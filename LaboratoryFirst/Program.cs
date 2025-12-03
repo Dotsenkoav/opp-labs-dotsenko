@@ -1,4 +1,4 @@
-﻿namespace Dotsenko.LaboratoryOOP
+﻿namespace LaboratoryOOP
 {
     /// <summary>
     /// Главный класс программы
