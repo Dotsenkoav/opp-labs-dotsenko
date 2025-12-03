@@ -42,30 +42,42 @@
             WaitForKey();
 
             Person person7 = new Person("Аркадий", "Сидоров", 40, Person.Sex.Male);
-
             firstPersonList.Add(person7);
             Console.WriteLine($"В первый список добавлен {person7.FirstName}");
+            PrintList(firstPersonList, "Первый список");
             WaitForKey();
 
             Person copiedPerson = firstPersonList.FindByIndex(1);
             secondPersonList.Add(copiedPerson);
             Console.WriteLine($"Во второй список скопирован {copiedPerson.FirstName}");
-
             PrintList(firstPersonList, "Обновленный первый список");
             PrintList(secondPersonList, "Обновленный второй список");
             WaitForKey();
 
             firstPersonList.RemoveAt(1);
             Console.WriteLine("В первом списке удален второй человек");
-
             PrintList(firstPersonList, "Первый список после удаления");
             PrintList(secondPersonList, "Второй список");
             WaitForKey();
 
             secondPersonList.Clear();
             Console.WriteLine("Второй список очищен");
-
             PrintList(secondPersonList, "Очищенный список");
+            WaitForKey();
+
+            Console.WriteLine("Тестируем вывод описания человека");
+            person1.PrintToConsole();
+            WaitForKey();
+
+            Console.WriteLine("Тестируем создание случайного пользователя");
+            Person person8 = Person.GetRandomPerson();
+            person8.PrintToConsole();
+            WaitForKey();
+
+            Console.WriteLine("Тестируем ввод пользователя");
+            Person person9 = Person.ReadFromConsole();
+            person9.PrintToConsole();
+            WaitForKey();
         }
 
         /// <summary>

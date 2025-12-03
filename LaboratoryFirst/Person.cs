@@ -162,12 +162,12 @@ namespace LaboratoryFirst
             {
                 string inputAge = Console.ReadLine();
 
-                if(int.TryParse(inputAge, out int age) && age >= 0)
+                if (int.TryParse(inputAge, out int age) && (age >= 0 && age < 123))
                 {
                     return age;
                 }
 
-                Console.Write("Ошибка: возраст должен быть неотрицательным числом. Повторите: ");
+                Console.Write("Ошибка: возраст должен быть в диапазоне от 0 до 123. Повторите: ");
                 continue;
             }
         }
@@ -240,7 +240,7 @@ namespace LaboratoryFirst
                     if (sex == 'M') return Sex.Male;
                     if (sex == 'F') return Sex.Female;
                 }
-                Console.Write("Ошибка: неверно введен пол. Введите M или F");
+                Console.Write("Ошибка: Неверно введен пол. Введите M или F: ");
                 continue;
             }
         }
