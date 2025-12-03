@@ -1,4 +1,4 @@
-﻿namespace LaboratoryOOP
+﻿namespace LaboratoryFirst
 {
     /// <summary>
     /// Главный класс программы
