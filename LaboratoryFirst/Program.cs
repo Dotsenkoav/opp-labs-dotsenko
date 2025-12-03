@@ -6,7 +6,7 @@
     internal class Program
     {
         /// <summary>
-        /// Точка входа в программу
+        /// Точка входа в программу (Тестирование классов)
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
