@@ -8,7 +8,7 @@
         /// <summary>
         /// Точка входа в программу (Тестирование классов)
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Аргументы запуска программы</param>
         public static void Main(string[] args)
         {
             Console.WriteLine("Создание списков...");

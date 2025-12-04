@@ -49,10 +49,10 @@ namespace LaboratoryFirst
         /// <param name="sex">Пол человека</param>
         public Person(string firstName, string lastName, int age, Sex sex)
         {
-            _firstName = firstName;
-            _lastName = lastName;
-            _age = age;
-            _sex = sex;
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            PersonSex = sex;
         }
 
         /// <summary>
