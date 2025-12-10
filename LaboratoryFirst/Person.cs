@@ -55,7 +55,7 @@ namespace LaboratoryFirst
         /// <summary>
         /// Конструктор класса по умолчанию
         /// </summary>
-        public Person() : this( "Неизвестно", "Неизвестно", 0, Sex.Male ) { }
+        public Person() : this( "Андрей", "Иванов", 18, Sex.Male ) { }
 
         /// <summary>
         /// Возвращает или задает имя человека
@@ -101,7 +101,7 @@ namespace LaboratoryFirst
             {
                 if (value < MinAge || value > MaxAge)
                 {
-                    throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
+                    throw new Exception($"{nameof(Age)} " +
                         $" не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
                 _age = value; 
@@ -115,24 +115,6 @@ namespace LaboratoryFirst
         {
             get { return _sex; }
             set { _sex = value; }
-        }
-
-        /// <summary>
-        /// Выводит информацию о человеке
-        /// </summary>
-        public void PrintPerson()
-        {
-            Console.WriteLine($"{FirstName} {LastName}," +
-                $" возраст: {Age}, {GetSex()}");
-        }
-
-        /// <summary>
-        /// Метод получения пола
-        /// </summary>
-        /// <returns></returns>
-        private string GetSex()
-        {
-            return Sex == Sex.Male ? "Мужской" : "Женский";
         }
 
         /// <summary>

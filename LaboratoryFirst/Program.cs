@@ -157,7 +157,7 @@ namespace LaboratoryFirst
         public static void TestGeneratePerson()
         {
             Person person = Person.GetRandomPerson();
-            person.PrintPerson();
+            PrintPerson(person);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace LaboratoryFirst
         public static void TestInputPerson()
         {
             Person person = InputFromConsole();
-            person.PrintPerson();
+            PrintPerson(person);
         }
 
         /// <summary>
@@ -307,6 +307,24 @@ namespace LaboratoryFirst
         }
 
         /// <summary>
+        /// Выводит информацию о человеке
+        /// </summary>
+        public static void PrintPerson(Person person)
+        {
+            Console.WriteLine($"{person.FirstName} {person.LastName}," +
+                $" возраст: {person.Age}, {GetSex(person)}");
+        }
+
+        /// <summary>
+        /// Метод получения пола
+        /// </summary>
+        /// <returns></returns>
+        private static string GetSex(Person person)
+        {
+            return person.Sex == Sex.Male ? "Мужской" : "Женский";
+        }
+
+        /// <summary>
         /// Выводит список людей на экран
         /// </summary>
         /// <param name="list">Список для вывода</param>
@@ -319,7 +337,7 @@ namespace LaboratoryFirst
             {
                 Person person = list.FindByIndex(i);
                 Console.Write($"     {i + 1}. ");
-                person.PrintPerson();
+                PrintPerson(person);
             }
         }
 
