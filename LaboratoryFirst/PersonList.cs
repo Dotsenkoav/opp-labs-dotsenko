@@ -44,80 +44,41 @@
         }
 
         /// <summary>
-        /// Добавляет указанного человека в список
+        /// Добавляет человека в список
         /// </summary>
-        /// <param name="person">Объект Person для добавления</param>
-        /// <exception cref="ArgumentNullException">
-        /// Возникает, если параметр <paramref name="person"/> равен null
-        /// </exception>
+        /// <param name="person">Объект класса Person</param>
         public void Add(Person person)
         {
-            if (person == null)
-            {
-                throw new ArgumentNullException(
-                    nameof(person),
-                    "Person cannot be null");
-            }
-
             _persons.Add(person);
         }
 
         /// <summary>
-        /// Удаляет указанного человека из списка
+        /// Удаляет человека из списка
         /// </summary>
-        /// <param name="person">Объект Person для удаления</param>
-        /// <exception cref="ArgumentNullException">
-        /// Возникает, если параметр <paramref name="person"/> равен null
-        /// </exception>
+        /// <param name="person">Объект класса Person</param>
         public void Remove(Person person)
         {
-            if (person == null)
-            {
-                throw new ArgumentNullException(
-                    nameof(person), 
-                    "Person cannot be null");
-            }
             _persons.Remove(person);
         }
 
         /// <summary>
         /// Удаляет человека из списка по индексу
         /// </summary>
-        /// <param name="index">Индекс человека в списке</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Возникает, если параметр <paramref name="index"/>
-        /// меньше 0 или больше/равен размеру списка
-        /// </exception>
+        /// <param name="index">Индекс</param>
         public void RemoveAt(int index)
         {
-            if (index < 0 || index >= _persons.Count)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index),
-                    $"Index can't be less 0 or above {_persons.Count - 1}!");
-            }
-
+            ValidateIndex(index);
             _persons.RemoveAt(index);
         }
 
         /// <summary>
-        /// Находит человека по заданному индексу
+        /// Находит человека по инлдексу
         /// </summary>
-        /// <param name="index">Индекс человека в списке</param>
-        /// <returns>Объект класса Person по индексу</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Возникает, если параметр <paramref name="index"/>
-        /// меньше 0 или больше/равен размеру списка
-        /// </exception>
+        /// <param name="index">Индекс</param>
+        /// <returns>Объект человека</returns>
         public Person FindByIndex(int index)
         {
-            if (index < 0 || index >= _persons.Count)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index),
-                    $"Index can't be less 0 or above {_persons.Count - 1}!");
-            }
-
+            ValidateIndex(index);
             return _persons[index];
         }
 
@@ -127,18 +88,18 @@
         /// <param name="person">Объект Person для поиска</param>
         /// <returns>Индекс первого вхождения человека в список</returns>
         /// <exception cref="ArgumentNullException">
-        /// Возникает, если параметр <paramref name="person"/> равен null
+        /// Возникает, если параметр <paramref name="person"/> не найден
         /// </exception>
         public int IndexOf(Person person)
         {
-            if (person == null)
+            if (_persons.Contains(person))
             {
-                throw new ArgumentNullException(
-                    nameof(person),
-                    "Person cannot be null");
+                return _persons.IndexOf(person);
             }
-
-            return _persons.IndexOf(person);
+            else
+            {
+                throw new ArgumentException("Данный человек не найден");
+            }
         }
 
         /// <summary>
@@ -147,6 +108,22 @@
         public void Clear()
         {
             _persons.Clear();
+        }
+
+        /// <summary>
+        /// Метод, проверяющий коректность индекса
+        /// </summary>
+        /// <param name="index">Индекс</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Возникает, в случае выхода индекса за диапазон</exception>
+        private void ValidateIndex(int index)
+        {
+            if (index < 0 || index >= _persons.Count)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    $"Индекс должен быть от 0 до {_persons.Count - 1}");
+            }
         }
     }
 }
