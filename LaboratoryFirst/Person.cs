@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
 
 namespace LaboratoryFirst
 {
@@ -8,37 +8,34 @@ namespace LaboratoryFirst
     internal class Person
     {
         /// <summary>
-        /// Пол человека
-        /// </summary>
-        public enum Sex
-        {
-            /// <summary>
-            /// Женский пол
-            /// </summary>
-            Female,
-            /// <summary>
-            /// Мужской пол
-            /// </summary>
-            Male
-        }
-
-        /// <summary>
         /// Имя человека
         /// </summary>
         private string _firstName;
+
         /// <summary>
         /// Фамилия человека
         /// </summary>
         private string _lastName;
+
         /// <summary>
         /// Возраст человека
         /// </summary>
         private int _age;
+
         /// <summary>
         /// Пол человека
         /// </summary>
         private Sex _sex;
 
+        /// <summary>
+        /// Минимальный возраст человека
+        /// </summary>
+        public const int MinAge = 0;
+
+        /// <summary>
+        /// Максимальный возраст человека
+        /// </summary>
+        public const int MaxAge = 123;
 
         /// <summary>
         /// Конструктор класса Person
@@ -49,11 +46,16 @@ namespace LaboratoryFirst
         /// <param name="sex">Пол человека</param>
         public Person(string firstName, string lastName, int age, Sex sex)
         {
-            _firstName = firstName;
-            _lastName = lastName;
-            _age = age;
-            _sex = sex;
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Sex = sex;
         }
+
+        /// <summary>
+        /// Конструктор класса по умолчанию
+        /// </summary>
+        public Person() : this( "Андрей", "Иванов", 18, Sex.Male ) { }
 
         /// <summary>
         /// Возвращает или задает имя человека
@@ -61,7 +63,15 @@ namespace LaboratoryFirst
         public string FirstName
         {
             get { return _firstName; }
-            set { _firstName = value; }
+            set 
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException($"{nameof(FirstName)}" +
+                        $" не может быть пустым!");
+                }
+                _firstName = value;
+            }
         }
 
         /// <summary>
@@ -70,7 +80,15 @@ namespace LaboratoryFirst
         public string LastName
         {
             get { return _lastName; }
-            set { _lastName = value; }
+            set 
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException($"{nameof(LastName)}" +
+                        $" не может быть пустым!");
+                }
+                _lastName = value; 
+            }
         }
 
         /// <summary>
@@ -79,27 +97,24 @@ namespace LaboratoryFirst
         public int Age
         {
             get { return _age; }
-            set { _age = value; }
+            set 
+            {
+                if (value < MinAge || value > MaxAge)
+                {
+                    throw new Exception($"{nameof(Age)} " +
+                        $" не может быть меньше {MinAge} или больше {MaxAge}!");
+                }
+                _age = value; 
+            }
         }
 
         /// <summary>
         /// Возвращает или задает пол человека
         /// </summary>
-        public Sex PersonSex
+        public Sex Sex
         {
             get { return _sex; }
             set { _sex = value; }
-        }
-
-        /// <summary>
-        /// Выводит информацию о человеке
-        /// </summary>
-        public void PrintToConsole()
-        {
-            Console.WriteLine($"Имя: {FirstName}");
-            Console.WriteLine($"Фамилия: {LastName}");
-            Console.WriteLine($"Возраст: {Age}");
-            Console.WriteLine($"Пол: {PersonSex}");
         }
 
         /// <summary>
@@ -110,9 +125,9 @@ namespace LaboratoryFirst
         {
             Random random = new Random();
 
-            string[] maleNames = { "Иван", "Алексей", "Дмитрий", "Сергей", "Андрей" };
-            string[] femaleNames = { "Анна", "Мария", "Елена", "Ольга", "Наталья" };
-            string[] lastNames = { "Иванов", "Петров", "Сидоров", "Кузнецов", "Васильев" };
+            string[] maleNames = ReadFile("Data/male_names.txt");
+            string[] femaleNames = ReadFile("Data/female_names.txt");
+            string[] lastNames = ReadFile("Data/lastnames.txt");
 
             Sex sex = random.Next(2) == 0 ? Sex.Male : Sex.Female;
             string firstName = sex == Sex.Male
@@ -125,124 +140,24 @@ namespace LaboratoryFirst
                 lastName += "а";
             }
 
-            int age = random.Next(0, 123);
-
-            return new Person(firstName, lastName, age, sex);
-        }
-
-
-        /// <summary>
-        /// Метод считывания человека с клавиатуры
-        /// </summary>
-        /// <returns>Объект класса Person с введенными полями</returns>
-        public static Person ReadFromConsole()
-        {
-            Console.Write("Введите имя: ");
-            string firstName = ReadAndValidateName();
-
-            Console.Write("Введите фамилию: ");
-            string lastName = ReadAndValidateName();
-
-            Console.Write("Введите возраст: ");
-            int age = ReadAndValidateAge();
-
-            Console.Write("Введите пол (M или F): ");
-            Sex sex = ReadAndValidateSex();
+            int age = random.Next(MinAge, MaxAge + 1);
 
             return new Person(firstName, lastName, age, sex);
         }
 
         /// <summary>
-        /// Метод считывания и проверки возраст
+        /// Метод считывания строк в файле
         /// </summary>
-        /// <returns>Возраст, проверенный на правильность</returns>
-        private static int ReadAndValidateAge()
+        /// <param name="path">Путь к файлу</param>
+        /// <returns>Массив слов</returns>
+        private static string[] ReadFile(string path)
         {
-            while (true)
-            {
-                string inputAge = Console.ReadLine();
+            if (!File.Exists(path))
+                return Array.Empty<string>();
 
-                if (int.TryParse(inputAge, out int age) && (age >= 0 && age < 123))
-                {
-                    return age;
-                }
-
-                Console.Write("Ошибка: возраст должен быть в диапазоне от 0 до 123. Повторите: ");
-                continue;
-            }
-        }
-
-        /// <summary>
-        /// Метод преобразования в правильный регистр
-        /// </summary>
-        /// <param name="name">Имя/Фамилия человека</param>
-        /// <returns>Строку имени с заглавной буквы</returns>
-        private static string ToValidCase(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                return name;
-
-            System.Globalization.TextInfo textInfo =
-                System.Globalization.CultureInfo.CurrentCulture.TextInfo;
-            return textInfo.ToTitleCase(name.ToLower());
-        }
-
-        /// <summary>
-        /// Метод проверки имени на содержание только английских и русских символов
-        /// </summary>
-        /// <param name="name">Имя/Фамилия человека</param>
-        /// <returns>Булевое значение валидности имени</returns>
-        private static bool IsValidName(string name)
-        {
-            return Regex.IsMatch(name, @"^[A-Za-zА-Яа-яЁё\s\-]+$");
-        }
-
-        /// <summary>
-        /// Метод считывания и проверки имени/фамилии
-        /// </summary>
-        /// <returns>Отформатированный формат имени</returns>
-        private static string ReadAndValidateName()
-        {
-            while (true)
-            {
-                string inputName = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(inputName))
-                {
-                    Console.WriteLine($"Имя/Фамилия не могут быть пустым");
-                    continue;
-                }
-
-                if (!IsValidName(inputName))
-                {
-                    Console.WriteLine("Имя/Фамилия должны содержать " +
-                        "ТОЛЬКО русские и английские символы. Повторите: ");
-                    continue;
-                }
-
-                return ToValidCase(inputName);
-            }
-        }
-
-        /// <summary>
-        /// Метод считывания и проверки пола человека
-        /// </summary>
-        /// <returns></returns>
-        private static Sex ReadAndValidateSex()
-        {
-            while (true)
-            {
-                string inputSex = Console.ReadLine();
-                if (char.TryParse(inputSex, out char sexChar))
-                {
-                    char sex = char.ToUpper(sexChar);
-
-                    if (sex == 'M') return Sex.Male;
-                    if (sex == 'F') return Sex.Female;
-                }
-                Console.Write("Ошибка: Неверно введен пол. Введите M или F: ");
-                continue;
-            }
+            return File.ReadAllLines(path)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .ToArray();
         }
     }
 }
