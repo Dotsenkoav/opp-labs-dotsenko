@@ -1,4 +1,6 @@
-﻿namespace LaboratoryFirst
+﻿using System;
+
+namespace LaboratoryFirst
 {
     /// <summary>
     /// Класс, описывающий сущность человека 
@@ -25,6 +27,15 @@
         /// </summary>
         private Sex _sex;
 
+        /// <summary>
+        /// Минимальный возраст человека
+        /// </summary>
+        public const int MinAge = 0;
+
+        /// <summary>
+        /// Максимальный возраст человека
+        /// </summary>
+        public const int MaxAge = 123;
 
         /// <summary>
         /// Конструктор класса Person
@@ -56,7 +67,8 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new Exception($"{nameof(FirstName)} не может быть пустым!");
+                    throw new ArgumentException($"{nameof(FirstName)}" +
+                        $" не может быть пустым!");
                 }
                 _firstName = value;
             }
@@ -72,7 +84,8 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new Exception($"{nameof(LastName)} не может быть пустым!");
+                    throw new ArgumentException($"{nameof(LastName)}" +
+                        $" не может быть пустым!");
                 }
                 _lastName = value; 
             }
@@ -86,13 +99,10 @@
             get { return _age; }
             set 
             {
-                const int minAge = 0;
-                const int maxAge = 123;
-
-                if (value < minAge || value > maxAge)
+                if (value < MinAge || value > MaxAge)
                 {
-                    throw new Exception($"{nameof(Age)} не может быть меньше " +
-                        $"{minAge} или больше {maxAge}!");
+                    throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
+                        $" не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
                 _age = value; 
             }
@@ -110,12 +120,19 @@
         /// <summary>
         /// Выводит информацию о человеке
         /// </summary>
-        public void PrintToConsole()
+        public void PrintPerson()
         {
-            Console.WriteLine($"Имя: {FirstName}");
-            Console.WriteLine($"Фамилия: {LastName}");
-            Console.WriteLine($"Возраст: {Age}");
-            Console.WriteLine($"Пол: {Sex}");
+            Console.WriteLine($"{FirstName} {LastName}," +
+                $" возраст: {Age}, {GetSex()}");
+        }
+
+        /// <summary>
+        /// Метод получения пола
+        /// </summary>
+        /// <returns></returns>
+        private string GetSex()
+        {
+            return Sex == Sex.Male ? "Мужской" : "Женский";
         }
 
         /// <summary>
@@ -126,9 +143,9 @@
         {
             Random random = new Random();
 
-            string[] maleNames = { "Иван", "Алексей", "Дмитрий", "Сергей", "Андрей" };
-            string[] femaleNames = { "Анна", "Мария", "Елена", "Ольга", "Наталья" };
-            string[] lastNames = { "Иванов", "Петров", "Сидоров", "Кузнецов", "Васильев" };
+            string[] maleNames = ReadFile("Data/male_names.txt");
+            string[] femaleNames = ReadFile("Data/female_names.txt");
+            string[] lastNames = ReadFile("Data/lastnames.txt");
 
             Sex sex = random.Next(2) == 0 ? Sex.Male : Sex.Female;
             string firstName = sex == Sex.Male
@@ -141,9 +158,24 @@
                 lastName += "а";
             }
 
-            int age = random.Next(0, 123);
+            int age = random.Next(MinAge, MaxAge + 1);
 
             return new Person(firstName, lastName, age, sex);
+        }
+
+        /// <summary>
+        /// Метод считывания строк в файле
+        /// </summary>
+        /// <param name="path">Путь к файлу</param>
+        /// <returns>Массив слов</returns>
+        private static string[] ReadFile(string path)
+        {
+            if (!File.Exists(path))
+                return Array.Empty<string>();
+
+            return File.ReadAllLines(path)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .ToArray();
         }
     }
 }

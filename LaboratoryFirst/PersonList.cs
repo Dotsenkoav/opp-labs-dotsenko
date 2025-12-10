@@ -21,7 +21,8 @@
         /// <summary>
         /// Создает новый список людей с указанными элементами
         /// </summary>
-        /// <param name="persons">Перечисление людей для инициализации списка</param>
+        /// <param name="persons">
+        /// Перечисление людей для инициализации списка</param>
         /// <exception cref="ArgumentNullException">
         /// Возникает, если параметр <paramref name="persons"/> равен null
         /// </exception>

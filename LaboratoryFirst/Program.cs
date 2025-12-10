@@ -1,4 +1,7 @@
-﻿namespace LaboratoryFirst
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+
+namespace LaboratoryFirst
 {
     /// <summary>
     /// Главный класс программы
@@ -24,7 +27,11 @@
                 ["Удаление человека"] = () => 
                     TestRemovePerson(firstPersonList, secondPersonList),
                 ["Очиска списка"] = () => 
-                    TestClearList(secondPersonList)
+                    TestClearList(secondPersonList),
+                ["Генерация случайного человека"] = () =>
+                    TestGeneratePerson(),
+                ["Ввод нового пользователя"] = () =>
+                    TestInputPerson()
             };
 
             StartTesting(testDictionary);
@@ -34,7 +41,8 @@
         /// Метод для инициализации экземпляров PersonList
         /// </summary>
         /// <returns>Два объекта класса PersonList</returns>
-        public static (PersonList firstList, PersonList secondList) InitializeObjects()
+        public static (PersonList firstList, PersonList secondList)
+            InitializeObjects()
         {
             Console.WriteLine("Создание списков...");
 
@@ -113,7 +121,8 @@
         {
             Person copiedPerson = firstPersonList.FindByIndex(1);
             secondPersonList.Add(copiedPerson);
-            Console.WriteLine($"Во второй список скопирован {copiedPerson.FirstName}");
+            Console.WriteLine($"Во второй список скопирован" +
+                $" {copiedPerson.FirstName}");
             PrintList(firstPersonList, "Первый список");
             PrintList(secondPersonList, "Обновленный второй список");
         }
@@ -133,13 +142,31 @@
         }
 
         /// <summary>
-        /// Метод теста очистки списка
+        /// Тест очистки списка
         /// </summary>
         /// <param name="secondPersonList">Первый список</param>
         public static void TestClearList(PersonList secondPersonList)
         {
             secondPersonList.Clear();
             PrintList(secondPersonList, "Очищенный список");
+        }
+
+        /// <summary>
+        /// Тестирование генерации человека
+        /// </summary>
+        public static void TestGeneratePerson()
+        {
+            Person person = Person.GetRandomPerson();
+            person.PrintPerson();
+        }
+
+        /// <summary>
+        /// Тестирование ввода человека с клавиатуры
+        /// </summary>
+        public static void TestInputPerson()
+        {
+            Person person = InputFromConsole();
+            person.PrintPerson();
         }
 
         /// <summary>
@@ -158,14 +185,18 @@
                     "имя",
                     new Action(() =>
                         {
-                            person.FirstName = Console.ReadLine();
+                            string input = Console.ReadLine();
+                            ValidateName(input);
+                            person.FirstName = CheckRegister(input);
                         })
                 },
                 {
                     "фамилию",
                     new Action(() =>
                         {
-                            person.LastName = Console.ReadLine();
+                            string input = Console.ReadLine();
+                            ValidateName(input);
+                            person.LastName = CheckRegister(input);
                         })
                 },
                 {
@@ -188,20 +219,28 @@
                     "пол",
                     new Action(() =>
                         {
-                            Console.Write("(Мужской/Женский): ");
+                            Console.Write("(1 - мужской, 2 - женский): ");
 
-                            string sex = Console.ReadLine();
+                            string inputNumber = Console.ReadLine();
 
-                            if (sex.ToLower() == "мужской")
+                            switch (inputNumber) 
                             {
-                                person.Sex = Sex.Male;
-                            } 
-                            else if (sex.ToLower() == "женский")
-                            {
-                                person.Sex = Sex.Female;
+                                case "1":
+                                {
+                                    person.Sex = Sex.Male;
+                                    break;
+                                }
+                                case "2":
+                                {
+                                    person.Sex = Sex.Female;
+                                    break;
+                                }
+                                default:
+                                {
+                                    throw new Exception("Неккоретный ввод." +
+                                        " Введите цифру 1(М) или 2(Ж)");
+                                }
                             }
-                            else throw new Exception(
-                                "Введите пол в нужном формате");
                         })
                 }
             };
@@ -213,9 +252,39 @@
 
             return person;
         }
+
+        /// <summary>
+        /// Метод, проверящий символы имени/фамилии
+        /// </summary>
+        /// <param name="name">Имя/Фамилия</param>
+        /// <exception cref="Exception">
+        /// Возникает, если имя/фамилия не содержит нужные символы</exception>
+        public static void ValidateName(string name)
+        {
+            const string russianCheck = @"^[а-яА-ЯёЁ\s\-]+$";
+            const string englishCheck = @"^[a-zA-Z\s\-]+$";
+
+            bool isValid = Regex.IsMatch(name, russianCheck) ||
+                Regex.IsMatch(name, englishCheck);
+
+            if (!isValid)
+                throw new Exception($"Имя/Фамилия могут содержать только" +
+                    $" русские/английские буквы, пробелы и дефисы!");
+        }
+
+        /// <summary>
+        /// Метод, преобразования регистра в правильный формат
+        /// </summary>
+        /// <param name="name">Имя/Фамилия для проверки</param>
+        /// <returns>Строка в правильном регистре</returns>
+        public static string CheckRegister(string name)
+        {
+            TextInfo txt = CultureInfo.CurrentCulture.TextInfo;
+            return txt.ToTitleCase(name.ToLower());
+        }
         
         /// <summary>
-        /// Метод, выполняющий действия
+        /// Метод, выполняющий действия в оболочке try и while
         /// </summary>
         /// <param name="action">Действие</param>
         /// <param name="enteredValue">Введенная строка</param>
@@ -225,7 +294,8 @@
             {
                 try
                 {
-                    Console.Write($"Пожалуйста, введите {enteredValue} человека: ");
+                    Console.Write($"Пожалуйста, " +
+                        $"введите {enteredValue} человека: ");
                     action.Invoke();
                     return;
                 }
@@ -245,19 +315,11 @@
         {
             Console.WriteLine(listName);
 
-            string sex;
-
             for (int i = 0; i < list.Count; i++) 
             {
                 Person person = list.FindByIndex(i);
-                if (person.Sex == Sex.Male)
-                {
-                    sex = "Мужской";
-                }
-                else sex = "Женский";
-
-                Console.WriteLine($"    {i + 1}. {person.FirstName}" +
-                    $" {person.LastName}, {person.Age} лет, {sex}");
+                Console.Write($"     {i + 1}. ");
+                person.PrintPerson();
             }
         }
 
