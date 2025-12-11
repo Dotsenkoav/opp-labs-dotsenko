@@ -55,7 +55,7 @@ namespace LaboratoryFirst
         /// <summary>
         /// Конструктор класса по умолчанию
         /// </summary>
-        public Person() : this( "Андрей", "Иванов", 18, Sex.Male ) { }
+        public Person() : this("Андрей", "Иванов", 18, Sex.Male) { }
 
         /// <summary>
         /// Возвращает или задает имя человека
@@ -63,7 +63,7 @@ namespace LaboratoryFirst
         public string FirstName
         {
             get { return _firstName; }
-            set 
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
@@ -80,14 +80,14 @@ namespace LaboratoryFirst
         public string LastName
         {
             get { return _lastName; }
-            set 
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException($"{nameof(LastName)}" +
                         $" не может быть пустым!");
                 }
-                _lastName = value; 
+                _lastName = value;
             }
         }
 
@@ -97,14 +97,14 @@ namespace LaboratoryFirst
         public int Age
         {
             get { return _age; }
-            set 
+            set
             {
                 if (value < MinAge || value > MaxAge)
                 {
                     throw new Exception($"{nameof(Age)} " +
                         $" не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
-                _age = value; 
+                _age = value;
             }
         }
 
@@ -115,51 +115,6 @@ namespace LaboratoryFirst
         {
             get { return _sex; }
             set { _sex = value; }
-        }
-
-        //TOOD: refactor
-        /// <summary>
-        /// Создает случайного человека
-        /// </summary>
-        /// <returns>Объект класса Person со случайными значениями полей</returns>
-        public static Person GetRandomPerson()
-        {
-            Random random = new Random();
-
-            string[] maleNames = ReadFile("Data/male_names.txt");
-            string[] femaleNames = ReadFile("Data/female_names.txt");
-            string[] lastNames = ReadFile("Data/lastnames.txt");
-
-            Sex sex = random.Next(2) == 0 ? Sex.Male : Sex.Female;
-            string firstName = sex == Sex.Male
-                ? maleNames[random.Next(maleNames.Length)]
-                : femaleNames[random.Next(femaleNames.Length)];
-
-            string lastName = lastNames[random.Next(lastNames.Length)];
-            if(sex == Sex.Female) 
-            {
-                lastName += "а";
-            }
-
-            int age = random.Next(MinAge, MaxAge + 1);
-
-            return new Person(firstName, lastName, age, sex);
-        }
-
-        /// <summary>
-        /// Метод считывания строк в файле
-        /// </summary>
-        /// <param name="path">Путь к файлу</param>
-        /// <returns>Массив слов</returns>
-        private static string[] ReadFile(string path)
-        {
-            if (!File.Exists(path))
-                //TODO: rsdn
-                return Array.Empty<string>();
-
-            return File.ReadAllLines(path)
-                .Where(value => !string.IsNullOrWhiteSpace(value))
-                .ToArray();
         }
     }
 }
