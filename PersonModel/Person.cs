@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace LaboratoryFirst
 {
@@ -28,6 +30,16 @@ namespace LaboratoryFirst
         private Sex _sex;
 
         /// <summary>
+        /// Паттерн регулярки ru
+        /// </summary>
+        private const string _russianCheck = @"^[а-яА-ЯёЁ\s\-]+$";
+
+        /// <summary>
+        /// Паттерн регулярки en
+        /// </summary>
+        private const string _englishCheck = @"^[a-zA-Z\s\-]+$";
+
+        /// <summary>
         /// Минимальный возраст человека
         /// </summary>
         public const int MinAge = 0;
@@ -36,6 +48,7 @@ namespace LaboratoryFirst
         /// Максимальный возраст человека
         /// </summary>
         public const int MaxAge = 123;
+
 
         /// <summary>
         /// Конструктор класса Person
@@ -70,7 +83,13 @@ namespace LaboratoryFirst
                     throw new ArgumentException($"{nameof(FirstName)}" +
                         $" не может быть пустым!");
                 }
-                _firstName = value;
+
+                if (!IsValidName(value))
+                {
+                    throw new Exception($"{nameof(value)} может содержать" +
+                        $" только русские/английские символы, пробел и -");
+                }
+                _firstName = CheckRegister(value);
             }
         }
 
@@ -87,7 +106,14 @@ namespace LaboratoryFirst
                     throw new ArgumentException($"{nameof(LastName)}" +
                         $" не может быть пустым!");
                 }
-                _lastName = value;
+
+                if (!IsValidFullname(_firstName, value))
+                {
+                    throw new Exception($"{nameof(LastName)} " +
+                        $"и {nameof(FirstName)} должны быть на " +
+                        $"одном языке и могут содержать только пробелы и -");
+                }
+                _lastName = CheckRegister(value);
             }
         }
 
@@ -115,6 +141,42 @@ namespace LaboratoryFirst
         {
             get { return _sex; }
             set { _sex = value; }
+        }
+
+        /// <summary>
+        /// Метод, преобразования регистра в правильный формат
+        /// </summary>
+        /// <param name="name">Имя/Фамилия для проверки</param>
+        /// <returns>Строка в правильном регистре</returns>
+        public static string CheckRegister(string name)
+        {
+            TextInfo txt = CultureInfo.CurrentCulture.TextInfo;
+            return txt.ToTitleCase(name.ToLower());
+        }
+
+        /// <summary>
+        /// Метод проверки имени или фамилии
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <returns>true - если подходит, иначе false</returns>
+        private bool IsValidName(string name)
+        {
+            return (Regex.IsMatch(name, _russianCheck)
+                || Regex.IsMatch(name, _englishCheck));
+        }
+
+        /// <summary>
+        /// Метод проверки имени и фамилии
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <param name="lastname">Фамилия</param>
+        /// <returns>true - если на одном языке, иначе false </returns>
+        private bool IsValidFullname(string name, string lastname)
+        {
+            return (Regex.IsMatch(name, _russianCheck) &&
+                Regex.IsMatch(lastname, _russianCheck))
+                || (Regex.IsMatch(name, _englishCheck) &&
+                Regex.IsMatch(lastname, _englishCheck));
         }
     }
 }
