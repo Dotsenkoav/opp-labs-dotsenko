@@ -15,6 +15,7 @@ namespace LaboratoryFirst
         /// Женский пол
         /// </summary>
         Female,
+
         /// <summary>
         /// Мужской пол
         /// </summary>

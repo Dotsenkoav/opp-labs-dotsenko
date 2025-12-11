@@ -117,6 +117,7 @@ namespace LaboratoryFirst
             set { _sex = value; }
         }
 
+        //TOOD: refactor
         /// <summary>
         /// Создает случайного человека
         /// </summary>
@@ -153,6 +154,7 @@ namespace LaboratoryFirst
         private static string[] ReadFile(string path)
         {
             if (!File.Exists(path))
+                //TODO: rsdn
                 return Array.Empty<string>();
 
             return File.ReadAllLines(path)

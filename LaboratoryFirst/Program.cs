@@ -268,6 +268,7 @@ namespace LaboratoryFirst
                 Regex.IsMatch(name, englishCheck);
 
             if (!isValid)
+                //TODO: {}
                 throw new Exception($"Имя/Фамилия могут содержать только" +
                     $" русские/английские буквы, пробелы и дефисы!");
         }
