@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace LaboratoryFirst
 {
-    //TODO: refactor +
     /// <summary>
     /// Создает случайного человека
     /// </summary>
     /// <returns>Объект класса Person со случайными значениями полей</returns>
     public class PersonGenerator
     {
-        //TOOD: refactor +
         /// <summary>
         /// Создает случайного человека
         /// </summary>
@@ -50,7 +48,6 @@ namespace LaboratoryFirst
         /// <returns>Массив слов</returns>
         private static string[] ReadFile(string path)
         {
-            //TODO: rsdn +
             if (!File.Exists(path))
             {
                 return Array.Empty<string>();

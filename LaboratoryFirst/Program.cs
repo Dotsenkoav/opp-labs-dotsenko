@@ -266,7 +266,6 @@ namespace LaboratoryFirst
 
             bool isValid = Regex.IsMatch(name, russianCheck) ||
                 Regex.IsMatch(name, englishCheck);
-            //TODO: {} +
             if (!isValid)
             {
                 throw new Exception($"Имя/Фамилия могут содержать только" +
