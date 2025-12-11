@@ -156,7 +156,7 @@ namespace LaboratoryFirst
         /// </summary>
         public static void TestGeneratePerson()
         {
-            Person person = Person.GetRandomPerson();
+            Person person = PersonGenerator.GetRandomPerson();
             PrintPerson(person);
         }
 
@@ -266,11 +266,12 @@ namespace LaboratoryFirst
 
             bool isValid = Regex.IsMatch(name, russianCheck) ||
                 Regex.IsMatch(name, englishCheck);
-
+            //TODO: {} +
             if (!isValid)
-                //TODO: {}
+            {
                 throw new Exception($"Имя/Фамилия могут содержать только" +
                     $" русские/английские буквы, пробелы и дефисы!");
+            }
         }
 
         /// <summary>

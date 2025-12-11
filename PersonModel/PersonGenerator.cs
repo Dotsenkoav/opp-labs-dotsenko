@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonModel
+namespace LaboratoryFirst
 {
     //TODO: refactor +
     /// <summary>
@@ -60,5 +60,4 @@ namespace PersonModel
                 .ToArray();
         }
     }
-}
 }
