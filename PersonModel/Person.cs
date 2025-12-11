@@ -5,7 +5,7 @@ namespace LaboratoryFirst
     /// <summary>
     /// Класс, описывающий сущность человека 
     /// </summary>
-    internal class Person
+    public class Person
     {
         /// <summary>
         /// Имя человека

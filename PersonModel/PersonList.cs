@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс, работающий со списком людей (объектами класса Person)
     /// </summary>
-    internal class PersonList
+    public class PersonList
     {
         /// <summary>
         /// Список людей, принимает объекта класса Person
