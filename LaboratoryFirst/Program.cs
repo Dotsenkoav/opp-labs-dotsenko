@@ -185,18 +185,14 @@ namespace LaboratoryFirst
                     "имя",
                     new Action(() =>
                         {
-                            string input = Console.ReadLine();
-                            ValidateName(input);
-                            person.FirstName = CheckRegister(input);
+                            person.FirstName = Console.ReadLine();
                         })
                 },
                 {
                     "фамилию",
                     new Action(() =>
                         {
-                            string input = Console.ReadLine();
-                            ValidateName(input);
-                            person.LastName = CheckRegister(input);
+                            person.LastName = Console.ReadLine();
                         })
                 },
                 {
@@ -251,37 +247,6 @@ namespace LaboratoryFirst
             }
 
             return person;
-        }
-
-        /// <summary>
-        /// Метод, проверящий символы имени/фамилии
-        /// </summary>
-        /// <param name="name">Имя/Фамилия</param>
-        /// <exception cref="Exception">
-        /// Возникает, если имя/фамилия не содержит нужные символы</exception>
-        public static void ValidateName(string name)
-        {
-            const string russianCheck = @"^[а-яА-ЯёЁ\s\-]+$";
-            const string englishCheck = @"^[a-zA-Z\s\-]+$";
-
-            bool isValid = Regex.IsMatch(name, russianCheck) ||
-                Regex.IsMatch(name, englishCheck);
-            if (!isValid)
-            {
-                throw new Exception($"Имя/Фамилия могут содержать только" +
-                    $" русские/английские буквы, пробелы и дефисы!");
-            }
-        }
-
-        /// <summary>
-        /// Метод, преобразования регистра в правильный формат
-        /// </summary>
-        /// <param name="name">Имя/Фамилия для проверки</param>
-        /// <returns>Строка в правильном регистре</returns>
-        public static string CheckRegister(string name)
-        {
-            TextInfo txt = CultureInfo.CurrentCulture.TextInfo;
-            return txt.ToTitleCase(name.ToLower());
         }
         
         /// <summary>
