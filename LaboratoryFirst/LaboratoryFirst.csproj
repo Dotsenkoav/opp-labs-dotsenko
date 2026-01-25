@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PersonModel\PersonModel.csproj" />
+    <ProjectReference Include="..\PersonModel\LaboratoryFirstPersonModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

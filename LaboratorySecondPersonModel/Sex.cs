@@ -1,4 +1,4 @@
-﻿namespace LaboratoryFirst
+﻿namespace LaboratorySecondPersonModel
 {
     /// <summary>
     /// Пол человека
