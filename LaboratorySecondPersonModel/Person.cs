@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace LaboratorySecondPersonModel
@@ -56,7 +57,7 @@ namespace LaboratorySecondPersonModel
         /// <param name="lastName">Фамилия человека</param>
         /// <param name="age">Возраст человека</param>
         /// <param name="sex">Пол человека</param>
-        public Person(string firstName, string lastName, int age, Sex sex)
+        public PersonBase(string firstName, string lastName, int age, Sex sex)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -67,7 +68,7 @@ namespace LaboratorySecondPersonModel
         /// <summary>
         /// Конструктор класса по умолчанию
         /// </summary>
-        public Person() : this("Андрей", "Иванов", 18, Sex.Male) { }
+        public PersonBase() : this("Андрей", "Иванов", 18, Sex.Male) { }
 
         /// <summary>
         /// Возвращает или задает имя человека
@@ -140,6 +141,13 @@ namespace LaboratorySecondPersonModel
         {
             get { return _sex; }
             set { _sex = value; }
+        }
+
+        public virtual string GetInfo()
+        {
+            string sexString = Sex == Sex.Male ? "Мужской" : "Женский";
+
+            return $"{FirstName} {LastName}, возраст: {Age}, {sexString}";
         }
 
         /// <summary>

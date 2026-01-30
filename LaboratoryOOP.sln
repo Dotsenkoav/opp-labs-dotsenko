@@ -5,7 +5,7 @@ VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoryFirst", "LaboratoryFirst\LaboratoryFirst.csproj", "{137B6DAC-380C-4F25-87AD-C9564AFD5434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoryFirstPersonModel", "PersonModel\LaboratoryFirstPersonModel.csproj", "{9099320E-B01E-4E84-B3B2-29F65784E622}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoryFirstPersonModel", "LaboratoryFirstPersonModel\LaboratoryFirstPersonModel.csproj", "{9099320E-B01E-4E84-B3B2-29F65784E622}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratorySecond", "LaboratorySecond\LaboratorySecond.csproj", "{DE5186FA-BE95-4314-809A-4E4EF464CC6D}"
 EndProject

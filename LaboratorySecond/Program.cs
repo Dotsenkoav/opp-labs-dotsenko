@@ -11,7 +11,7 @@
         /// <param name="args">Аргументы запуска программы</param>
         public static void Main(string[] args)
         {
-            Console.WriteLine("Тест программы");
+
         }
     }
 }
