@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace LaboratorySecondPersonModel
@@ -42,12 +41,12 @@ namespace LaboratorySecondPersonModel
         /// <summary>
         /// Минимальный возраст человека
         /// </summary>
-        public const int MinAge = 0;
+        public virtual int MinAge { get; } = 0;
 
         /// <summary>
         /// Максимальный возраст человека
         /// </summary>
-        public const int MaxAge = 123;
+        public virtual int MaxAge { get; } = 123;
 
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace LaboratorySecondPersonModel
             {
                 if (value < MinAge || value > MaxAge)
                 {
-                    throw new Exception($"{nameof(Age)} " +
+                    throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
                         $" не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
                 _age = value;

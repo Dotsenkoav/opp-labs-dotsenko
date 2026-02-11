@@ -5,7 +5,7 @@ namespace LaboratorySecondPersonModel
     /// <summary>
     /// Класс описывающий сущность родителя
     /// </summary>
-    internal class Adult : PersonBase
+    public class Adult : PersonBase
     {
         /// <summary>
         /// Номер паспорта
@@ -30,7 +30,7 @@ namespace LaboratorySecondPersonModel
         /// <summary>
         /// Паттерн на цифры в паспорте
         /// </summary>
-        private const string _passportCheck = @"^\d+$";
+        private const string _passportPattern = @"^\d+$";
 
         /// <summary>
         /// Количество цифр в номере паспорта
@@ -41,6 +41,11 @@ namespace LaboratorySecondPersonModel
         /// Количество цифр в серии паспорта
         /// </summary>
         public const int QuantityPassportDigits = 6;
+
+        /// <summary>
+        /// Минимальный возраст взрослого
+        /// </summary>
+        public override int MinAge { get; } = 18;
 
         /// <summary>
         /// Конструктор класса Adult
@@ -150,7 +155,8 @@ namespace LaboratorySecondPersonModel
                         "быть противоположного пола.");
                 }
 
-                if (value != null && value._partner != null && value._partner != this)
+                if (value != null && value._partner != null
+                    && value._partner != this)
                 {
                     Adult oldPartner = value._partner;
                     value._partner = null;
@@ -207,12 +213,21 @@ namespace LaboratorySecondPersonModel
         /// Метод проверки номера и серии паспорта на цифры
         /// </summary>
         /// <param name="passport">номер или серия паспорта</param>
-        /// <returns>Булевое значение соответствие номера или серии</returns>
+        /// <returns>Булевое значение соответствие значению</returns>
         public bool IsPassportValid(string passport)
         {
             if (string.IsNullOrEmpty(passport)) return false;
 
-            return Regex.IsMatch(passport, _passportCheck);
+            return Regex.IsMatch(passport, _passportPattern);
+        }
+
+        /// <summary>
+        /// Метод для приветствия взрослого
+        /// </summary>
+        /// <returns>Строка приветствия взрослого</returns>
+        public string VacationRequest()
+        {
+            return "Добрый день, хочу уйти в отпуск";
         }
     }
 }

@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс описывающий сущность ребенка
     /// </summary>
-    internal class Child : PersonBase
+    public class Child : PersonBase
     {
         /// <summary>
         /// Мама
@@ -19,7 +19,12 @@
         /// Место учебы
         /// </summary>
         private string _placeOfStudy;
-        
+
+        /// <summary>
+        /// Максимальный возраст ребёнка
+        /// </summary>
+        public override int MaxAge { get; } = 17;
+
         /// <summary>
         /// Конструктор класса Child
         /// </summary>
@@ -107,6 +112,15 @@
             return base.GetInfo() + $", мать: {motherInfo}" +
                 $", отец: {fatherInfo}" +
                 $", место учёбы: {PlaceOfStudy}";
+        }
+
+        /// <summary>
+        /// Метод для приветствия ребёнка
+        /// </summary>
+        /// <returns>Строка приветствия ребёнка</returns>
+        public string DontWantSchool()
+        {
+            return "Не хочу идти в школу!";
         }
     }
 }
