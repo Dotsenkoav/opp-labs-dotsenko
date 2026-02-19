@@ -109,7 +109,8 @@
             string fatherInfo = Father == null ?
                 "Отец отсутствует" : $"{Father.FirstName} {Father.LastName}";
 
-            return base.GetInfo() + $", мать: {motherInfo}" +
+            return $"Ребёнок: " + 
+                base.GetInfo() + $", мать: {motherInfo}" +
                 $", отец: {fatherInfo}" +
                 $", место учёбы: {PlaceOfStudy}";
         }

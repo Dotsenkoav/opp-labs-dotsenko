@@ -89,18 +89,11 @@ namespace LaboratorySecondPersonModel
                     _passportNumber = value;
                     return;
                 }
+            {
+                //TODO: duplication +
 
-                if (value.Length == QuantityPassportDigits
-                    && IsPassportValid(value))
-                {
-                    _passportNumber = value;
-                }
-                else
-                {
-                    throw new ArgumentException
-                        ($"Номер паспорт должен состоять из " +
-                        $"{QuantityPassportDigits} цифр");
-                }
+                _passportNumber = ValidatePassport(value,
+                    QuantityPassportDigits, "номер паспорта");
             }
         }
 
@@ -117,18 +110,10 @@ namespace LaboratorySecondPersonModel
                     _passportSeries = value;
                     return;
                 }
+                //TODO: duplication +
 
-                if (value.Length == QuantitySeriesDigits
-                    && IsPassportValid(value))
-                {
-                    _passportSeries = value;
-                }
-                else
-                {
-                    throw new ArgumentException
-                        ($"Серия паспорта должна состоять из " +
-                        $"{QuantitySeriesDigits} цифр");
-                }
+                _passportSeries = ValidatePassport(value,
+                    QuantitySeriesDigits, "серия паспорта");
             }
         }
 
@@ -202,7 +187,8 @@ namespace LaboratorySecondPersonModel
                 partnerInfo = $"{Partner.FirstName} {Partner.LastName}";
             }
 
-            return base.GetInfo() +
+            return $"Взрослый: " + 
+                base.GetInfo() +
                 $", серия паспорта: {PassportSeries}," +
                 $" номер паспорта: {PassportNumber}," +
                 $" партнёр: {partnerInfo}," +
@@ -221,13 +207,25 @@ namespace LaboratorySecondPersonModel
             return Regex.IsMatch(passport, _passportPattern);
         }
 
-        /// <summary>
-        /// Метод для приветствия взрослого
-        /// </summary>
-        /// <returns>Строка приветствия взрослого</returns>
-        public string VacationRequest()
-        {
-            return "Добрый день, хочу уйти в отпуск";
+       private string ValidatePassport(string value,
+           int requiredQuantity, string fieldName)
+       {
+            if (string.IsNullOrEmpty(value))
+            {
+                return "";
+            }
+
+            if (value.Length == requiredQuantity
+                && IsPassportValid(value))
+            {
+                return value;
+            }
+            else
+            {
+                throw new ArgumentException
+                    ($"Поле ${fieldName} должно состоять из " +
+                    $"{requiredQuantity} цифр");
+            }
         }
     }
 }

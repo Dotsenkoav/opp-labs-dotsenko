@@ -20,9 +20,10 @@
         private static void FillRandomPerson(PersonBase person,
             Sex? sex = null)
         {
-            string[] maleNames = ReadFile("Data/male_names.txt");
-            string[] femaleNames = ReadFile("Data/female_names.txt");
-            string[] lastNames = ReadFile("Data/lastnames.txt");
+            //TODO: duplication +
+            string[] maleNames = ReadFile("male_names.txt");
+            string[] femaleNames = ReadFile("female_names.txt");
+            string[] lastNames = ReadFile("lastnames.txt");
 
             Sex selectedSex = sex.HasValue 
                 ? sex.Value 
@@ -46,7 +47,8 @@
         /// <param name="adult">Экземпляр класса Adult</param>
         private static void FillRandomAdult(Adult adult)
         {
-            string[] jobPlaces = ReadFile("Data/jobs.txt");
+            //TODO: duplication +
+            string[] jobPlaces = ReadFile("jobs.txt");
 
             adult.PlaceOfJob = jobPlaces[_random.Next(jobPlaces.Length)];
 
@@ -94,7 +96,8 @@
         /// <param name="child">Экземпляр класса Child</param>
         private static void FillRandomChild(Child child)
         {
-            string[] placeOfStudy = ReadFile("Data/study_places.txt");
+            //TODO: duplication +
+            string[] placeOfStudy = ReadFile("study_places.txt");
 
             child.Age = _random.Next(child.MinAge, child.MaxAge);
 
@@ -148,13 +151,15 @@
         /// </summary>
         /// <param name="path">Путь к файлу</param>
         /// <returns>Массив слов</returns>
-        private static string[] ReadFile(string path)
+        private static string[] ReadFile(string file, string  defaultPath = "Data/")
         {
-            if (!File.Exists(path))
+            string fullPath =  string.Concat(defaultPath, file);
+
+            if (!File.Exists(fullPath))
             {
                 return Array.Empty<string>();
             }
-            return File.ReadAllLines(path)
+            return File.ReadAllLines(fullPath)
                 .Where(value => !string.IsNullOrWhiteSpace(value))
                 .ToArray();
         }

@@ -64,29 +64,12 @@ namespace LaboratorySecond
         /// <param name="persons">Список людей</param>
         public static void TestTypePerson(PersonList persons)
         {
+            //TODO: polymorphism +
             var fourthPerson = persons.FindByIndex(3);
             Console.WriteLine($"Тип четверого человека:" +
                 $" {fourthPerson.GetType()}");
 
-            switch (fourthPerson)
-            {
-                case Adult adultPerson:
-                {
-                    Console.Write($"{adultPerson.FirstName} {adultPerson.LastName}: ");
-                    Console.WriteLine(adultPerson.VacationRequest());
-                    break;
-                }
-                case Child childPerson:
-                {
-                    Console.Write($"{childPerson.FirstName} {childPerson.LastName}: ");
-                    Console.WriteLine(childPerson.DontWantSchool());
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
-            }
+            Console.WriteLine(fourthPerson.GetInfo());
         }
 
         /// <summary>
