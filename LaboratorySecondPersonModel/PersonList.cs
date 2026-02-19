@@ -1,21 +1,21 @@
-﻿namespace LaboratoryFirst
+﻿namespace LaboratorySecondPersonModel
 {
     /// <summary>
-    /// Класс, работающий со списком людей (объектами класса Person)
+    /// Список людей, принимает объекты Person
     /// </summary>
-    internal class PersonList
+    public class PersonList
     {
         /// <summary>
         /// Список людей, принимает объекта класса Person
         /// </summary>
-        private List<Person> _persons;
-        
+        private readonly List<PersonBase> _persons;
+
         /// <summary>
         /// Конструктор класса по умолчанию
         /// </summary>
         public PersonList()
         {
-            _persons = new List<Person>();
+            _persons = new List<PersonBase>();
         }
 
         /// <summary>
@@ -26,14 +26,14 @@
         /// <exception cref="ArgumentNullException">
         /// Возникает, если параметр <paramref name="persons"/> равен null
         /// </exception>
-        public PersonList(IEnumerable<Person> persons)
+        public PersonList(IEnumerable<PersonBase> persons)
         {
             if (persons == null)
             {
                 throw new ArgumentNullException(nameof(persons));
             }
 
-            _persons = new List<Person>(persons);   
+            _persons = new List<PersonBase>(persons);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@
         /// Добавляет человека в список
         /// </summary>
         /// <param name="person">Объект класса Person</param>
-        public void Add(Person person)
+        public void Add(PersonBase person)
         {
             _persons.Add(person);
         }
@@ -57,7 +57,7 @@
         /// Удаляет человека из списка
         /// </summary>
         /// <param name="person">Объект класса Person</param>
-        public void Remove(Person person)
+        public void Remove(PersonBase person)
         {
             _persons.Remove(person);
         }
@@ -73,11 +73,11 @@
         }
 
         /// <summary>
-        /// Находит человека по инлдексу
+        /// Находит человека по индексу
         /// </summary>
         /// <param name="index">Индекс</param>
         /// <returns>Объект человека</returns>
-        public Person FindByIndex(int index)
+        public PersonBase FindByIndex(int index)
         {
             ValidateIndex(index);
             return _persons[index];
@@ -91,7 +91,7 @@
         /// <exception cref="ArgumentNullException">
         /// Возникает, если параметр <paramref name="person"/> не найден
         /// </exception>
-        public int IndexOf(Person person)
+        public int IndexOf(PersonBase person)
         {
             if (_persons.Contains(person))
             {
@@ -112,7 +112,7 @@
         }
 
         /// <summary>
-        /// Метод, проверяющий коректность индекса
+        /// Метод, проверяющий корректность индекса
         /// </summary>
         /// <param name="index">Индекс</param>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -126,6 +126,16 @@
                     $"Индекс должен быть от 0 до {_persons.Count - 1}");
             }
         }
+
+        /// <summary>
+        /// Метод для считывания людей из списка
+        /// </summary>
+        public void PrintAll()
+        {
+            for (int i = 0; i < _persons.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {_persons[i].GetInfo()}");
+            }
+        }
     }
 }
-

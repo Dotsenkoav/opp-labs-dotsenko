@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LaboratoryFirstPersonModel\LaboratoryFirstPersonModel.csproj" />
+    <ProjectReference Include="..\PersonModel\LaboratoryFirstPersonModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

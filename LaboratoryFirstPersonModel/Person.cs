@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace LaboratoryFirst
 {
     /// <summary>
     /// Класс, описывающий сущность человека 
     /// </summary>
-    internal class Person
+    public class Person
     {
         /// <summary>
         /// Имя человека
@@ -28,6 +30,16 @@ namespace LaboratoryFirst
         private Sex _sex;
 
         /// <summary>
+        /// Паттерн регулярки ru
+        /// </summary>
+        private const string _russianCheck = @"^[а-яА-ЯёЁ\s\-]+$";
+
+        /// <summary>
+        /// Паттерн регулярки en
+        /// </summary>
+        private const string _englishCheck = @"^[a-zA-Z\s\-]+$";
+
+        /// <summary>
         /// Минимальный возраст человека
         /// </summary>
         public const int MinAge = 0;
@@ -36,6 +48,7 @@ namespace LaboratoryFirst
         /// Максимальный возраст человека
         /// </summary>
         public const int MaxAge = 123;
+
 
         /// <summary>
         /// Конструктор класса Person
@@ -55,7 +68,7 @@ namespace LaboratoryFirst
         /// <summary>
         /// Конструктор класса по умолчанию
         /// </summary>
-        public Person() : this( "Андрей", "Иванов", 18, Sex.Male ) { }
+        public Person() : this("Андрей", "Иванов", 18, Sex.Male) { }
 
         /// <summary>
         /// Возвращает или задает имя человека
@@ -63,14 +76,20 @@ namespace LaboratoryFirst
         public string FirstName
         {
             get { return _firstName; }
-            set 
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException($"{nameof(FirstName)}" +
                         $" не может быть пустым!");
                 }
-                _firstName = value;
+
+                if (!IsValidName(value))
+                {
+                    throw new Exception($"{nameof(value)} может содержать" +
+                        $" только русские/английские символы, пробел и -");
+                }
+                _firstName = CheckRegister(value);
             }
         }
 
@@ -80,14 +99,21 @@ namespace LaboratoryFirst
         public string LastName
         {
             get { return _lastName; }
-            set 
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException($"{nameof(LastName)}" +
                         $" не может быть пустым!");
                 }
-                _lastName = value; 
+
+                if (!IsValidFullname(_firstName, value))
+                {
+                    throw new Exception($"{nameof(LastName)} " +
+                        $"и {nameof(FirstName)} должны быть на " +
+                        $"одном языке и могут содержать только пробелы и -");
+                }
+                _lastName = CheckRegister(value);
             }
         }
 
@@ -97,14 +123,14 @@ namespace LaboratoryFirst
         public int Age
         {
             get { return _age; }
-            set 
+            set
             {
                 if (value < MinAge || value > MaxAge)
                 {
                     throw new Exception($"{nameof(Age)} " +
                         $" не может быть меньше {MinAge} или больше {MaxAge}!");
                 }
-                _age = value; 
+                _age = value;
             }
         }
 
@@ -118,46 +144,39 @@ namespace LaboratoryFirst
         }
 
         /// <summary>
-        /// Создает случайного человека
+        /// Метод, преобразования регистра в правильный формат
         /// </summary>
-        /// <returns>Объект класса Person со случайными значениями полей</returns>
-        public static Person GetRandomPerson()
+        /// <param name="name">Имя/Фамилия для проверки</param>
+        /// <returns>Строка в правильном регистре</returns>
+        public static string CheckRegister(string name)
         {
-            Random random = new Random();
-
-            string[] maleNames = ReadFile("Data/male_names.txt");
-            string[] femaleNames = ReadFile("Data/female_names.txt");
-            string[] lastNames = ReadFile("Data/lastnames.txt");
-
-            Sex sex = random.Next(2) == 0 ? Sex.Male : Sex.Female;
-            string firstName = sex == Sex.Male
-                ? maleNames[random.Next(maleNames.Length)]
-                : femaleNames[random.Next(femaleNames.Length)];
-
-            string lastName = lastNames[random.Next(lastNames.Length)];
-            if(sex == Sex.Female) 
-            {
-                lastName += "а";
-            }
-
-            int age = random.Next(MinAge, MaxAge + 1);
-
-            return new Person(firstName, lastName, age, sex);
+            TextInfo txt = CultureInfo.CurrentCulture.TextInfo;
+            return txt.ToTitleCase(name.ToLower());
         }
 
         /// <summary>
-        /// Метод считывания строк в файле
+        /// Метод проверки имени или фамилии
         /// </summary>
-        /// <param name="path">Путь к файлу</param>
-        /// <returns>Массив слов</returns>
-        private static string[] ReadFile(string path)
+        /// <param name="name">Имя</param>
+        /// <returns>true - если подходит, иначе false</returns>
+        private bool IsValidName(string name)
         {
-            if (!File.Exists(path))
-                return Array.Empty<string>();
+            return (Regex.IsMatch(name, _russianCheck)
+                || Regex.IsMatch(name, _englishCheck));
+        }
 
-            return File.ReadAllLines(path)
-                .Where(value => !string.IsNullOrWhiteSpace(value))
-                .ToArray();
+        /// <summary>
+        /// Метод проверки имени и фамилии
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <param name="lastname">Фамилия</param>
+        /// <returns>true - если на одном языке, иначе false </returns>
+        private bool IsValidFullname(string name, string lastname)
+        {
+            return (Regex.IsMatch(name, _russianCheck) &&
+                Regex.IsMatch(lastname, _russianCheck))
+                || (Regex.IsMatch(name, _englishCheck) &&
+                Regex.IsMatch(lastname, _englishCheck));
         }
     }
 }

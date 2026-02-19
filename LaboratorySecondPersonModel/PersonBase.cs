@@ -1,0 +1,182 @@
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+
+namespace LaboratorySecondPersonModel
+{
+    /// <summary>
+    /// Класс, описывающий сущность человека 
+    /// </summary>
+    public abstract class PersonBase
+    {
+        /// <summary>
+        /// Имя человека
+        /// </summary>
+        private string _firstName;
+
+        /// <summary>
+        /// Фамилия человека
+        /// </summary>
+        private string _lastName;
+
+        /// <summary>
+        /// Возраст человека
+        /// </summary>
+        private int _age;
+
+        /// <summary>
+        /// Пол человека
+        /// </summary>
+        private Sex _sex;
+
+        /// <summary>
+        /// Паттерн регулярки ru
+        /// </summary>
+        private const string _russianCheck = @"^[а-яА-ЯёЁ\s\-]+$";
+
+        /// <summary>
+        /// Паттерн регулярки en
+        /// </summary>
+        private const string _englishCheck = @"^[a-zA-Z\s\-]+$";
+
+        /// <summary>
+        /// Минимальный возраст человека
+        /// </summary>
+        public virtual int MinAge { get; } = 0;
+
+        /// <summary>
+        /// Максимальный возраст человека
+        /// </summary>
+        public virtual int MaxAge { get; } = 123;
+
+
+        /// <summary>
+        /// Конструктор класса Person
+        /// </summary>
+        /// <param name="firstName">Имя человека</param>
+        /// <param name="lastName">Фамилия человека</param>
+        /// <param name="age">Возраст человека</param>
+        /// <param name="sex">Пол человека</param>
+        protected PersonBase(string firstName, string lastName,
+            int age, Sex sex)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Sex = sex;
+        }
+
+        /// <summary>
+        /// Возвращает или задает имя человека
+        /// </summary>
+        public string FirstName
+        {
+            get { return _firstName; }
+            set
+            {
+                _firstName = ValidateName(value, "имя");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задает фамилию человека
+        /// </summary>
+        public string LastName
+        {
+            get { return _lastName; }
+            set
+            {
+                _lastName = ValidateName(value, "фамилия");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задает возраст человека
+        /// </summary>
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                if (value < MinAge || value > MaxAge)
+                {
+                    throw new ArgumentOutOfRangeException($"{nameof(Age)} " +
+                        $" не может быть меньше {MinAge} или больше {MaxAge}!");
+                }
+                _age = value;
+            }
+        }
+
+        //TODO: autoproperty
+        /// <summary>
+        /// Возвращает или задает пол человека
+        /// </summary>
+        public Sex Sex
+        {
+            get { return _sex; }
+            set { _sex = value; }
+        }
+
+        /// <summary>
+        /// Метод получения информации о человеке
+        /// </summary>
+        /// <returns>строку с информацией о человеке</returns>
+        public virtual string GetInfo()
+        {
+            string sexString = Sex == Sex.Male ? "Мужской" : "Женский";
+
+            return $"{FirstName} {LastName}, возраст: {Age}, {sexString}";
+        }
+
+        /// <summary>
+        /// Метод, преобразования регистра в правильный формат
+        /// </summary>
+        /// <param name="name">Имя/Фамилия для проверки</param>
+        /// <returns>Строка в правильном регистре</returns>
+        public static string CheckRegister(string name)
+        {
+            TextInfo txt = CultureInfo.CurrentCulture.TextInfo;
+            return txt.ToTitleCase(name.ToLower());
+        }
+
+        /// <summary>
+        /// Метод проверки имени и фамилии
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <param name="lastname">Фамилия</param>
+        /// <returns>true - если на одном языке, иначе false </returns>
+        private bool IsValidFullname(string name, string lastname)
+        {
+            return (Regex.IsMatch(name, _russianCheck) &&
+                Regex.IsMatch(lastname, _russianCheck))
+                || (Regex.IsMatch(name, _englishCheck) &&
+                Regex.IsMatch(lastname, _englishCheck));
+        }
+
+        /// <summary>
+        /// Валидация имени/фамилии
+        /// </summary>
+        /// <param name="value">Имя/фамилия</param>
+        /// <param name="fieldName">Название поля</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Ошибка,
+        /// при пустом значении</exception>
+        /// <exception cref="Exception">Ошибка,
+        /// при неправильном формате</exception>
+        private string ValidateName(string value, string fieldName)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException($"{fieldName}" +
+                    $" не может быть пустым!");
+            }
+
+            if (fieldName == "фамилия" && !IsValidFullname(FirstName, value))
+            {
+                throw new Exception($"{fieldName} " +
+                    $"может содержать только пробелы и -");
+            }
+
+            return CheckRegister(value);
+        }
+    }
+}
