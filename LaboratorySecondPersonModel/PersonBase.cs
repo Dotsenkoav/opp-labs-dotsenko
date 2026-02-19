@@ -57,7 +57,8 @@ namespace LaboratorySecondPersonModel
         /// <param name="lastName">Фамилия человека</param>
         /// <param name="age">Возраст человека</param>
         /// <param name="sex">Пол человека</param>
-        protected PersonBase(string firstName, string lastName, int age, Sex sex)
+        protected PersonBase(string firstName, string lastName,
+            int age, Sex sex)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -185,7 +186,8 @@ namespace LaboratorySecondPersonModel
 
             if (fieldName == "фамилия" && !IsValidFullname(FirstName, value))
             {
-                throw new Exception($"{fieldName} может содержать только пробелы и -");
+                throw new Exception($"{fieldName} " +
+                    $"может содержать только пробелы и -");
             }
 
             return CheckRegister(value);
