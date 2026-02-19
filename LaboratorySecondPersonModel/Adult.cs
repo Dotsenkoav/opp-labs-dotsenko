@@ -84,8 +84,6 @@ namespace LaboratorySecondPersonModel
             get { return _passportNumber; }
             set
             { 
-                //TODO: duplication +
-
                 _passportNumber = ValidatePassport(value,
                     QuantityPassportDigits, "номер паспорта");
             }
@@ -99,8 +97,6 @@ namespace LaboratorySecondPersonModel
             get { return _passportSeries; }
             set
             {
-                //TODO: duplication +
-
                 _passportSeries = ValidatePassport(value,
                     QuantitySeriesDigits, "серия паспорта");
             }

@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 
 namespace LaboratorySecondPersonModel
 {
-    //TODO: rename file +
     /// <summary>
     /// Класс, описывающий сущность человека 
     /// </summary>
@@ -74,7 +73,6 @@ namespace LaboratorySecondPersonModel
             get { return _firstName; }
             set
             {
-                //TODO: duplication +
                 _firstName = ValidateName(value, "имя");
             }
         }
@@ -87,7 +85,6 @@ namespace LaboratorySecondPersonModel
             get { return _lastName; }
             set
             {
-                //TODO: duplication +
                 _lastName = ValidateName(value, "фамилия");
             }
         }
@@ -109,6 +106,7 @@ namespace LaboratorySecondPersonModel
             }
         }
 
+        //TODO: autoproperty
         /// <summary>
         /// Возвращает или задает пол человека
         /// </summary>
@@ -118,7 +116,6 @@ namespace LaboratorySecondPersonModel
             set { _sex = value; }
         }
 
-        //TODO: XML +
         /// <summary>
         /// Метод получения информации о человеке
         /// </summary>
@@ -139,17 +136,6 @@ namespace LaboratorySecondPersonModel
         {
             TextInfo txt = CultureInfo.CurrentCulture.TextInfo;
             return txt.ToTitleCase(name.ToLower());
-        }
-
-        /// <summary>
-        /// Метод проверки имени или фамилии
-        /// </summary>
-        /// <param name="name">Имя</param>
-        /// <returns>true - если подходит, иначе false</returns>
-        private bool IsValidName(string name)
-        {
-            return (Regex.IsMatch(name, _russianCheck)
-                || Regex.IsMatch(name, _englishCheck));
         }
 
         /// <summary>

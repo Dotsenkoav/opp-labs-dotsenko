@@ -64,7 +64,6 @@ namespace LaboratorySecond
         /// <param name="persons">Список людей</param>
         public static void TestTypePerson(PersonList persons)
         {
-            //TODO: polymorphism +
             var fourthPerson = persons.FindByIndex(3);
             Console.WriteLine($"Тип четверого человека:" +
                 $" {fourthPerson.GetType()}");
@@ -97,6 +96,5 @@ namespace LaboratorySecond
             Console.ReadKey();
             Console.WriteLine();
         }
-
     }
 }
