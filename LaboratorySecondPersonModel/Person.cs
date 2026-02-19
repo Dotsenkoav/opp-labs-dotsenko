@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace LaboratorySecondPersonModel
 {
+    //TODO: rename file
     /// <summary>
     /// Класс, описывающий сущность человека 
     /// </summary>
@@ -72,6 +73,7 @@ namespace LaboratorySecondPersonModel
             get { return _firstName; }
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException($"{nameof(FirstName)}" +
@@ -95,6 +97,7 @@ namespace LaboratorySecondPersonModel
             get { return _lastName; }
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException($"{nameof(LastName)}" +
@@ -137,6 +140,7 @@ namespace LaboratorySecondPersonModel
             set { _sex = value; }
         }
 
+        //TODO: XML
         public virtual string GetInfo()
         {
             string sexString = Sex == Sex.Male ? "Мужской" : "Женский";

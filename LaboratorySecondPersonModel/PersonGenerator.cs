@@ -20,6 +20,7 @@
         private static void FillRandomPerson(PersonBase person,
             Sex? sex = null)
         {
+            //TODO: duplication
             string[] maleNames = ReadFile("Data/male_names.txt");
             string[] femaleNames = ReadFile("Data/female_names.txt");
             string[] lastNames = ReadFile("Data/lastnames.txt");
@@ -46,6 +47,7 @@
         /// <param name="adult">Экземпляр класса Adult</param>
         private static void FillRandomAdult(Adult adult)
         {
+            //TODO: duplication
             string[] jobPlaces = ReadFile("Data/jobs.txt");
 
             adult.PlaceOfJob = jobPlaces[_random.Next(jobPlaces.Length)];
@@ -94,6 +96,7 @@
         /// <param name="child">Экземпляр класса Child</param>
         private static void FillRandomChild(Child child)
         {
+            //TODO: duplication
             string[] placeOfStudy = ReadFile("Data/study_places.txt");
 
             child.Age = _random.Next(child.MinAge, child.MaxAge);
