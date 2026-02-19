@@ -84,13 +84,6 @@ namespace LaboratorySecondPersonModel
             get { return _passportNumber; }
             set
             { 
-                //TODO: duplication
-                if (string.IsNullOrEmpty(value))
-                {
-                    _passportNumber = value;
-                    return;
-                }
-            {
                 //TODO: duplication +
 
                 _passportNumber = ValidatePassport(value,
@@ -106,12 +99,6 @@ namespace LaboratorySecondPersonModel
             get { return _passportSeries; }
             set
             {
-                //TODO: duplication
-                if (string.IsNullOrEmpty(value))
-                {
-                    _passportSeries = value;
-                    return;
-                }
                 //TODO: duplication +
 
                 _passportSeries = ValidatePassport(value,

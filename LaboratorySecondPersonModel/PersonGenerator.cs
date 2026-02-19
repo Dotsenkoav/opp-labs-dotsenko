@@ -153,7 +153,7 @@
         /// <returns>Массив слов</returns>
         private static string[] ReadFile(string file, string  defaultPath = "Data/")
         {
-            string fullPath =  string.Concat(defaultPath, file);
+            string fullPath = defaultPath + file;
 
             if (!File.Exists(fullPath))
             {
