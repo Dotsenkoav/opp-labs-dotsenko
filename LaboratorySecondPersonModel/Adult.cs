@@ -84,6 +84,7 @@ namespace LaboratorySecondPersonModel
             get { return _passportNumber; }
             set
             { 
+                //TODO: duplication
                 if (string.IsNullOrEmpty(value))
                 {
                     _passportNumber = value;
@@ -105,6 +106,7 @@ namespace LaboratorySecondPersonModel
             get { return _passportSeries; }
             set
             {
+                //TODO: duplication
                 if (string.IsNullOrEmpty(value))
                 {
                     _passportSeries = value;

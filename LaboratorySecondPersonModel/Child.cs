@@ -104,8 +104,9 @@
         /// <returns>Строку с информацией об объекте Child</returns>
         public override string GetInfo()
         {
-            string motherInfo = Mother == null ?
-                "Мать отсутствует" : $"{Mother.FirstName} {Mother.LastName}";
+            string motherInfo = Mother == null 
+                ? "Мать отсутствует" 
+                : $"{Mother.FirstName} {Mother.LastName}";
             string fatherInfo = Father == null ?
                 "Отец отсутствует" : $"{Father.FirstName} {Father.LastName}";
 
