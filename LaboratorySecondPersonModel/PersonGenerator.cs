@@ -151,7 +151,8 @@
         /// </summary>
         /// <param name="path">Путь к файлу</param>
         /// <returns>Массив слов</returns>
-        private static string[] ReadFile(string file, string  defaultPath = "Data/")
+        private static string[] ReadFile(string file,
+            string  defaultPath = "Data/")
         {
             string fullPath = defaultPath + file;
 
