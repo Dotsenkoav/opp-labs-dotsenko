@@ -58,22 +58,34 @@ namespace LaboratorySecond
             persons.PrintAll();
         }
 
+        /// <summary>
+        /// Метод определения тип четвертого человека и его метод
+        /// </summary>
+        /// <param name="persons">Список людей</param>
         public static void TestTypePerson(PersonList persons)
         {
             var fourthPerson = persons.FindByIndex(3);
             Console.WriteLine($"Тип четверого человека:" +
                 $" {fourthPerson.GetType()}");
 
-            if (fourthPerson is Adult adult)
+            switch (fourthPerson)
             {
-                Console.Write($"{adult.FirstName} {adult.LastName}: ");
-                Console.WriteLine(adult.VacationRequest());
-            }
-
-            if (fourthPerson is Child child)
-            {
-                Console.Write($"{child.FirstName} {child.LastName}: ");
-                Console.WriteLine(child.DontWantSchool());
+                case Adult adultPerson:
+                {
+                    Console.Write($"{adultPerson.FirstName} {adultPerson.LastName}: ");
+                    Console.WriteLine(adultPerson.VacationRequest());
+                    break;
+                }
+                case Child childPerson:
+                {
+                    Console.Write($"{childPerson.FirstName} {childPerson.LastName}: ");
+                    Console.WriteLine(childPerson.DontWantSchool());
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
             }
         }
 

@@ -56,18 +56,13 @@ namespace LaboratorySecondPersonModel
         /// <param name="lastName">Фамилия человека</param>
         /// <param name="age">Возраст человека</param>
         /// <param name="sex">Пол человека</param>
-        public PersonBase(string firstName, string lastName, int age, Sex sex)
+        protected PersonBase(string firstName, string lastName, int age, Sex sex)
         {
             FirstName = firstName;
             LastName = lastName;
             Age = age;
             Sex = sex;
         }
-
-        /// <summary>
-        /// Конструктор класса по умолчанию
-        /// </summary>
-        public PersonBase() : this("Андрей", "Иванов", 18, Sex.Male) { }
 
         /// <summary>
         /// Возвращает или задает имя человека
