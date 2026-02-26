@@ -14,6 +14,7 @@ internal class Program
         TestFiveAuthorBook();
     }
 
+    //TODO: XML
     public static void TestSingeAuthorBook()
     {
         var book = new Book
@@ -31,6 +32,7 @@ internal class Program
         Console.WriteLine(book.GetGOSTInfo());
     }
 
+    //TODO: XML
     public static void TestFiveAuthorBook()
     {
         var book = new Book
@@ -43,6 +45,7 @@ internal class Program
             TotalPages = 700
         };
 
+        //TODO: RSDN
         book.AddAuthors("Иванов, И.И.", "Петров, П.П.", "Сидоров, С.С.", "Кузнецов, И.И.", "Соловьев, С.С.");
 
         Console.WriteLine(book.GetGOSTInfo());
