@@ -106,15 +106,10 @@ namespace LaboratorySecondPersonModel
             }
         }
 
-        //TODO: autoproperty
         /// <summary>
         /// Возвращает или задает пол человека
         /// </summary>
-        public Sex Sex
-        {
-            get { return _sex; }
-            set { _sex = value; }
-        }
+        public Sex Sex { get; set; }
 
         /// <summary>
         /// Метод получения информации о человеке

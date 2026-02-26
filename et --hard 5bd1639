@@ -1,0 +1,71 @@
+*   [33mc81e390[m[33m ([m[1;31morigin/develop[m[33m)[m Merge branch 'develop' of https://github.com/Dotsenkoav/opp-labs-dotsenko into develop
+[31m|[m[32m\[m  
+[31m|[m * [33m5bd1639[m ЛР2 - код принят
+[31m|[m * [33mfe00da3[m fix(Lab2): исправлены TODO
+[31m|[m * [33m628b181[m fix(Lab2): исправлены TODO #3
+[31m|[m * [33m2f3a28c[m fix(Lab2): исправлены TODO #2
+* [32m|[m [33m3c81612[m Revert "а"
+* [32m|[m [33mc52ce42[m а
+[32m|[m[32m/[m  
+*   [33m539a64c[m[33m ([m[1;36mHEAD[m[33m)[m fix(Lab2): исправлены TODO
+[33m|[m[34m\[m  
+* [34m|[m [33m97209de[m fix(Lab2): исправлены TODO
+[34m|[m [34m|[m *   [33mac35264[m[33m ([m[1;35mrefs/stash[m[33m)[m On (no branch): Извлечение develop
+[34m|[m [34m|[m[34m/[m[36m|[m[1;31m\[m  
+[34m|[m [34m|[m [36m|[m * [33mb9e13b8[m untracked files on (no branch): 2f2a767 Добавлены TODO
+[34m|[m [34m|[m * [33m99a8cd4[m index on (no branch): 2f2a767 Добавлены TODO
+[34m|[m [34m|[m[34m/[m  
+[34m|[m * [33m2f2a767[m Добавлены TODO
+[34m|[m[34m/[m  
+* [33m2748c28[m[33m ([m[1;32mdevelop[m[33m)[m fix(Lab2): доработка кода
+* [33m5a08f03[m feature(Lab2): переход на .NET 8.0
+* [33mb4dbf21[m feature(Lab2): доработан функционал ЛР2
+* [33m81d23e5[m feature(Lab2): доработаны классы Child и Adult
+* [33m7aa9f65[m fix(Lab2): фикс названия директорий
+* [33mdf0bb76[m feature(Lab2): добавлены класса для второй лабораторной
+* [33mc207129[m fix(Person): перенесены проверки регистра в класс
+* [33m1871abe[m fix(Program): пофикшен програм
+* [33mffd72b5[m Убраны TODO
+* [33m3e44ad9[m fix(TODO): исправлены замечания
+* [33m8ede8fd[m fix(Person): изменен персон
+* [33m41764fd[m fix(Lab1): добавлен генератор случайных людей
+* [33m3f6bbd4[m Добавлены TODO
+* [33m3b7fdda[m fix(PersonLab): перенесена Data в Model
+* [33m8a6a711[m fix(Program): добавлено разделение по KISS
+* [33mec905f5[m fix(LaboratoryFirst): изменил версию .NET
+[1;31m|[m *   [33m93cb6de[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #4 from Dotsenkoav/develop
+[1;31m|[m [1;32m|[m[1;31m\[m  
+[1;31m|[m [1;32m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;32m|[m   
+* [1;32m|[m [33m90e940d[m fix(Program): доработаны баги
+* [1;32m|[m [33mcd85aba[m feature(Program, Person): доработаны проверки пользовательского ввода
+* [1;32m|[m [33m60ccf98[m fix(Program): доработан функционал по принципу DRY и KISS
+* [1;32m|[m   [33m3c8e02e[m Merge branch 'develop' of https://github.com/Dotsenkoav/opp-labs-dotsenko into develop
+[1;34m|[m[1;35m\[m [1;32m\[m  
+* [1;35m|[m [1;32m|[m [33m23d4168[m fix(Person): исправлен класс Person
+[1;35m|[m [1;35m|[m *   [33md263ef9[m Merge pull request #3 from Dotsenkoav/develop
+[1;35m|[m [1;35m|[m [1;36m|[m[1;35m\[m  
+[1;35m|[m [1;35m|[m [1;36m|[m[1;35m/[m  
+[1;35m|[m [1;35m|[m[1;35m/[m[1;36m|[m   
+[1;35m|[m * [1;36m|[m [33m838cee7[m Merge branch 'main' into develop
+[1;35m|[m[1;35m/[m[1;36m|[m [1;36m|[m 
+[1;35m|[m [1;36m|[m[1;36m/[m  
+[1;35m|[m *   [33m91749a8[m Merge pull request #2 from Dotsenkoav/release-branches
+[1;35m|[m [34m|[m[35m\[m  
+[1;35m|[m [34m|[m * [33m4427026[m[33m ([m[1;31morigin/release-branches[m[33m)[m test(github conflicts): тестируем конфликт
+[1;35m|[m * [35m|[m   [33m6bd7492[m Merge pull request #1 from Dotsenkoav/develop
+[1;35m|[m [36m|[m[1;31m\[m [35m\[m  
+* [36m|[m [1;31m|[m [35m|[m [33m5db84a2[m Test(github conflicts): тестирование конфликтов
+[35m|[m [36m|[m[35m_[m[1;31m|[m[35m/[m  
+[35m|[m[35m/[m[36m|[m [1;31m|[m   
+* [36m|[m [1;31m|[m [33m4ac1f1d[m test(Person): протестирован функционал класса Person
+* [36m|[m [1;31m|[m [33m377f78a[m feature(Person): доработан функционал класса Person
+[1;31m|[m [36m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[36m|[m   
+* [36m|[m [33mdaf03cc[m test(Person, PersonList): протестированы классы
+[36m|[m[36m/[m  
+* [33m9004505[m feature(LaboratoryFirst): добавлены основные классы
+* [33mc6eb505[m refactoring(LaboratoryFirst): добавлен проект лабораторной 1 - удален старый проект LaboratoryOOP - добавлен новый класс Person - добавлена заготовка под класс PersonList
+* [33me454f86[m feature(Program): добавлен основной класс
+* [33med97d3d[m Добавьте файлы проекта.
+* [33m0723b6f[m Добавить .gitattributes и .gitignore.
