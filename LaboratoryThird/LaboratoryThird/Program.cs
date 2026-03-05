@@ -51,43 +51,43 @@ internal class Program
             switch (choice)
             {
                 case "1":
-                    {
-                        publications.Add(InputBook());
-                        Console.WriteLine("Книга добавлена!\n");
-                        break;
-                    }
+                {
+                    publications.Add(InputBook());
+                    Console.WriteLine("Книга добавлена!\n");
+                    break;
+                }
                 case "2":
-                    {
-                        publications.Add(InputJournal());
-                        break;
-                    }
+                {
+                    publications.Add(InputJournal());
+                    break;
+                }
                 case "3":
-                    {
-                        publications.Add(InputCollection());
-                        Console.WriteLine("Сборник добавлен!\n");
-                        break;
-                    }
+                {
+                    publications.Add(InputCollection());
+                    Console.WriteLine("Сборник добавлен!\n");
+                    break;
+                }
                 case "4":
-                    {
-                        publications.Add(InputDissertation());
-                        Console.WriteLine("Диссертация добавлена!\n");
-                        break;
-                    }
+                {
+                    publications.Add(InputDissertation());
+                    Console.WriteLine("Диссертация добавлена!\n");
+                    break;
+                }
                 case "5":
-                    {
-                        ShowAllPublications();
-                        break;
-                    }
+                {
+                    ShowAllPublications();
+                    break;
+                }
                 case "0":
-                    {
-                        Console.WriteLine("До свидания!");
-                        return;
-                    }
+                {
+                    Console.WriteLine("До свидания!");
+                    return;
+                }
                 default:
-                    {
-                        Console.WriteLine("Неверный выбор. Повторите ввод.");
-                        break;
-                    }
+                {
+                    Console.WriteLine("Неверный выбор. Повторите ввод.");
+                    break;
+                }
             }
         }
     }
