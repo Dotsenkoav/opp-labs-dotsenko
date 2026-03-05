@@ -196,7 +196,7 @@ internal class Program
     /// <typeparam name="T">Параметр типа (PublicationBase)</typeparam>
     /// <param name="actions">Действие</param>
     /// <returns>Экземпляр издания</returns>
-    static T CreatePublication<T>(Dictionary<string, Action<T>> actions)
+    private static T CreatePublication<T>(Dictionary<string, Action<T>> actions)
     where T : PublicationBase, new()
     {
         T publication = new T();
