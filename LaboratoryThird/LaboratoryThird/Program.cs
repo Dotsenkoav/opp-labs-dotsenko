@@ -15,7 +15,6 @@ internal class Program
     /// </summary>
     private const int NumberOffset = 1;
 
-    //TODO: RSDN +
     /// <summary>
     /// Список, для хранения всех изданий
     /// </summary>
@@ -103,7 +102,6 @@ internal class Program
     {
         return new Dictionary<string, Action<T>>
         {
-            //TODO: отступы +
             ["название"] = (publication) 
                 => publication.Title = Console.ReadLine(),
             ["сведения о заглавии (enter, чтобы пропустить)"] = (publication)
