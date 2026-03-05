@@ -47,7 +47,6 @@ namespace LaboratoryThirdModel
         {
             if (authors == null || authors.Length == 0)
             {
-                //TODO: {} +
                 throw new ArgumentException(
                     "Должен передаваться минимум один автор",
                     nameof(authors));
@@ -69,7 +68,6 @@ namespace LaboratoryThirdModel
             var bookInformation = new StringBuilder();
 
             int authorCount = _authors.Count;
-            //TODO: magic (to const) +
             if (authorCount >= MinAuthorsForTitle
                 && authorCount <= MaxAuthorsForTitle)
             {
@@ -85,12 +83,10 @@ namespace LaboratoryThirdModel
             if (authorCount > 0)
             {
                 bookInformation.Append(" / ");
-                //TODO: magic (to const) +
                 if (authorCount == SingleAuthor)
                 {
                     bookInformation.Append(SwapAuthorFormat(_authors[0]));
                 }
-                //TODO: magic (to const) +
                 else if (authorCount <= MaxAuthorsForFullList)
                 {
                     var formattedAuthors = _authors.Select(SwapAuthorFormat);
@@ -101,7 +97,6 @@ namespace LaboratoryThirdModel
                 {
                     var firstThree = _authors.Take(MaxAuthorsForFullList)
                         .Select(SwapAuthorFormat);
-                    //TODO: RSDN +
                     bookInformation.Append($"{string.Join(", ",
                         firstThree)} [и др.]");
                 }
