@@ -18,7 +18,7 @@ internal class Program
     /// <summary>
     /// Список, для хранения всех изданий
     /// </summary>
-    private static List<IPublication> publications = new();
+    private static List<IPublication> _publications = new();
 
     /// <summary>
     /// Точка входа в программу
@@ -52,24 +52,24 @@ internal class Program
             {
                 case "1":
                 {
-                    publications.Add(InputBook());
+                    _publications.Add(InputBook());
                     Console.WriteLine("Книга добавлена!\n");
                     break;
                 }
                 case "2":
                 {
-                    publications.Add(InputJournal());
+                    _publications.Add(InputJournal());
                     break;
                 }
                 case "3":
                 {
-                    publications.Add(InputCollection());
+                    _publications.Add(InputCollection());
                     Console.WriteLine("Сборник добавлен!\n");
                     break;
                 }
                 case "4":
                 {
-                    publications.Add(InputDissertation());
+                    _publications.Add(InputDissertation());
                     Console.WriteLine("Диссертация добавлена!\n");
                     break;
                 }
@@ -102,18 +102,18 @@ internal class Program
     {
         return new Dictionary<string, Action<T>>
         {
-            ["название"] = (publication) => publication.Title =
-            Console.ReadLine(),
+            ["название"] = (publication) 
+                => publication.Title = Console.ReadLine(),
             ["сведения о заглавии (enter, чтобы пропустить)"] = (publication)
-            => publication.TitleInformation = Console.ReadLine(),
+                => publication.TitleInformation = Console.ReadLine(),
             ["место издания"] = (publication)
-            => publication.Place = Console.ReadLine(),
+                => publication.Place = Console.ReadLine(),
             ["издательство/учредитель"] = (publication)
-            => publication.Publisher = Console.ReadLine(),
+                => publication.Publisher = Console.ReadLine(),
             ["год издания"] = (publication)
-            => publication.Year = ReadInteger("Год издания"),
+                => publication.Year = ReadInteger("Год издания"),
             ["количество страниц"] = (publication)
-            => publication.TotalPages = ReadInteger("Количество страниц")
+                => publication.TotalPages = ReadInteger("Количество страниц")
         };
     }
 
@@ -226,7 +226,7 @@ internal class Program
     /// </summary>
     private static void ShowAllPublications()
     {
-        if (publications.Count == 0)
+        if (_publications.Count == 0)
         {
             Console.WriteLine("\nСписок изданий пуст.");
             return;
@@ -236,15 +236,15 @@ internal class Program
         Console.WriteLine("Список всех изданий");
         Console.WriteLine(new string('=', LineWidth));
 
-        for (int i = 0; i < publications.Count; i++)
+        for (int i = 0; i < _publications.Count; i++)
         {
             Console.WriteLine($"\nИздание №{i + NumberOffset}");
             Console.WriteLine(new string('-', LineWidth));
-            Console.WriteLine(publications[i].GetGOSTInformation());
+            Console.WriteLine(_publications[i].GetGOSTInformation());
         }
 
         Console.WriteLine("\n" + new string('=', LineWidth));
-        Console.WriteLine($"Всего изданий: {publications.Count}");
+        Console.WriteLine($"Всего изданий: {_publications.Count}");
         Console.WriteLine(new string('=', LineWidth));
     }
 
