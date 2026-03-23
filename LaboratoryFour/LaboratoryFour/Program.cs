@@ -1,4 +1,4 @@
-namespace LaboratoryFour
+namespace View
 {
     internal static class Program
     {

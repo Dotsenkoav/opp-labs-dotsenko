@@ -28,72 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox1 = new GroupBox();
-            button1 = new Button();
-            button2 = new Button();
-            dataGridView1 = new DataGridView();
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            PublicationsGroupBox = new GroupBox();
+            PublicationsDataGridView = new DataGridView();
+            AddPublicationsButton = new Button();
+            PublicationsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PublicationsDataGridView).BeginInit();
             SuspendLayout();
             // 
-            // groupBox1
+            // PublicationsGroupBox
             // 
-            groupBox1.Controls.Add(dataGridView1);
-            groupBox1.Location = new Point(12, 12);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(776, 367);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            PublicationsGroupBox.Controls.Add(PublicationsDataGridView);
+            PublicationsGroupBox.ForeColor = SystemColors.ButtonHighlight;
+            PublicationsGroupBox.Location = new Point(16, 13);
+            PublicationsGroupBox.Margin = new Padding(4, 3, 4, 3);
+            PublicationsGroupBox.Name = "PublicationsGroupBox";
+            PublicationsGroupBox.Padding = new Padding(4, 3, 4, 3);
+            PublicationsGroupBox.Size = new Size(906, 392);
+            PublicationsGroupBox.TabIndex = 0;
+            PublicationsGroupBox.TabStop = false;
+            PublicationsGroupBox.Text = "Список изданий";
             // 
-            // button1
+            // PublicationsDataGridView
             // 
-            button1.Location = new Point(53, 401);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            PublicationsDataGridView.BackgroundColor = Color.FromArgb(38, 38, 38);
+            PublicationsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            PublicationsDataGridView.Location = new Point(8, 22);
+            PublicationsDataGridView.Margin = new Padding(4, 3, 4, 3);
+            PublicationsDataGridView.Name = "PublicationsDataGridView";
+            PublicationsDataGridView.Size = new Size(890, 361);
+            PublicationsDataGridView.TabIndex = 0;
             // 
-            // button2
+            // AddPublicationsButton
             // 
-            button2.Location = new Point(177, 401);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 2;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 22);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(764, 339);
-            dataGridView1.TabIndex = 0;
+            AddPublicationsButton.BackColor = Color.FromArgb(39, 174, 96);
+            AddPublicationsButton.Cursor = Cursors.Hand;
+            AddPublicationsButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            AddPublicationsButton.FlatStyle = FlatStyle.Flat;
+            AddPublicationsButton.Location = new Point(23, 419);
+            AddPublicationsButton.Margin = new Padding(4, 3, 4, 3);
+            AddPublicationsButton.Name = "AddPublicationsButton";
+            AddPublicationsButton.Size = new Size(116, 41);
+            AddPublicationsButton.TabIndex = 1;
+            AddPublicationsButton.Text = "Добавить";
+            AddPublicationsButton.UseVisualStyleBackColor = false;
+            AddPublicationsButton.Click += AddPublicationsButton_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
+            BackColor = Color.FromArgb(26, 26, 26);
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(groupBox1);
+            ClientSize = new Size(935, 488);
+            Controls.Add(AddPublicationsButton);
+            Controls.Add(PublicationsGroupBox);
+            Font = new Font("Bookman Old Style", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "GOST Library";
-            groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Text = "Библиотечный учёт";
+            PublicationsGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PublicationsDataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private GroupBox groupBox1;
-        private DataGridView dataGridView1;
-        private Button button1;
-        private Button button2;
+        private GroupBox PublicationsGroupBox;
+        private DataGridView PublicationsDataGridView;
+        private Button AddPublicationsButton;
     }
 }
