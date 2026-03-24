@@ -38,6 +38,15 @@ namespace LaboratoryThirdModel
         private string _degree;
 
         /// <summary>
+        /// Список ученых степеней
+        /// </summary>
+        public static readonly string[] PossibleDegree = new[]
+        {
+            "Кандидат наук",
+            "Доктор наук"
+        };
+
+        /// <summary>
         /// Свойство автора
         /// </summary>
         public string AuthorFull

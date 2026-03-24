@@ -1,38 +1,49 @@
 ﻿using LaboratoryThirdModel;
+using System.Text.RegularExpressions;
 
 namespace View.Panels
 {
-    public partial class BookParameterPanel : PublicationParameterPanel
+    /// <summary>
+    /// Класс, для обработки панели издания книг
+    /// </summary>
+    public partial class BookParameterPanel 
+        : PublicationParameterPanelBase
     {
-        private string[] _authors = Array.Empty<string>();
-
-        private const string AuthorsFile = "authors.txt";
-
+        /// <summary>
+        /// Конструктор для панели книги
+        /// </summary>
         public BookParameterPanel()
         {
             InitializeComponent();
         }
-    
+
+        /// <summary>
+        /// Метод для очистки полей панели книги
+        /// </summary>
         public override void ClearValues()
         {
             AuthorsTextBox.Clear();
             AuthorsListBox.Items.Clear();
         }
 
-        public override void FillRandomValue(Random random)
+        /// <summary>
+        /// Метод для валидации количества авторов
+        /// </summary>
+        /// <exception cref="ArgumentException">Ошибка,
+        /// если нет авторов</exception>
+        public override void ValidateFields()
         {
-            _authors = ReadFile(AuthorsFile);
-            AuthorsListBox.Items.Clear();
-
-            int authorCount = random.Next(6);
-
-            for (int i = 0; i < authorCount; i++)
+            if (AuthorsListBox.Items.Count == 0)
             {
-                string author = _authors[random.Next(_authors.Length)];
-                AuthorsListBox.Items.Add(author);
-            }
+                throw new ArgumentException("Добавьте хотя бы" +
+                    " одного автора");
+            }    
         }
 
+        /// <summary>
+        /// Метод для создания издания книги
+        /// </summary>
+        /// <returns>Объект класса Book</returns>
         public override PublicationBase CreatePublication()
         {
             var book = new Book();
@@ -44,12 +55,20 @@ namespace View.Panels
 
             return book;
         }
-            
-        private void AuthorTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        
+        /// <summary>
+        /// Метод для обработки нажатия клавиши Enter поля авторов
+        /// </summary>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Аргумент события</param>
+        private void AuthorTextBox_KeyPress(object sender,
+            KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
                 string authorName = AuthorsTextBox.Text.Trim();
+                
+                if (IsValidAuthor(authorName))
                 {
                     AuthorsListBox.Items.Add(authorName);
                     AuthorsTextBox.Clear();
@@ -57,28 +76,60 @@ namespace View.Panels
             }
         }
 
+        /// <summary>
+        /// Метод для обработки двойного нажатия на элемент списка
+        /// </summary>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Аргумент события</param>
         private void AuthorsListBox_DoubleClick(object sender, EventArgs e)
         {
-            if (AuthorsListBox.SelectedItems != null)
+            if (AuthorsListBox.SelectedItem != null)
             {
                 AuthorsListBox.Items.Remove(AuthorsListBox.SelectedItem);
             }
         }
 
-        private static string[] ReadFile(string file,
-            string defaultPath = "Data/")
+        /// <summary>
+        /// Метод для случайного заполнения полей книги
+        /// </summary>
+        /// <param name="random">Объект класса Random</param>
+        public override void FillRandomValue(Random random)
         {
-            string fullPath = Path.GetFullPath(Path.Combine(defaultPath, file));
+            const int MinimumRandomAuthors = 1;
+            const int MaximumRandomAuthors = 6;
 
-            Console.Write(fullPath);
-            if (!File.Exists(fullPath))
+            string[] authors = DataHelper.ReadFile("authors.txt");
+
+            AuthorsListBox.Items.Clear();
+
+            int authorCount = random.Next(MinimumRandomAuthors,
+                MaximumRandomAuthors);
+
+            for (int i = 0; i < authorCount; i++)
             {
-                return Array.Empty<string>();
+                string author = authors[random.Next(authors.Length)];
+                AuthorsListBox.Items.Add(author);
             }
+        }
 
-            return File.ReadAllLines(fullPath)
-                .Where(value => !string.IsNullOrWhiteSpace(value))
-                .ToArray();
+        /// <summary>
+        /// Метод валидации ввода автора
+        /// </summary>
+        /// <param name="author">Автор</param>
+        /// <returns>булевое значение, true - если соответствует формату,
+        /// иначе false</returns>
+        private bool IsValidAuthor(string author)
+        {
+            var pattern =
+                new Regex(@"^[А-Яа-яёЁ]+\s+[А-Яа-яёЁ]\.([А-Яа-яёЁ]\.)?$");
+
+            if (!pattern.IsMatch(author))
+            {
+                ShowWarning("Используйте формат:" +
+                    " Фамилия И.О.\nПример: Иванов И.И.");
+                return false;
+            }
+            return true;
         }
     }
 }

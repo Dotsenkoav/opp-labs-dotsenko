@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             PublicationsGroupBox = new GroupBox();
             PublicationsDataGridView = new DataGridView();
             AddPublicationsButton = new Button();
@@ -83,9 +84,10 @@
             Controls.Add(AddPublicationsButton);
             Controls.Add(PublicationsGroupBox);
             Font = new Font("Bookman Old Style", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "Библиотечный учёт";
+            Text = "Библиотечный контроль";
             PublicationsGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PublicationsDataGridView).EndInit();
             ResumeLayout(false);

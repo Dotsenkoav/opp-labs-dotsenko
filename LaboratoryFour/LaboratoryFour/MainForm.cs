@@ -27,6 +27,7 @@ namespace View
         private void InitializeDataGridView()
         {
             PublicationsDataGridView.AutoGenerateColumns = false;
+            PublicationsDataGridView.ForeColor = Color.Black;
 
             AddColumn("Title", "Название", 200);
             AddColumn("Year", "Год", 60);
@@ -58,7 +59,6 @@ namespace View
             var addForm = new AddPublicationForm();
             addForm.PublicationCreated += OnPublicationCreated;
             addForm.ShowDialog();
-            addForm.PublicationCreated -= OnPublicationCreated;
         }
 
         private void OnPublicationCreated(object? sender, PublicationBase publication)

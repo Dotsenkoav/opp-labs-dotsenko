@@ -24,14 +24,13 @@ namespace View
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPublicationForm));
             AddFormGroupBox = new GroupBox();
             ParametersGroupBox = new GroupBox();
             TotalPagesTextBox = new TextBox();
@@ -78,9 +77,11 @@ namespace View
             AddFormGroupBox.Size = new Size(342, 605);
             AddFormGroupBox.TabIndex = 0;
             AddFormGroupBox.TabStop = false;
+            AddFormGroupBox.Enter += AddFormGroupBox_Enter;
             // 
             // ParametersGroupBox
             // 
+            ParametersGroupBox.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             ParametersGroupBox.ForeColor = Color.White;
             ParametersGroupBox.Location = new Point(6, 395);
             ParametersGroupBox.Name = "ParametersGroupBox";
@@ -94,6 +95,7 @@ namespace View
             // 
             TotalPagesTextBox.BackColor = Color.FromArgb(38, 38, 38);
             TotalPagesTextBox.BorderStyle = BorderStyle.FixedSingle;
+            TotalPagesTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             TotalPagesTextBox.ForeColor = Color.White;
             TotalPagesTextBox.Location = new Point(17, 355);
             TotalPagesTextBox.Name = "TotalPagesTextBox";
@@ -129,6 +131,7 @@ namespace View
             // 
             PublisherTextBox.BackColor = Color.FromArgb(38, 38, 38);
             PublisherTextBox.BorderStyle = BorderStyle.FixedSingle;
+            PublisherTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             PublisherTextBox.ForeColor = Color.White;
             PublisherTextBox.Location = new Point(17, 305);
             PublisherTextBox.Name = "PublisherTextBox";
@@ -164,6 +167,7 @@ namespace View
             // 
             TitleInformationTextBox.BackColor = Color.FromArgb(38, 38, 38);
             TitleInformationTextBox.BorderStyle = BorderStyle.FixedSingle;
+            TitleInformationTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             TitleInformationTextBox.ForeColor = Color.White;
             TitleInformationTextBox.Location = new Point(17, 155);
             TitleInformationTextBox.Name = "TitleInformationTextBox";
@@ -187,6 +191,7 @@ namespace View
             // 
             PlaceTextBox.BackColor = Color.FromArgb(38, 38, 38);
             PlaceTextBox.BorderStyle = BorderStyle.FixedSingle;
+            PlaceTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             PlaceTextBox.ForeColor = Color.White;
             PlaceTextBox.Location = new Point(17, 255);
             PlaceTextBox.Name = "PlaceTextBox";
@@ -198,6 +203,7 @@ namespace View
             // 
             YearTextBox.BackColor = Color.FromArgb(38, 38, 38);
             YearTextBox.BorderStyle = BorderStyle.FixedSingle;
+            YearTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             YearTextBox.ForeColor = Color.White;
             YearTextBox.Location = new Point(17, 205);
             YearTextBox.Name = "YearTextBox";
@@ -220,6 +226,7 @@ namespace View
             // 
             TitleTextBox.BackColor = Color.FromArgb(38, 38, 38);
             TitleTextBox.BorderStyle = BorderStyle.FixedSingle;
+            TitleTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             TitleTextBox.ForeColor = Color.White;
             TitleTextBox.Location = new Point(17, 105);
             TitleTextBox.Name = "TitleTextBox";
@@ -243,12 +250,13 @@ namespace View
             PublicationsComboBox.BackColor = Color.FromArgb(38, 38, 38);
             PublicationsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             PublicationsComboBox.FlatStyle = FlatStyle.Flat;
+            PublicationsComboBox.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             PublicationsComboBox.ForeColor = Color.White;
             PublicationsComboBox.FormattingEnabled = true;
             PublicationsComboBox.Items.AddRange(new object[] { "Книга", "Сборник", "Журнал", "Диссертация" });
             PublicationsComboBox.Location = new Point(17, 50);
             PublicationsComboBox.Name = "PublicationsComboBox";
-            PublicationsComboBox.Size = new Size(301, 23);
+            PublicationsComboBox.Size = new Size(301, 25);
             PublicationsComboBox.TabIndex = 0;
             // 
             // AddPublicationButton
@@ -309,6 +317,7 @@ namespace View
             Controls.Add(AddPublicationButton);
             Controls.Add(AddFormGroupBox);
             ForeColor = SystemColors.ControlText;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(382, 770);
             MinimumSize = new Size(382, 630);
             Name = "AddPublicationForm";
@@ -317,8 +326,6 @@ namespace View
             AddFormGroupBox.PerformLayout();
             ResumeLayout(false);
         }
-
-        #endregion
 
         private GroupBox AddFormGroupBox;
         private ComboBox PublicationsComboBox;

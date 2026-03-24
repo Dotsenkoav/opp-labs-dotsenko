@@ -1,5 +1,8 @@
 ﻿namespace View.Panels
 {
+    /// <summary>
+    /// Часть класса, описывающая дизайн панели издания журнала
+    /// </summary>
     partial class JournalParameterPanel
     {
         /// <summary> 
@@ -7,10 +10,21 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Надпись для выпадающего списка частоты издания
+        /// </summary>
+        private Label LabelForFrequency;
+
+        /// <summary>
+        /// Выпадающий список частоты издания
+        /// </summary>
+        private ComboBox FrequencyComboBox;
+
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">истинно, если
+        /// управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,10 +34,8 @@
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором компонентов
-
         /// <summary> 
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
+        /// Требуемый метод для поддержки конструктора — не изменяйте
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent()
@@ -35,7 +47,8 @@
             // LabelForFrequency
             // 
             LabelForFrequency.AutoSize = true;
-            LabelForFrequency.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForFrequency.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForFrequency.ForeColor = Color.White;
             LabelForFrequency.ImageAlign = ContentAlignment.TopLeft;
             LabelForFrequency.Location = new Point(13, 10);
@@ -51,7 +64,6 @@
             FrequencyComboBox.FlatStyle = FlatStyle.Flat;
             FrequencyComboBox.ForeColor = Color.White;
             FrequencyComboBox.FormattingEnabled = true;
-            FrequencyComboBox.Items.AddRange(new object[] { "Книга", "Сборник", "Журнал", "Диссертация" });
             FrequencyComboBox.Location = new Point(13, 34);
             FrequencyComboBox.Name = "FrequencyComboBox";
             FrequencyComboBox.Size = new Size(301, 23);
@@ -69,9 +81,5 @@
             ResumeLayout(false);
             PerformLayout();
         }
-
-        #endregion
-        private Label LabelForFrequency;
-        private ComboBox FrequencyComboBox;
     }
 }

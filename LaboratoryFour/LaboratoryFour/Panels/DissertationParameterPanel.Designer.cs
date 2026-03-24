@@ -1,5 +1,8 @@
 ﻿namespace View.Panels
 {
+    /// <summary>
+    /// Часть класса, описывающая дизайн панели издания диссертации
+    /// </summary>
     partial class DissertationParameterPanel
     {
         /// <summary> 
@@ -7,10 +10,41 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Текстовое поле для специальности
+        /// </summary>
+        private TextBox SpecialityTextBox;
+
+        /// <summary>
+        /// Надпись для текстового поля специальности
+        /// </summary>
+        private Label LabelForSpeciality;
+
+        /// <summary>
+        /// Текстовое поле для автора диссертации
+        /// </summary>
+        private TextBox AuthorTextBox;
+
+        /// <summary>
+        /// Надпись для текстового поля автора
+        /// </summary>
+        private Label LabelForAuthor;
+
+        /// <summary>
+        /// Надпись для выпадающего списка ученой степени
+        /// </summary>
+        private Label LabelForDegree;
+
+        /// <summary>
+        /// Выпадающий список для ученой степени
+        /// </summary>
+        private ComboBox DegreeComboBox;
+
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">истинно, если
+        /// управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -19,8 +53,6 @@
             }
             base.Dispose(disposing);
         }
-
-        #region Код, автоматически созданный конструктором компонентов
 
         /// <summary> 
         /// Требуемый метод для поддержки конструктора — не изменяйте 
@@ -50,7 +82,8 @@
             // LabelForSpeciality
             // 
             LabelForSpeciality.AutoSize = true;
-            LabelForSpeciality.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForSpeciality.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForSpeciality.ForeColor = Color.White;
             LabelForSpeciality.ImageAlign = ContentAlignment.TopLeft;
             LabelForSpeciality.Location = new Point(13, 60);
@@ -66,14 +99,16 @@
             AuthorTextBox.ForeColor = Color.White;
             AuthorTextBox.Location = new Point(13, 34);
             AuthorTextBox.Name = "AuthorTextBox";
-            AuthorTextBox.PlaceholderText = "Введите автора в формате Фамилия Имя Отчество...";
+            AuthorTextBox.PlaceholderText = "Введите автора" +
+                " в формате Фамилия Имя Отчество...";
             AuthorTextBox.Size = new Size(301, 23);
             AuthorTextBox.TabIndex = 24;
             // 
             // LabelForAuthor
             // 
             LabelForAuthor.AutoSize = true;
-            LabelForAuthor.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForAuthor.Font = new Font("Cascadia Code",
+                12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForAuthor.ForeColor = Color.White;
             LabelForAuthor.ImageAlign = ContentAlignment.TopLeft;
             LabelForAuthor.Location = new Point(13, 10);
@@ -85,7 +120,8 @@
             // LabelForDegree
             // 
             LabelForDegree.AutoSize = true;
-            LabelForDegree.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForDegree.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForDegree.ForeColor = Color.White;
             LabelForDegree.ImageAlign = ContentAlignment.TopLeft;
             LabelForDegree.Location = new Point(13, 110);
@@ -101,7 +137,6 @@
             DegreeComboBox.FlatStyle = FlatStyle.Flat;
             DegreeComboBox.ForeColor = Color.White;
             DegreeComboBox.FormattingEnabled = true;
-            DegreeComboBox.Items.AddRange(new object[] { "Книга", "Сборник", "Журнал", "Диссертация" });
             DegreeComboBox.Location = new Point(13, 134);
             DegreeComboBox.Name = "DegreeComboBox";
             DegreeComboBox.Size = new Size(301, 23);
@@ -123,14 +158,5 @@
             ResumeLayout(false);
             PerformLayout();
         }
-
-        #endregion
-
-        private TextBox SpecialityTextBox;
-        private Label LabelForSpeciality;
-        private TextBox AuthorTextBox;
-        private Label LabelForAuthor;
-        private Label LabelForDegree;
-        private ComboBox DegreeComboBox;
     }
 }

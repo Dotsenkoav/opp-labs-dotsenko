@@ -1,6 +1,9 @@
 ﻿namespace View.Panels
 {
-    partial class PublicationParameterPanel
+    /// <summary>
+    /// Часть класса, отвечающая за базовую панель параметров
+    /// </summary>
+    partial class PublicationParameterPanelBase
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -10,7 +13,8 @@
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">истинно,
+        /// если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -19,8 +23,6 @@
             }
             base.Dispose(disposing);
         }
-
-        #region Код, автоматически созданный конструктором компонентов
 
         /// <summary> 
         /// Требуемый метод для поддержки конструктора — не изменяйте 
@@ -38,7 +40,5 @@
             Size = new Size(364, 99);
             ResumeLayout(false);
         }
-
-        #endregion
     }
 }

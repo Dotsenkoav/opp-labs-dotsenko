@@ -1,18 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿using LaboratoryThirdModel;
 
 namespace View.Panels
 {
-    public partial class DissertationParameterPanel : UserControl
+    /// <summary>
+    /// Класс для обработки панели издания диссертации
+    /// </summary>
+    public partial class DissertationParameterPanel 
+        : PublicationParameterPanelBase
     {
+        /// <summary>
+        /// Конструктор для панели диссертации
+        /// </summary>
         public DissertationParameterPanel()
         {
             InitializeComponent();
+            FillComboBox();
+        }
+
+        /// <summary>
+        /// Метод заполнения выпадающего списка ученой степени
+        /// </summary>
+        private void FillComboBox()
+        {
+            DegreeComboBox.Items.AddRange(Dissertation.PossibleDegree);
+        }
+
+        /// <summary>
+        /// Метод для очистки полей диссертации
+        /// </summary>
+        public override void ClearValues()
+        {
+            SpecialityTextBox.Clear();
+            AuthorTextBox.Clear();
+            DegreeComboBox.SelectedIndex = -1;
+        }
+
+        public override void ValidateFields()
+        {
+
+        }
+
+        /// <summary>
+        /// Метод создания публикации
+        /// </summary>
+        /// <returns>Объект класса Dissertation</returns>
+        public override PublicationBase CreatePublication()
+        {
+            var dissertation = new Dissertation();
+
+            return dissertation;
+        }
+
+        /// <summary>
+        /// Метод случайного заполнения полей диссертации
+        /// </summary>
+        /// <param name="random">Объект класса Random</param>
+        public override void FillRandomValue(Random random)
+        {
+            string[] authorsDissertation =
+                DataHelper.ReadFile("authors_dissertation.txt");
+
+            string[] specialities =
+                DataHelper.ReadFile("specialities.txt");
+
+            AuthorTextBox.Text =
+                authorsDissertation[random.Next(authorsDissertation.Length)];
+
+            SpecialityTextBox.Text =
+                specialities[random.Next(specialities.Length)];
+
+            DegreeComboBox.SelectedIndex =
+                random.Next(DegreeComboBox.Items.Count);
         }
     }
 }

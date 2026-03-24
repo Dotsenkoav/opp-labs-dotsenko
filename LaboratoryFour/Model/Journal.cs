@@ -13,6 +13,21 @@ namespace LaboratoryThirdModel
         private string _frequency;
 
         /// <summary>
+        /// Список частоты издания
+        /// </summary>
+        public static readonly string[] PossibleFrequencies = new[]
+        {
+            "Ежедневный",
+            "Еженедельный",
+            "Ежемесячный",
+            "Ежеквартальный",
+            "Полугодовой",
+            "Годовой",
+            "С прочей периодичностью",
+            "С неопределенной периодичностью"
+        };
+
+        /// <summary>
         /// Свойство частоты издания
         /// </summary>
         public string Frequency { get; set; }

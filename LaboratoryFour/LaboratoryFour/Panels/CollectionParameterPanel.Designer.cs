@@ -1,5 +1,8 @@
 ﻿namespace View.Panels
 {
+    /// <summary>
+    /// Часть класса, описывающая дизайн панели издания сборника
+    /// </summary>
     partial class CollectionParameterPanel
     {
         /// <summary> 
@@ -7,10 +10,31 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Надпись для текстового поля редакционной коллегии
+        /// </summary>
+        private Label LabelForEditorialBoard;
+
+        /// <summary>
+        /// Текстовое поле редакционной коллегии
+        /// </summary>
+        private TextBox EditorialBoardTextBox;
+
+        /// <summary>
+        /// Надпись для текстового поля ответственных редакторов
+        /// </summary>
+        private Label LabelForResponsibleEditors;
+        
+        /// <summary>
+        /// Текстовое поле для ввода ответственных редакторов
+        /// </summary>
+        private TextBox ResponsibleEditorsTextBox;
+
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">истинно, если
+        /// управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -19,8 +43,6 @@
             }
             base.Dispose(disposing);
         }
-
-        #region Код, автоматически созданный конструктором компонентов
 
         /// <summary> 
         /// Требуемый метод для поддержки конструктора — не изменяйте 
@@ -37,7 +59,8 @@
             // LabelForEditorialBoard
             // 
             LabelForEditorialBoard.AutoSize = true;
-            LabelForEditorialBoard.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForEditorialBoard.Font = new Font("Cascadia Code",
+                12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForEditorialBoard.ForeColor = Color.White;
             LabelForEditorialBoard.ImageAlign = ContentAlignment.TopLeft;
             LabelForEditorialBoard.Location = new Point(13, 10);
@@ -53,14 +76,16 @@
             EditorialBoardTextBox.ForeColor = Color.White;
             EditorialBoardTextBox.Location = new Point(13, 34);
             EditorialBoardTextBox.Name = "EditorialBoardTextBox";
-            EditorialBoardTextBox.PlaceholderText = "Введите редакционную коллегию";
+            EditorialBoardTextBox.PlaceholderText = "Введите" +
+                " редакционную коллегию...";
             EditorialBoardTextBox.Size = new Size(301, 23);
             EditorialBoardTextBox.TabIndex = 20;
             // 
             // LabelForResponsibleEditors
             // 
             LabelForResponsibleEditors.AutoSize = true;
-            LabelForResponsibleEditors.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForResponsibleEditors.Font = new Font("Cascadia Code",
+                12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForResponsibleEditors.ForeColor = Color.White;
             LabelForResponsibleEditors.ImageAlign = ContentAlignment.TopLeft;
             LabelForResponsibleEditors.Location = new Point(13, 60);
@@ -76,7 +101,8 @@
             ResponsibleEditorsTextBox.ForeColor = Color.White;
             ResponsibleEditorsTextBox.Location = new Point(13, 84);
             ResponsibleEditorsTextBox.Name = "ResponsibleEditorsTextBox";
-            ResponsibleEditorsTextBox.PlaceholderText = "Введите ответственных редакторов";
+            ResponsibleEditorsTextBox.PlaceholderText = "Введите" +
+                " ответственных редакторов...";
             ResponsibleEditorsTextBox.Size = new Size(301, 23);
             ResponsibleEditorsTextBox.TabIndex = 22;
             // 
@@ -94,12 +120,5 @@
             ResumeLayout(false);
             PerformLayout();
         }
-
-        #endregion
-
-        private Label LabelForEditorialBoard;
-        private TextBox EditorialBoardTextBox;
-        private Label LabelForResponsibleEditors;
-        private TextBox ResponsibleEditorsTextBox;
     }
 }

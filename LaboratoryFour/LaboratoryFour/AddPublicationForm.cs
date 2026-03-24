@@ -25,7 +25,7 @@ namespace View
         /// <summary>
         /// Текущая используемая панель
         /// </summary>
-        private PublicationParameterPanel? _currentParameterPanel;
+        private PublicationParameterPanelBase? _currentParameterPanel;
 
         /// <summary>
         /// Метод инициализации компонентов формы
@@ -64,11 +64,14 @@ namespace View
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private PublicationParameterPanel? CreateParameterPanel(string type)
+        private PublicationParameterPanelBase? CreateParameterPanel(string type)
         {
             return type switch
             {
                 "Книга" => new BookParameterPanel(),
+                "Сборник" => new CollectionParameterPanel(),
+                "Журнал" => new JournalParameterPanel(),
+                "Диссертация" => new DissertationParameterPanel(),
                 _ => null
             };
         }
@@ -184,10 +187,10 @@ namespace View
 
         private void FillRandomFields(Random random)
         {
-            string[] titles = ReadFile("titles.txt");
-            string[] places = ReadFile("places.txt");
-            string[] publishers = ReadFile("publishers.txt");
-            string[] titleInformations = ReadFile("titleInformations.txt");
+            string[] titles = DataHelper.ReadFile("titles.txt");
+            string[] places = DataHelper.ReadFile("places.txt");
+            string[] publishers = DataHelper.ReadFile("publishers.txt");
+            string[] titleInformations = DataHelper.ReadFile("titleInformations.txt");
 
             TitleTextBox.Text = titles[random.Next(titles.Length)];
 
@@ -197,6 +200,7 @@ namespace View
 
             PublisherTextBox.Text = publishers[random.Next(publishers.Length)];
 
+            //Const
             YearTextBox.Text = random.Next(2000, DateTime.Now.Year + 1).ToString();
 
             TotalPagesTextBox.Text = random.Next(50, 500).ToString();
@@ -205,29 +209,22 @@ namespace View
         private void RandomPublicationButton_Click(object sender, EventArgs e)
         {
             var random = new Random();
-
-            FillRandomFields(random);
-            UpdateParameterPanel();
             if (_currentParameterPanel != null)
             {
+                FillRandomFields(random);
+                UpdateParameterPanel();
                 _currentParameterPanel.FillRandomValue(random);
+            }
+            // Переделать
+            else
+            {
+                throw new Exception("Сначала выберите тип издания");
             }
         }
 
-        private static string[] ReadFile(string file,
-            string defaultPath = "Data/")
+        private void AddFormGroupBox_Enter(object sender, EventArgs e)
         {
-            string fullPath = Path.GetFullPath(Path.Combine(defaultPath, file));
 
-            Console.Write(fullPath);
-            if (!File.Exists(fullPath))
-            {
-                return Array.Empty<string>();
-            }
-
-            return File.ReadAllLines(fullPath)
-                .Where(value => !string.IsNullOrWhiteSpace(value))
-                .ToArray();
         }
     }
 }
