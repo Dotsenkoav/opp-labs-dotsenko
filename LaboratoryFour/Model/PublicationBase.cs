@@ -41,7 +41,7 @@ namespace LaboratoryThirdModel
         /// <summary>
         /// Минимальный год издания
         /// </summary>
-        private const int MinYear = 868;
+        public const int MinYear = 868;
 
         /// <summary>
         /// Свойство заглавия

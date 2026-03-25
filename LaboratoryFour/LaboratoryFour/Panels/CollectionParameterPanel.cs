@@ -25,9 +25,15 @@ namespace View.Panels
             ResponsibleEditorsTextBox.Clear();
         }
 
+        /// <summary>
+        /// Метод проверки полей сборника
+        /// </summary>
         public override void ValidateFields()
         {
-
+            ValidateTextBox(EditorialBoardTextBox,
+                "редакционной коллегии");
+            ValidateTextBox(ResponsibleEditorsTextBox,
+                "ответственных редакторов");
         }
 
         /// <summary>
@@ -36,9 +42,11 @@ namespace View.Panels
         /// <returns>Объект класса Collection</returns>
         public override PublicationBase CreatePublication()
         {
-            var collection = new Collection();
-
-            return collection;
+            return new Collection
+            {
+                EditorialBoard = EditorialBoardTextBox.Text,
+                ResponsibleEditors = ResponsibleEditorsTextBox.Text
+            };
         }
 
         /// <summary>
@@ -47,7 +55,17 @@ namespace View.Panels
         /// <param name="random"></param>
         public override void FillRandomValue(Random random)
         {
+            string[] editorialBoards = DataHelper.ReadFile
+                ("editorial_boards.txt");
 
+            string[] responsbileEditors = DataHelper.ReadFile
+                ("responsible_editors.txt");
+
+            EditorialBoardTextBox.Text =
+                editorialBoards[random.Next(editorialBoards.Length)];
+
+            ResponsibleEditorsTextBox.Text =
+                responsbileEditors[random.Next(responsbileEditors.Length)];
         }
     }
 }

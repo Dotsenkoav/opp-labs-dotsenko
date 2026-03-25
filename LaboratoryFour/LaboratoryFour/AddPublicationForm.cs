@@ -1,13 +1,4 @@
 ﻿using LaboratoryThirdModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Numerics;
-using System.Security.Policy;
-using System.Text;
-using System.Windows.Forms;
 using View.Panels;
 
 namespace View
@@ -33,10 +24,19 @@ namespace View
         public AddPublicationForm()
         {
             InitializeComponent();
-
-            PublicationsComboBox.SelectedIndexChanged += (s, e) => UpdateParameterPanel();
-
+            FillPublicationComboBox();
+            PublicationsComboBox.SelectedIndexChanged += (s, e)
+                => UpdateParameterPanel();
             UpdateParameterPanel();
+        }
+
+        /// <summary>
+        /// Метод заполнения типов публикации
+        /// </summary>
+        private void FillPublicationComboBox()
+        {
+            PublicationsComboBox.Items.AddRange(new object[]
+            { "Книга", "Сборник", "Журнал", "Диссертация" });
         }
 
         /// <summary>
@@ -44,7 +44,8 @@ namespace View
         /// </summary>
         private void UpdateParameterPanel()
         {
-            string? selectedType = PublicationsComboBox.SelectedItem?.ToString();
+            string? selectedType
+                = PublicationsComboBox.SelectedItem?.ToString();
             if (selectedType == null) return;
 
             ParametersGroupBox.Controls.Clear();
@@ -62,37 +63,53 @@ namespace View
         /// <summary>
         /// Создание экземпляра панели
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private PublicationParameterPanelBase? CreateParameterPanel(string type)
+        /// <param name="typePublication">Тип публикации</param>
+        /// <returns>Панель требуемого типа</returns>
+        private PublicationParameterPanelBase? CreateParameterPanel
+            (string typePublication)
         {
-            return type switch
+            switch (typePublication)
             {
-                "Книга" => new BookParameterPanel(),
-                "Сборник" => new CollectionParameterPanel(),
-                "Журнал" => new JournalParameterPanel(),
-                "Диссертация" => new DissertationParameterPanel(),
-                _ => null
-            };
+                case "Книга":
+                {
+                    return new BookParameterPanel();
+                }
+                case "Сборник":
+                {
+                    return new CollectionParameterPanel();
+                }
+                case "Журнал":
+                {
+                    return new JournalParameterPanel();
+                }
+                case "Диссертация":
+                {
+                    return new DissertationParameterPanel();
+                }
+                default:
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
         /// Метод обработки нажатия кнопки "ОК"
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Параметры события</param>
         private void AddPublicationButton_Click(object sender, EventArgs e)
         {
             try
             {
                 ValidateFormFields();
+                _currentParameterPanel!.ValidateFields();
 
-                var publication = _currentParameterPanel!.CreatePublication();
-
+                var publication
+                    = _currentParameterPanel!.CreatePublication();
                 FillCommonFields(publication);
 
                 PublicationCreated?.Invoke(this, publication);
-
                 DialogResult = DialogResult.OK;
                 Close();
             }
@@ -104,6 +121,29 @@ namespace View
         }
 
         /// <summary>
+        /// Метод обработки события случайной генерации издания
+        /// </summary>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Параметры события</param>
+        /// <exception cref="Exception"></exception>
+        private void RandomPublicationButton_Click(object sender,
+            EventArgs e)
+        {
+            if (_currentParameterPanel == null)
+            {
+                MessageBox.Show("Сначала выберите тип издания",
+                    "Предупреждение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var random = new Random();
+
+            FillRandomFields(random);
+            _currentParameterPanel.FillRandomValue(random);
+        }
+
+        /// <summary>
         /// Валидация заполнения формы
         /// </summary>
         /// <exception cref="ArgumentException">Ошибка,
@@ -112,17 +152,14 @@ namespace View
         {
             if (PublicationsComboBox.SelectedItem == null)
             {
-                throw new ArgumentException("Выберите тип публикации");
+                throw new ArgumentException("Выберите тип издания");
             }
-
-            string selectedType = PublicationsComboBox.SelectedItem.ToString();
 
             ValidateRequired(TitleTextBox.Text, "название издания");
             ValidateYear(YearTextBox.Text);
             ValidateRequired(PlaceTextBox.Text, "место издания");
             ValidateRequired(PublisherTextBox.Text, "издательство");
             ValidatePositiveInt(TotalPagesTextBox.Text, "Количество страниц");
-
         }
 
 
@@ -149,9 +186,12 @@ namespace View
         /// при некорректном вводе года</exception>
         private void ValidateYear(string yearText)
         {
-            if (!int.TryParse(yearText, out int year) || year < 868 || year > DateTime.Now.Year)
+            if (!int.TryParse(yearText, out int year)
+                || year < PublicationBase.MinYear
+                || year > DateTime.Now.Year)
             {
-                throw new ArgumentException("Некорректный год издания (от 868 до текущего)");
+                throw new ArgumentException($"Некорректный год издания" +
+                    $" (введите от {PublicationBase.MinYear} до текущего)");
             }
         }
 
@@ -166,7 +206,8 @@ namespace View
         {
             if (!int.TryParse(value, out int intValue) || intValue <= 0)
             {
-                throw new ArgumentException($"{fieldName} должно быть положительным числом");
+                throw new ArgumentException($"{fieldName}" +
+                    $" должно быть положительным числом");
             }
         }
 
@@ -185,46 +226,44 @@ namespace View
             publication.TotalPages = int.Parse(TotalPagesTextBox.Text);
         }
 
+        /// <summary>
+        /// Метод заполнения случайными данными базовых полей
+        /// </summary>
+        /// <param name="random">Объект класса Random</param>
         private void FillRandomFields(Random random)
         {
+            const int MinimalRandomPages = 50;
+            const int MaximumRandomPages = 1000;
+
             string[] titles = DataHelper.ReadFile("titles.txt");
             string[] places = DataHelper.ReadFile("places.txt");
             string[] publishers = DataHelper.ReadFile("publishers.txt");
-            string[] titleInformations = DataHelper.ReadFile("titleInformations.txt");
+            string[] titleInformations 
+                = DataHelper.ReadFile("titleInformations.txt");
 
             TitleTextBox.Text = titles[random.Next(titles.Length)];
-
-            TitleInformationTextBox.Text = titleInformations[random.Next(titleInformations.Length)];
-
+            TitleInformationTextBox.Text 
+                = titleInformations[random.Next(titleInformations.Length)];
             PlaceTextBox.Text = places[random.Next(places.Length)];
+            PublisherTextBox.Text 
+                = publishers[random.Next(publishers.Length)];
 
-            PublisherTextBox.Text = publishers[random.Next(publishers.Length)];
+            YearTextBox.Text = random.Next(PublicationBase.MinYear,
+                DateTime.Now.Year + 1).ToString();
 
-            //Const
-            YearTextBox.Text = random.Next(2000, DateTime.Now.Year + 1).ToString();
-
-            TotalPagesTextBox.Text = random.Next(50, 500).ToString();
+            TotalPagesTextBox.Text = random.Next(MinimalRandomPages,
+                MaximumRandomPages).ToString();
         }
 
-        private void RandomPublicationButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Обработчик события нажатия на кнопку "Отмена"
+        /// </summary>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Параметры события</param>
+        private void CancelPublicationButton_Click(object sender, EventArgs e)
         {
-            var random = new Random();
-            if (_currentParameterPanel != null)
-            {
-                FillRandomFields(random);
-                UpdateParameterPanel();
-                _currentParameterPanel.FillRandomValue(random);
-            }
-            // Переделать
-            else
-            {
-                throw new Exception("Сначала выберите тип издания");
-            }
-        }
-
-        private void AddFormGroupBox_Enter(object sender, EventArgs e)
-        {
-
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

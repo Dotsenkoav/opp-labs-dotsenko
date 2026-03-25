@@ -30,10 +30,7 @@ namespace View.Panels
         /// </summary>
         public override void ValidateFields()
         {
-            if (FrequencyComboBox.SelectedIndex == -1)
-            {
-                throw new ArgumentException("Выберите частоту издания");
-            }
+            ValidateComboBox(FrequencyComboBox, "частоту издания");
         }
 
         /// <summary>

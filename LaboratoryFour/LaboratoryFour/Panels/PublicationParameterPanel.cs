@@ -38,6 +38,54 @@ namespace View.Panels
         public abstract void ValidateFields();
 
         /// <summary>
+        /// Метод проверки текстбоксов
+        /// </summary>
+        /// <param name="textBox">Значение</param>
+        /// <param name="propertyName">название поля</param>
+        /// <exception cref="ArgumentException">Ошибка,
+        /// при пустом поле</exception>
+        protected void ValidateTextBox(TextBox textBox, string propertyName)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                throw new ArgumentException($"Поле {propertyName} " +
+                    $"не может быть пустым");
+            }
+        }
+
+        /// <summary>
+        /// Метод валидации ComboBox
+        /// </summary>
+        /// <param name="comboBox">Объект ComboBox</param>
+        /// <param name="propertyName">Название ComboBox</param>
+        /// <exception cref="ArgumentException">Ошибка,
+        /// если не выбран элемент ComboBox</exception>
+        protected void ValidateComboBox(ComboBox comboBox,
+            string propertyName)
+        {
+            if (comboBox.SelectedIndex == -1)
+            {
+                throw new ArgumentException($"Выберите {propertyName}");
+            }
+        }
+
+        /// <summary>
+        /// Метод валидации ListBox
+        /// </summary>
+        /// <param name="listBox">Объект ListBox</param>
+        /// <param name="propertyName">Название ListBox</param>
+        /// <exception cref="ArgumentException">Ошибка,
+        /// если ListBox пуст</exception>
+        protected void ValidateListBox(ListBox listBox,
+            string propertyName)
+        {
+            if (listBox.Items.Count == 0)
+            {
+                throw new ArgumentException($"Выберите {propertyName}");
+            }
+        }
+
+        /// <summary>
         /// Метод для отображения предупреждения
         /// </summary>
         /// <param name="message"></param>

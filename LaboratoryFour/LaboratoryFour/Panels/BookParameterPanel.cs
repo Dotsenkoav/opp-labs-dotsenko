@@ -33,11 +33,7 @@ namespace View.Panels
         /// если нет авторов</exception>
         public override void ValidateFields()
         {
-            if (AuthorsListBox.Items.Count == 0)
-            {
-                throw new ArgumentException("Добавьте хотя бы" +
-                    " одного автора");
-            }    
+            ValidateListBox(AuthorsListBox, "авторов");
         }
 
         /// <summary>

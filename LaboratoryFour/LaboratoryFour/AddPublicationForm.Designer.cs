@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace View
 {
+    /// <summary>
+    /// Форма для добавления нового издания
+    /// </summary>
     partial class AddPublicationForm
     {
         /// <summary>
@@ -12,9 +15,105 @@ namespace View
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
+        /// Общий контейнер для ввода
+        /// </summary>
+        private GroupBox AddFormGroupBox;
+
+        /// <summary>
+        /// Выпадающий список выбора издания
+        /// </summary>
+        private ComboBox PublicationsComboBox;
+
+        /// <summary>
+        /// Надпись для выбора издания
+        /// </summary>
+        private Label LabelForChoosePublication;
+
+        /// <summary>
+        /// Надпись для поля ввода названия
+        /// </summary>
+        private Label LabelForTitle;
+
+        /// <summary>
+        /// Текстовое поле для названия
+        /// </summary>
+        private TextBox TitleTextBox;
+
+        /// <summary>
+        /// Надпись для поля ввода года
+        /// </summary>
+        private Label LabelForYear;
+
+        /// <summary>
+        /// Текстовое поле для ввода места издания
+        /// </summary>
+        private TextBox PlaceTextBox;
+
+        /// <summary>
+        /// Текстовое поле для ввода года
+        /// </summary>
+        private TextBox YearTextBox;
+
+        /// <summary>
+        /// Кнопка для добавления публикации
+        /// </summary>
+        private Button AddPublicationButton;
+
+        /// <summary>
+        /// Надпись для сведений о заглавии
+        /// </summary>
+        private Label LabelForTitleInformation;
+
+        /// <summary>
+        /// Текстовое поле для сведений о заглавии
+        /// </summary>
+        private TextBox TitleInformationTextBox;
+
+        /// <summary>
+        /// Надпись для ввода издательства
+        /// </summary>
+        private Label LabelForPublisher;
+
+        /// <summary>
+        /// Текстовое поле для ввода издательства
+        /// </summary>
+        private TextBox PublisherTextBox;
+
+        /// <summary>
+        /// Надпись для места издательства
+        /// </summary>
+        private Label LabelForPlace;
+
+        /// <summary>
+        /// Надпись для ввода количества страниц
+        /// </summary>
+        private Label LabelForTotalPages;
+
+        /// <summary>
+        /// Текстовое поле количества страница
+        /// </summary>
+        private TextBox TotalPagesTextBox;
+
+        /// <summary>
+        /// Контейнер для параметров конкретного издания
+        /// </summary>
+        private GroupBox ParametersGroupBox;
+
+        /// <summary>
+        /// Кнопка отмена добавления издания
+        /// </summary>
+        private Button CancelPublicationButton;
+
+        /// <summary>
+        /// Кнопка рандомной генерации издания
+        /// </summary>
+        private Button RandomPublicationButton;
+
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources
+        /// should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -30,7 +129,9 @@ namespace View
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPublicationForm));
+            System.ComponentModel.ComponentResourceManager resources 
+                = new System.ComponentModel.ComponentResourceManager
+                (typeof(AddPublicationForm));
             AddFormGroupBox = new GroupBox();
             ParametersGroupBox = new GroupBox();
             TotalPagesTextBox = new TextBox();
@@ -77,11 +178,11 @@ namespace View
             AddFormGroupBox.Size = new Size(342, 605);
             AddFormGroupBox.TabIndex = 0;
             AddFormGroupBox.TabStop = false;
-            AddFormGroupBox.Enter += AddFormGroupBox_Enter;
             // 
             // ParametersGroupBox
             // 
-            ParametersGroupBox.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            ParametersGroupBox.Font = new Font("Cascadia Code",
+                9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             ParametersGroupBox.ForeColor = Color.White;
             ParametersGroupBox.Location = new Point(6, 395);
             ParametersGroupBox.Name = "ParametersGroupBox";
@@ -95,7 +196,8 @@ namespace View
             // 
             TotalPagesTextBox.BackColor = Color.FromArgb(38, 38, 38);
             TotalPagesTextBox.BorderStyle = BorderStyle.FixedSingle;
-            TotalPagesTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            TotalPagesTextBox.Font = new Font("Consolas", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             TotalPagesTextBox.ForeColor = Color.White;
             TotalPagesTextBox.Location = new Point(17, 355);
             TotalPagesTextBox.Name = "TotalPagesTextBox";
@@ -106,7 +208,8 @@ namespace View
             // LabelForTotalPages
             // 
             LabelForTotalPages.AutoSize = true;
-            LabelForTotalPages.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForTotalPages.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForTotalPages.ForeColor = Color.White;
             LabelForTotalPages.ImageAlign = ContentAlignment.TopLeft;
             LabelForTotalPages.Location = new Point(17, 331);
@@ -118,7 +221,8 @@ namespace View
             // LabelForPublisher
             // 
             LabelForPublisher.AutoSize = true;
-            LabelForPublisher.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForPublisher.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForPublisher.ForeColor = Color.White;
             LabelForPublisher.ImageAlign = ContentAlignment.TopLeft;
             LabelForPublisher.Location = new Point(17, 281);
@@ -131,7 +235,8 @@ namespace View
             // 
             PublisherTextBox.BackColor = Color.FromArgb(38, 38, 38);
             PublisherTextBox.BorderStyle = BorderStyle.FixedSingle;
-            PublisherTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            PublisherTextBox.Font = new Font("Consolas", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             PublisherTextBox.ForeColor = Color.White;
             PublisherTextBox.Location = new Point(17, 305);
             PublisherTextBox.Name = "PublisherTextBox";
@@ -142,7 +247,8 @@ namespace View
             // LabelForPlace
             // 
             LabelForPlace.AutoSize = true;
-            LabelForPlace.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForPlace.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForPlace.ForeColor = Color.White;
             LabelForPlace.ImageAlign = ContentAlignment.TopLeft;
             LabelForPlace.Location = new Point(17, 231);
@@ -154,7 +260,8 @@ namespace View
             // LabelForTitleInformation
             // 
             LabelForTitleInformation.AutoSize = true;
-            LabelForTitleInformation.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForTitleInformation.Font = new Font("Cascadia Code",
+                12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForTitleInformation.ForeColor = Color.White;
             LabelForTitleInformation.ImageAlign = ContentAlignment.TopLeft;
             LabelForTitleInformation.Location = new Point(17, 131);
@@ -167,18 +274,21 @@ namespace View
             // 
             TitleInformationTextBox.BackColor = Color.FromArgb(38, 38, 38);
             TitleInformationTextBox.BorderStyle = BorderStyle.FixedSingle;
-            TitleInformationTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            TitleInformationTextBox.Font = new Font("Consolas", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             TitleInformationTextBox.ForeColor = Color.White;
             TitleInformationTextBox.Location = new Point(17, 155);
             TitleInformationTextBox.Name = "TitleInformationTextBox";
-            TitleInformationTextBox.PlaceholderText = "Введите сведения о заглавии...";
+            TitleInformationTextBox.PlaceholderText 
+                = "Введите сведения о заглавии...";
             TitleInformationTextBox.Size = new Size(301, 23);
             TitleInformationTextBox.TabIndex = 8;
             // 
             // LabelForYear
             // 
             LabelForYear.AutoSize = true;
-            LabelForYear.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            LabelForYear.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 204);
             LabelForYear.ForeColor = Color.White;
             LabelForYear.ImageAlign = ContentAlignment.TopLeft;
             LabelForYear.Location = new Point(17, 181);
@@ -191,7 +301,8 @@ namespace View
             // 
             PlaceTextBox.BackColor = Color.FromArgb(38, 38, 38);
             PlaceTextBox.BorderStyle = BorderStyle.FixedSingle;
-            PlaceTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            PlaceTextBox.Font = new Font("Consolas", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             PlaceTextBox.ForeColor = Color.White;
             PlaceTextBox.Location = new Point(17, 255);
             PlaceTextBox.Name = "PlaceTextBox";
@@ -203,7 +314,8 @@ namespace View
             // 
             YearTextBox.BackColor = Color.FromArgb(38, 38, 38);
             YearTextBox.BorderStyle = BorderStyle.FixedSingle;
-            YearTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            YearTextBox.Font = new Font("Consolas", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             YearTextBox.ForeColor = Color.White;
             YearTextBox.Location = new Point(17, 205);
             YearTextBox.Name = "YearTextBox";
@@ -214,7 +326,8 @@ namespace View
             // LabelForTitle
             // 
             LabelForTitle.AutoSize = true;
-            LabelForTitle.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            LabelForTitle.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 204);
             LabelForTitle.ForeColor = Color.White;
             LabelForTitle.Location = new Point(17, 81);
             LabelForTitle.Name = "LabelForTitle";
@@ -226,7 +339,8 @@ namespace View
             // 
             TitleTextBox.BackColor = Color.FromArgb(38, 38, 38);
             TitleTextBox.BorderStyle = BorderStyle.FixedSingle;
-            TitleTextBox.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            TitleTextBox.Font = new Font("Consolas", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             TitleTextBox.ForeColor = Color.White;
             TitleTextBox.Location = new Point(17, 105);
             TitleTextBox.Name = "TitleTextBox";
@@ -237,7 +351,8 @@ namespace View
             // LabelForChoosePublication
             // 
             LabelForChoosePublication.AutoSize = true;
-            LabelForChoosePublication.Font = new Font("Cascadia Code", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForChoosePublication.Font = new Font("Cascadia Code",
+                12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForChoosePublication.ForeColor = Color.White;
             LabelForChoosePublication.Location = new Point(17, 26);
             LabelForChoosePublication.Name = "LabelForChoosePublication";
@@ -250,10 +365,10 @@ namespace View
             PublicationsComboBox.BackColor = Color.FromArgb(38, 38, 38);
             PublicationsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             PublicationsComboBox.FlatStyle = FlatStyle.Flat;
-            PublicationsComboBox.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            PublicationsComboBox.Font = new Font("Cascadia Code",
+                9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             PublicationsComboBox.ForeColor = Color.White;
             PublicationsComboBox.FormattingEnabled = true;
-            PublicationsComboBox.Items.AddRange(new object[] { "Книга", "Сборник", "Журнал", "Диссертация" });
             PublicationsComboBox.Location = new Point(17, 50);
             PublicationsComboBox.Name = "PublicationsComboBox";
             PublicationsComboBox.Size = new Size(301, 25);
@@ -263,9 +378,11 @@ namespace View
             // 
             AddPublicationButton.BackColor = Color.FromArgb(39, 174, 96);
             AddPublicationButton.Cursor = Cursors.Hand;
-            AddPublicationButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            AddPublicationButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             AddPublicationButton.FlatStyle = FlatStyle.Flat;
-            AddPublicationButton.Font = new Font("Leelawadee", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AddPublicationButton.Font = new Font("Leelawadee", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             AddPublicationButton.ForeColor = Color.Transparent;
             AddPublicationButton.Location = new Point(221, 668);
             AddPublicationButton.Name = "AddPublicationButton";
@@ -279,9 +396,11 @@ namespace View
             // 
             CancelPublicationButton.BackColor = Color.FromArgb(39, 174, 96);
             CancelPublicationButton.Cursor = Cursors.Hand;
-            CancelPublicationButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            CancelPublicationButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             CancelPublicationButton.FlatStyle = FlatStyle.Flat;
-            CancelPublicationButton.Font = new Font("Leelawadee", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CancelPublicationButton.Font = new Font("Leelawadee", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             CancelPublicationButton.ForeColor = Color.Transparent;
             CancelPublicationButton.Location = new Point(20, 668);
             CancelPublicationButton.Name = "CancelPublicationButton";
@@ -289,20 +408,23 @@ namespace View
             CancelPublicationButton.TabIndex = 2;
             CancelPublicationButton.Text = "Отмена";
             CancelPublicationButton.UseVisualStyleBackColor = false;
+            CancelPublicationButton.Click += CancelPublicationButton_Click;
             // 
             // RandomPublicationButton
             // 
             RandomPublicationButton.BackColor = Color.FromArgb(39, 174, 96);
             RandomPublicationButton.Cursor = Cursors.Hand;
-            RandomPublicationButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            RandomPublicationButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             RandomPublicationButton.FlatStyle = FlatStyle.Flat;
-            RandomPublicationButton.Font = new Font("Leelawadee", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RandomPublicationButton.Font = new Font("Leelawadee", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             RandomPublicationButton.ForeColor = Color.Transparent;
             RandomPublicationButton.Location = new Point(18, 623);
             RandomPublicationButton.Name = "RandomPublicationButton";
             RandomPublicationButton.Size = new Size(330, 30);
             RandomPublicationButton.TabIndex = 3;
-            RandomPublicationButton.Text = "Случайная публикация";
+            RandomPublicationButton.Text = "Случайное издание";
             RandomPublicationButton.UseVisualStyleBackColor = false;
             RandomPublicationButton.Click += RandomPublicationButton_Click;
             // 
@@ -326,25 +448,5 @@ namespace View
             AddFormGroupBox.PerformLayout();
             ResumeLayout(false);
         }
-
-        private GroupBox AddFormGroupBox;
-        private ComboBox PublicationsComboBox;
-        private Label LabelForChoosePublication;
-        private Label LabelForTitle;
-        private TextBox TitleTextBox;
-        private Label LabelForYear;
-        private TextBox PlaceTextBox;
-        private TextBox YearTextBox;
-        private Button AddPublicationButton;
-        private Label LabelForTitleInformation;
-        private TextBox TitleInformationTextBox;
-        private Label LabelForPublisher;
-        private TextBox PublisherTextBox;
-        private Label LabelForPlace;
-        private Label LabelForTotalPages;
-        private TextBox TotalPagesTextBox;
-        private GroupBox ParametersGroupBox;
-        private Button CancelPublicationButton;
-        private Button RandomPublicationButton;
     }
 }

@@ -35,9 +35,14 @@ namespace View.Panels
             DegreeComboBox.SelectedIndex = -1;
         }
 
+        /// <summary>
+        /// Метод для валидации полей диссертации
+        /// </summary>
         public override void ValidateFields()
         {
-
+            ValidateTextBox(SpecialityTextBox, "специальности");
+            ValidateTextBox(AuthorTextBox, "автора");
+            ValidateComboBox(DegreeComboBox, "ученую степень");
         }
 
         /// <summary>
@@ -46,9 +51,12 @@ namespace View.Panels
         /// <returns>Объект класса Dissertation</returns>
         public override PublicationBase CreatePublication()
         {
-            var dissertation = new Dissertation();
-
-            return dissertation;
+            return new Dissertation
+            {
+                AuthorFull = AuthorTextBox.Text,
+                Speciality = SpecialityTextBox.Text,
+                Degree = DegreeComboBox.Text
+            };
         }
 
         /// <summary>
