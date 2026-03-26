@@ -20,6 +20,7 @@ namespace View.Panels
         /// </summary>
         public abstract void ClearValues();
 
+        //TODO: условная компиляция
         /// <summary>
         /// Абстрактный метод заполнения параметров случайными значениями
         /// </summary>
