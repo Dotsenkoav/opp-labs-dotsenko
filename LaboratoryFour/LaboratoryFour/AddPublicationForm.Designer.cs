@@ -130,8 +130,8 @@ namespace View
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources 
-                = new System.ComponentModel.ComponentResourceManager
-                (typeof(AddPublicationForm));
+                = new System.ComponentModel
+                .ComponentResourceManager(typeof(AddPublicationForm));
             AddFormGroupBox = new GroupBox();
             ParametersGroupBox = new GroupBox();
             TotalPagesTextBox = new TextBox();
@@ -156,7 +156,7 @@ namespace View
             // 
             // AddFormGroupBox
             // 
-            AddFormGroupBox.BackColor = Color.FromArgb(25, 25, 25);
+            AddFormGroupBox.BackColor = Color.FromArgb(30, 30, 30);
             AddFormGroupBox.Controls.Add(ParametersGroupBox);
             AddFormGroupBox.Controls.Add(TotalPagesTextBox);
             AddFormGroupBox.Controls.Add(LabelForTotalPages);
@@ -181,8 +181,8 @@ namespace View
             // 
             // ParametersGroupBox
             // 
-            ParametersGroupBox.Font = new Font("Cascadia Code",
-                9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            ParametersGroupBox.Font = new Font("Cascadia Code", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             ParametersGroupBox.ForeColor = Color.White;
             ParametersGroupBox.Location = new Point(6, 395);
             ParametersGroupBox.Name = "ParametersGroupBox";
@@ -279,8 +279,8 @@ namespace View
             TitleInformationTextBox.ForeColor = Color.White;
             TitleInformationTextBox.Location = new Point(17, 155);
             TitleInformationTextBox.Name = "TitleInformationTextBox";
-            TitleInformationTextBox.PlaceholderText 
-                = "Введите сведения о заглавии...";
+            TitleInformationTextBox.PlaceholderText = "Введите" +
+                " сведения о заглавии...";
             TitleInformationTextBox.Size = new Size(301, 23);
             TitleInformationTextBox.TabIndex = 8;
             // 
@@ -351,8 +351,8 @@ namespace View
             // LabelForChoosePublication
             // 
             LabelForChoosePublication.AutoSize = true;
-            LabelForChoosePublication.Font = new Font("Cascadia Code",
-                12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelForChoosePublication.Font = new Font("Cascadia Code", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelForChoosePublication.ForeColor = Color.White;
             LabelForChoosePublication.Location = new Point(17, 26);
             LabelForChoosePublication.Name = "LabelForChoosePublication";
@@ -365,8 +365,8 @@ namespace View
             PublicationsComboBox.BackColor = Color.FromArgb(38, 38, 38);
             PublicationsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             PublicationsComboBox.FlatStyle = FlatStyle.Flat;
-            PublicationsComboBox.Font = new Font("Cascadia Code",
-                9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            PublicationsComboBox.Font = new Font("Cascadia Code", 9.75F,
+                FontStyle.Regular, GraphicsUnit.Point, 204);
             PublicationsComboBox.ForeColor = Color.White;
             PublicationsComboBox.FormattingEnabled = true;
             PublicationsComboBox.Location = new Point(17, 50);
@@ -384,7 +384,7 @@ namespace View
             AddPublicationButton.Font = new Font("Leelawadee", 12F,
                 FontStyle.Bold, GraphicsUnit.Point, 0);
             AddPublicationButton.ForeColor = Color.Transparent;
-            AddPublicationButton.Location = new Point(221, 668);
+            AddPublicationButton.Location = new Point(18, 668);
             AddPublicationButton.Name = "AddPublicationButton";
             AddPublicationButton.Size = new Size(127, 30);
             AddPublicationButton.TabIndex = 1;
@@ -402,7 +402,7 @@ namespace View
             CancelPublicationButton.Font = new Font("Leelawadee", 12F,
                 FontStyle.Bold, GraphicsUnit.Point, 0);
             CancelPublicationButton.ForeColor = Color.Transparent;
-            CancelPublicationButton.Location = new Point(20, 668);
+            CancelPublicationButton.Location = new Point(221, 667);
             CancelPublicationButton.Name = "CancelPublicationButton";
             CancelPublicationButton.Size = new Size(127, 30);
             CancelPublicationButton.TabIndex = 2;
@@ -427,10 +427,6 @@ namespace View
             RandomPublicationButton.Text = "Случайное издание";
             RandomPublicationButton.UseVisualStyleBackColor = false;
             RandomPublicationButton.Click += RandomPublicationButton_Click;
-
-            #if !DEBUG
-            RandomPublicationButton.Visible = false;
-            #endif
             // 
             // AddPublicationForm
             // 
@@ -444,8 +440,8 @@ namespace View
             Controls.Add(AddFormGroupBox);
             ForeColor = SystemColors.ControlText;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximumSize = new Size(382, 770);
-            MinimumSize = new Size(382, 630);
+            MaximumSize = new Size(382, 748);
+            MinimumSize = new Size(382, 748);
             Name = "AddPublicationForm";
             Text = "Добавление издания";
             AddFormGroupBox.ResumeLayout(false);

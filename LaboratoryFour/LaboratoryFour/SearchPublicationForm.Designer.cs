@@ -92,8 +92,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources 
-                = new System.ComponentModel.ComponentResourceManager
-                (typeof(SearchPublicationForm));
+                = new System.ComponentModel
+                .ComponentResourceManager(typeof(SearchPublicationForm));
             CancelSearchButton = new Button();
             SearchButton = new Button();
             ResetButton = new Button();
@@ -283,7 +283,7 @@
             TitleTextBox.Size = new Size(290, 23);
             TitleTextBox.TabIndex = 3;
             // 
-            // SearchForm
+            // SearchPublicationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -294,7 +294,9 @@
             Controls.Add(SearchButton);
             Controls.Add(CancelSearchButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "SearchForm";
+            MaximumSize = new Size(372, 418);
+            MinimumSize = new Size(372, 418);
+            Name = "SearchPublicationForm";
             Text = "Поиск издания";
             SearchParametersGroupBox.ResumeLayout(false);
             SearchParametersGroupBox.PerformLayout();

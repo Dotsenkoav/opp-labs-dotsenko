@@ -1,5 +1,8 @@
 ﻿namespace View
 {
+    /// <summary>
+    /// Главная форма для управления библиотекой изданий
+    /// </summary>
     partial class MainForm
     {
         /// <summary>
@@ -8,9 +11,46 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
+        /// Контейнер для таблицы изданий
+        /// </summary>
+        private GroupBox PublicationsGroupBox;
+
+        /// <summary>
+        /// Таблица изданий
+        /// </summary>
+        private DataGridView PublicationsDataGridView;
+
+        /// <summary>
+        /// Кнопка добавления издания, вызывающая новую форму
+        /// </summary>
+        private Button AddPublicationsButton;
+
+        /// <summary>
+        /// Кнопка удаления издания из таблицы
+        /// </summary>
+        private Button RemovePublicationsButton;
+
+        /// <summary>
+        /// Кнопка поиска изданий
+        /// </summary>
+        private Button SearchButton;
+
+        /// <summary>
+        /// Кнопка загрузки списка изданий из файла
+        /// </summary>
+        private Button DownloadButton;
+
+        /// <summary>
+        /// Кнопка сохранения списка изданий в файл
+        /// </summary>
+        private Button SaveButton;
+
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if
+        /// managed resources should be disposed; otherwise,
+        /// false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -26,9 +66,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            DataGridViewCellStyle dataGridViewCellStyle1 
+                = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 
+                = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources 
+                = new System.ComponentModel
+                .ComponentResourceManager(typeof(MainForm));
             PublicationsGroupBox = new GroupBox();
             PublicationsDataGridView = new DataGridView();
             AddPublicationsButton = new Button();
@@ -37,13 +81,15 @@
             DownloadButton = new Button();
             SaveButton = new Button();
             PublicationsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)PublicationsDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)
+                PublicationsDataGridView).BeginInit();
             SuspendLayout();
             // 
             // PublicationsGroupBox
             // 
             PublicationsGroupBox.Controls.Add(PublicationsDataGridView);
-            PublicationsGroupBox.Font = new Font("Ebrima", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PublicationsGroupBox.Font = new Font("Ebrima", 9.75F,
+                FontStyle.Bold, GraphicsUnit.Point, 0);
             PublicationsGroupBox.ForeColor = SystemColors.ButtonHighlight;
             PublicationsGroupBox.Location = new Point(16, 13);
             PublicationsGroupBox.Margin = new Padding(4, 3, 4, 3);
@@ -60,33 +106,47 @@
             PublicationsDataGridView.AllowUserToDeleteRows = false;
             PublicationsDataGridView.AllowUserToResizeColumns = false;
             PublicationsDataGridView.AllowUserToResizeRows = false;
-            PublicationsDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            PublicationsDataGridView.BackgroundColor = Color.FromArgb(38, 38, 38);
+            PublicationsDataGridView.AutoSizeRowsMode 
+                = DataGridViewAutoSizeRowsMode.AllCells;
+            PublicationsDataGridView.BackgroundColor 
+                = Color.FromArgb(38, 38, 38);
             PublicationsDataGridView.BorderStyle = BorderStyle.None;
-            PublicationsDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            PublicationsDataGridView.ColumnHeadersBorderStyle 
+                = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(65, 64, 72);
-            dataGridViewCellStyle1.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.Font = new Font("Calibri", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 204);
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(65, 64, 72);
+            dataGridViewCellStyle1.SelectionBackColor 
+                = Color.FromArgb(65, 64, 72);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            PublicationsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            PublicationsDataGridView.ColumnHeadersDefaultCellStyle 
+                = dataGridViewCellStyle1;
             PublicationsDataGridView.ColumnHeadersHeight = 25;
-            PublicationsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            PublicationsDataGridView.ColumnHeadersHeightSizeMode 
+                = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment 
+                = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(38, 38, 38);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 12F,
+                FontStyle.Bold, GraphicsUnit.Point, 204);
             dataGridViewCellStyle2.ForeColor = SystemColors.ButtonHighlight;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(39, 174, 96);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor 
+                = Color.FromArgb(39, 174, 96);
+            dataGridViewCellStyle2.SelectionForeColor 
+                = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            PublicationsDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            PublicationsDataGridView.DefaultCellStyle 
+                = dataGridViewCellStyle2;
             PublicationsDataGridView.EnableHeadersVisualStyles = false;
             PublicationsDataGridView.GridColor = Color.DimGray;
             PublicationsDataGridView.Location = new Point(7, 24);
             PublicationsDataGridView.Name = "PublicationsDataGridView";
             PublicationsDataGridView.ReadOnly = true;
             PublicationsDataGridView.RowHeadersVisible = false;
-            PublicationsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            PublicationsDataGridView.ScrollBars = ScrollBars.Vertical;
+            PublicationsDataGridView.SelectionMode 
+                = DataGridViewSelectionMode.FullRowSelect;
             PublicationsDataGridView.Size = new Size(1051, 450);
             PublicationsDataGridView.TabIndex = 0;
             // 
@@ -94,7 +154,8 @@
             // 
             AddPublicationsButton.BackColor = Color.FromArgb(39, 174, 96);
             AddPublicationsButton.Cursor = Cursors.Hand;
-            AddPublicationsButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            AddPublicationsButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             AddPublicationsButton.FlatStyle = FlatStyle.Flat;
             AddPublicationsButton.ForeColor = Color.White;
             AddPublicationsButton.Location = new Point(94, 511);
@@ -110,7 +171,8 @@
             // 
             RemovePublicationsButton.BackColor = Color.FromArgb(39, 174, 96);
             RemovePublicationsButton.Cursor = Cursors.Hand;
-            RemovePublicationsButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            RemovePublicationsButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             RemovePublicationsButton.FlatStyle = FlatStyle.Flat;
             RemovePublicationsButton.ForeColor = Color.White;
             RemovePublicationsButton.Location = new Point(233, 511);
@@ -126,7 +188,8 @@
             // 
             SearchButton.BackColor = Color.FromArgb(39, 174, 96);
             SearchButton.Cursor = Cursors.Hand;
-            SearchButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            SearchButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             SearchButton.FlatStyle = FlatStyle.Flat;
             SearchButton.ForeColor = Color.White;
             SearchButton.Location = new Point(408, 511);
@@ -142,7 +205,8 @@
             // 
             DownloadButton.BackColor = Color.FromArgb(39, 174, 96);
             DownloadButton.Cursor = Cursors.Hand;
-            DownloadButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            DownloadButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             DownloadButton.FlatStyle = FlatStyle.Flat;
             DownloadButton.ForeColor = Color.White;
             DownloadButton.Location = new Point(730, 511);
@@ -158,7 +222,8 @@
             // 
             SaveButton.BackColor = Color.FromArgb(39, 174, 96);
             SaveButton.Cursor = Cursors.Hand;
-            SaveButton.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            SaveButton.FlatAppearance.BorderColor 
+                = Color.FromArgb(64, 64, 64);
             SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.ForeColor = Color.White;
             SaveButton.Location = new Point(869, 511);
@@ -183,22 +248,18 @@
             Controls.Add(RemovePublicationsButton);
             Controls.Add(AddPublicationsButton);
             Controls.Add(PublicationsGroupBox);
-            Font = new Font("Bookman Old Style", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            Font = new Font("Bookman Old Style", 9.75F,
+                FontStyle.Bold, GraphicsUnit.Point, 204);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
+            MaximumSize = new Size(1110, 603);
+            MinimumSize = new Size(1110, 603);
             Name = "MainForm";
             Text = "Библиотечный контроль";
             PublicationsGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)PublicationsDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)
+                PublicationsDataGridView).EndInit();
             ResumeLayout(false);
         }
-
-        private GroupBox PublicationsGroupBox;
-        private DataGridView PublicationsDataGridView;
-        private Button AddPublicationsButton;
-        private Button RemovePublicationsButton;
-        private Button SearchButton;
-        private Button DownloadButton;
-        private Button SaveButton;
     }
 }

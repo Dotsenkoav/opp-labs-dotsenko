@@ -36,7 +36,7 @@ namespace View
             AddColumn("Place", "Место издания", 120);
             AddColumn("Publisher", "Издательство", 150);
             AddColumn("TotalPages", "Стр.", 100);
-            AddColumn("GostInformation", "Библиографическая запись", 418);
+            AddColumn("GostInformation", "Библиографическая запись", 404);
         }
 
         /// <summary>
@@ -58,6 +58,11 @@ namespace View
                 });
         }
 
+        /// <summary>
+        /// Событие при нажатии кнопки добавления издания
+        /// </summary>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Аргументы события</param>
         private void AddPublicationsButton_Click(object sender, EventArgs e)
         {
             var addForm = new AddPublicationForm();
@@ -110,10 +115,7 @@ namespace View
 
             if (countChooseElement == 0)
             {
-                MessageBox.Show("Выберите издания для удаления",
-                    "Внимание",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                callMessageBox("Выберите издание для удаления", "Ошибка");
             }
 
             if (MessageBox.Show($"Удалить " +
@@ -157,6 +159,11 @@ namespace View
             searchForm.ShowDialog();
         }
 
+        /// <summary>
+        /// Метод обработки нажатия кнопки загрузки
+        /// </summary>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Аргументы события</param>
         private void DownloadButton_Click(object sender, EventArgs e)
         {
             using var dialog = new OpenFileDialog
@@ -169,18 +176,25 @@ namespace View
             {
                 try
                 {
-                    _publications = PublicationSerializer.Load(dialog.FileName);
+                    _publications 
+                        = PublicationSerializer.Load(dialog.FileName);
                     RefreshDataGridView();
-                    MessageBox.Show($"Загружено {_publications.Count} изданий.", "Успех",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    callMessageBox($"Загружено {_publications.Count}" +
+                        $" изданий", "Уведомление");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    callMessageBox(ex.Message, "Ошибка");
                 }
             }
         }
 
+        /// <summary>
+        /// Метод обработки нажатия кнопки сохранения
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             using var dialog = new SaveFileDialog
@@ -193,12 +207,40 @@ namespace View
             {
                 try
                 {
-                    PublicationSerializer.Save(_publications, dialog.FileName);
-                    MessageBox.Show("Сохранено.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PublicationSerializer.Save(_publications, 
+                        dialog.FileName);
+                    callMessageBox("Файл успешно сохранен", "Уведомление");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    callMessageBox(ex.Message, "Ошибка");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод для вызова MessageBox
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="typeMessage">Тип сообщения</param>
+        private void callMessageBox(string message, string typeMessage)
+        {
+            switch (typeMessage)
+            {
+                case "Уведомление":
+                {
+                    MessageBox.Show("Уведомление.", message,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    break;
+                }
+                case "Ошибка":
+                {
+                    MessageBox.Show($"Ошибка: {message}",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    break;
                 }
             }
         }
