@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json.Serialization;
 
 
 namespace LaboratoryThirdModel
@@ -112,6 +113,11 @@ namespace LaboratoryThirdModel
                 _totalPages = value;
             }
         }
+
+        /// <summary>
+        /// Свойство получения информации по ГОСТ
+        /// </summary>
+        public string GostInformation => GetGOSTInformation();
 
         /// <summary>
         /// Абстрактный метод описывающий издание по ГОСТ

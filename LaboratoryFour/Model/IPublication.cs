@@ -37,6 +37,11 @@ namespace LaboratoryThirdModel
         int TotalPages { get; set; }
 
         /// <summary>
+        /// Свойство для получения информации по ГОСТ
+        /// </summary>
+        string GostInformation { get; }
+
+        /// <summary>
         /// Метод формирования описания по ГОСТ
         /// </summary>
         /// <returns>Строку с информацие об издании</returns>
