@@ -124,6 +124,7 @@ namespace View
             }
         }
 
+        #if DEBUG
         /// <summary>
         /// Метод обработки события случайной генерации издания
         /// </summary>
@@ -146,6 +147,7 @@ namespace View
             FillRandomFields(random);
             _currentParameterPanel.FillRandomValue(random);
         }
+        #endif
 
         /// <summary>
         /// Валидация заполнения формы

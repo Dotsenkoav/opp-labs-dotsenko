@@ -114,8 +114,9 @@
             PublicationsDataGridView.ColumnHeadersBorderStyle 
                 = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(65, 64, 72);
-            dataGridViewCellStyle1.Font = new Font("Calibri", 12F,
-                FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.Font 
+                = new Font("Calibri", 12F, FontStyle.Bold,
+                GraphicsUnit.Point, 204);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor 
                 = Color.FromArgb(65, 64, 72);
@@ -157,6 +158,8 @@
             AddPublicationsButton.FlatAppearance.BorderColor 
                 = Color.FromArgb(64, 64, 64);
             AddPublicationsButton.FlatStyle = FlatStyle.Flat;
+            AddPublicationsButton.Font 
+                = new Font("Leelawadee", 12F, FontStyle.Bold);
             AddPublicationsButton.ForeColor = Color.White;
             AddPublicationsButton.Location = new Point(94, 511);
             AddPublicationsButton.Margin = new Padding(4, 3, 4, 3);
@@ -174,6 +177,8 @@
             RemovePublicationsButton.FlatAppearance.BorderColor 
                 = Color.FromArgb(64, 64, 64);
             RemovePublicationsButton.FlatStyle = FlatStyle.Flat;
+            RemovePublicationsButton.Font 
+                = new Font("Leelawadee", 12F, FontStyle.Bold);
             RemovePublicationsButton.ForeColor = Color.White;
             RemovePublicationsButton.Location = new Point(233, 511);
             RemovePublicationsButton.Margin = new Padding(4, 3, 4, 3);
@@ -191,6 +196,8 @@
             SearchButton.FlatAppearance.BorderColor 
                 = Color.FromArgb(64, 64, 64);
             SearchButton.FlatStyle = FlatStyle.Flat;
+            SearchButton.Font 
+                = new Font("Leelawadee", 12F, FontStyle.Bold);
             SearchButton.ForeColor = Color.White;
             SearchButton.Location = new Point(408, 511);
             SearchButton.Margin = new Padding(4, 3, 4, 3);
@@ -208,6 +215,8 @@
             DownloadButton.FlatAppearance.BorderColor 
                 = Color.FromArgb(64, 64, 64);
             DownloadButton.FlatStyle = FlatStyle.Flat;
+            DownloadButton.Font 
+                = new Font("Leelawadee", 12F, FontStyle.Bold);
             DownloadButton.ForeColor = Color.White;
             DownloadButton.Location = new Point(730, 511);
             DownloadButton.Margin = new Padding(4, 3, 4, 3);
@@ -225,6 +234,7 @@
             SaveButton.FlatAppearance.BorderColor 
                 = Color.FromArgb(64, 64, 64);
             SaveButton.FlatStyle = FlatStyle.Flat;
+            SaveButton.Font = new Font("Leelawadee", 12F, FontStyle.Bold);
             SaveButton.ForeColor = Color.White;
             SaveButton.Location = new Point(869, 511);
             SaveButton.Margin = new Padding(4, 3, 4, 3);

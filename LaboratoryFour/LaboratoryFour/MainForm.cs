@@ -115,7 +115,8 @@ namespace View
 
             if (countChooseElement == 0)
             {
-                СallMessageBox("Выберите издание для удаления", "Ошибка");
+                СallMessageBox("Выберите издание для удаления",
+                    MessageBoxIcon.Error);
             }
             else
             {
@@ -183,11 +184,11 @@ namespace View
                         = PublicationSerializer.Load(dialog.FileName);
                     RefreshDataGridView();
                     СallMessageBox($"Загружено {_publications.Count}" +
-                        $" изданий", "Уведомление");
+                        $" изданий", MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {
-                    СallMessageBox(ex.Message, "Ошибка");
+                    СallMessageBox(ex.Message, MessageBoxIcon.Error);
                 }
             }
         }
@@ -211,41 +212,33 @@ namespace View
                 {
                     PublicationSerializer.Save(_publications, 
                         dialog.FileName);
-                    СallMessageBox("Файл успешно сохранен", "Уведомление");
+                    СallMessageBox("Файл успешно сохранен",
+                        MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {
-                    СallMessageBox(ex.Message, "Ошибка");
+                    СallMessageBox(ex.Message, MessageBoxIcon.Error);
                 }
             }
         }
 
         //TODO: RSDN +
         /// <summary>
-        /// Метод для вызова MessageBox
+        /// Метод вызовы диалогового окна
         /// </summary>
         /// <param name="message">Сообщение</param>
-        /// <param name="typeMessage">Тип сообщения</param>
-        private void СallMessageBox(string message, string typeMessage)
+        /// <param name="messageType">Иконка типа</param>
+        private void СallMessageBox(string message,
+            MessageBoxIcon messageType)
         {
-            switch (typeMessage)
-            {
-                case "Уведомление":
-                {
-                    MessageBox.Show(message, "Уведомление",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    break;
-                }
-                case "Ошибка":
-                {
-                    MessageBox.Show($"Ошибка: {message}",
-                        "Ошибка",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    break;
-                }
-            }
+            var captionMessage = messageType == MessageBoxIcon.Error
+                ? "Ошибка" 
+                : "Предупреждение";
+
+            MessageBox.Show(message,
+                captionMessage,
+                MessageBoxButtons.OK,
+                messageType);
         }
     }
 }

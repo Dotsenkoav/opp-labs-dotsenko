@@ -20,12 +20,14 @@ namespace View.Panels
         /// </summary>
         public abstract void ClearValues();
 
-        //TODO: условная компиляция
+        //TODO: условная компиляция +
+        #if DEBUG
         /// <summary>
         /// Абстрактный метод заполнения параметров случайными значениями
         /// </summary>
         /// <param name="random">Экземпляр класса Random</param>
         public abstract void FillRandomValue(Random random);
+        #endif  
 
         /// <summary>
         /// Абстрактный метод создания издания

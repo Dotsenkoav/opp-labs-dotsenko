@@ -426,7 +426,9 @@ namespace View
             RandomPublicationButton.TabIndex = 3;
             RandomPublicationButton.Text = "Случайное издание";
             RandomPublicationButton.UseVisualStyleBackColor = false;
+            #if DEBUG
             RandomPublicationButton.Click += RandomPublicationButton_Click;
+            #endif
             // 
             // AddPublicationForm
             // 
