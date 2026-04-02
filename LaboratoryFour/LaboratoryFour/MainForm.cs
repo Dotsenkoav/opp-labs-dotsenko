@@ -220,7 +220,6 @@ namespace View
             }
         }
 
-        //TODO: RSDN +
         /// <summary>
         /// Метод для вызова MessageBox
         /// </summary>
