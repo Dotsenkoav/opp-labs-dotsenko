@@ -222,7 +222,6 @@ namespace View
             }
         }
 
-        //TODO: RSDN +
         /// <summary>
         /// Метод вызовы диалогового окна
         /// </summary>
