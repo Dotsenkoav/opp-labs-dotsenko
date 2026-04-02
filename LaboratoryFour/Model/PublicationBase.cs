@@ -7,6 +7,11 @@ namespace LaboratoryThirdModel
     /// <summary>
     /// Базовый класс издания
     /// </summary>
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+    [JsonDerivedType(typeof(Book), "book")]
+    [JsonDerivedType(typeof(Journal), "journal")]
+    [JsonDerivedType(typeof(Collection), "collection")]
+    [JsonDerivedType(typeof(Dissertation), "dissertation")]
     public abstract class PublicationBase : IPublication
     {
         /// <summary>

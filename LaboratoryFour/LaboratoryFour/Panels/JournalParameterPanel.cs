@@ -45,7 +45,8 @@ namespace View.Panels
             };
         }
 
-        //TODO: условная компиляция
+        //TODO: условная компиляция +
+        #if DEBUG
         /// <summary>
         /// Метод для случайного заполнения полей журнала
         /// </summary>
@@ -55,5 +56,6 @@ namespace View.Panels
             FrequencyComboBox.SelectedIndex =
                 random.Next(Journal.PossibleFrequencies.Length);
         }
+        #endif
     }
 }

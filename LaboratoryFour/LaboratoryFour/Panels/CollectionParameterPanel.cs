@@ -49,7 +49,8 @@ namespace View.Panels
             };
         }
 
-        //TODO: условная компиляция
+        //TODO: условная компиляция +
+        #if DEBUG
         /// <summary>
         /// Метод для случайного заполнения полей сборника
         /// </summary>
@@ -68,5 +69,6 @@ namespace View.Panels
             ResponsibleEditorsTextBox.Text =
                 responsbileEditors[random.Next(responsbileEditors.Length)];
         }
+        #endif
     }
 }

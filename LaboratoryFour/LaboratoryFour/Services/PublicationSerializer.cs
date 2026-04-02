@@ -1,56 +1,143 @@
 ﻿using LaboratoryThirdModel;
 using System.Text.Json;
+using System.Text;
 
 namespace View.Services
 {
     /// <summary>
-    /// Класс сериализатор
+    /// Класс для сериализации изданий
     /// </summary>
     public static class PublicationSerializer
     {
         /// <summary>
-        /// Опции сериализации
+        /// Опции JSON сериализатора
         /// </summary>
-        private static readonly JsonSerializerOptions _options 
-            = new() { WriteIndented = true };
+        private static readonly JsonSerializerOptions _options = new()
+        {
+            WriteIndented = true
+        };
 
         /// <summary>
-        /// Метод сохранения
+        /// Метод для сохранения файла
         /// </summary>
-        /// <param name="publications">Список изданий</param>
-        /// <param name="path">Путь до файла</param>
+        /// <param name="publications">Список публикаций</param>
+        /// <param name="path">Путь</param>
         public static void Save(List<IPublication> publications, string path)
         {
-            var list = publications.Cast<object>().ToList();
-            File.WriteAllText(path,
-                JsonSerializer.Serialize(list, _options));
+            var list = publications.Cast<PublicationBase>().ToList();
+            File.WriteAllText(path, JsonSerializer.Serialize(list,
+                _options));
         }
 
         /// <summary>
-        /// Метод загрузки
+        /// Метод для загрузки публикации
         /// </summary>
-        /// <param name="path">Путь до файла</param>
-        /// <returns>Список изданий</returns>
+        /// <param name="path">Путь</param>
+        /// <returns>Список публикаций</returns>
+        /// <exception cref="InvalidOperationException">
+        /// Ошибка, при повреждении файла</exception>
         public static List<IPublication> Load(string path)
         {
             var json = File.ReadAllText(path);
-            var docs = JsonDocument.Parse(json).RootElement.EnumerateArray();
+            JsonDocument doc = JsonDocument.Parse(json);
             var result = new List<IPublication>();
 
-            foreach (var doc in docs)
+            foreach (JsonElement elementJSON in
+                doc.RootElement.EnumerateArray())
             {
-                if (doc.TryGetProperty("Authors", out _))
-                    result.Add(JsonSerializer.Deserialize<Book>(doc)!);
-                else if (doc.TryGetProperty("Frequency", out _))
-                    result.Add(JsonSerializer.Deserialize<Journal>(doc)!);
-                else if (doc.TryGetProperty("EditorialBoard", out _))
-                    result
-                        .Add(JsonSerializer.Deserialize<Collection>(doc)!);
-                else if (doc.TryGetProperty("AuthorFull", out _))
-                    result
-                        .Add(JsonSerializer.Deserialize<Dissertation>(doc)!);
+                if (HasEmptyStrings(elementJSON))
+                {
+                    throw new InvalidOperationException("" +
+                        "Файл поврежден: обнаружены пустые значения");
+                }
+
+                if (!HasValidYear(elementJSON))
+                {
+                    throw new InvalidOperationException($"Файл поврежден:" +
+                        $" год издания должен быть от" +
+                        $" {PublicationBase.MinYear} " +
+                        $"до {DateTime.Now.Year}");
+                }
+
+                string typePublication = elementJSON
+                    .GetProperty("$type").GetString();
+
+                switch (typePublication)
+                {
+                    case "book":
+                    {
+                        result.Add(JsonSerializer.Deserialize<Book>
+                            (elementJSON.GetRawText(), _options)!);
+                        break;
+                    }
+                    case "journal":
+                    {
+                        result.Add(JsonSerializer.Deserialize<Journal>
+                            (elementJSON.GetRawText(), _options)!);
+                        break;
+                    }
+                    case "collection":
+                    {
+                        result.Add(JsonSerializer.Deserialize<Collection>
+                            (elementJSON.GetRawText(), _options)!);
+                        break;
+                    }
+                    case "dissertation":
+                    {
+                        result.Add(JsonSerializer.Deserialize<Dissertation>
+                            (elementJSON.GetRawText(), _options)!);
+                        break;
+                    }
+                    default:
+                    {
+                        throw new ArgumentException("Не найден" +
+                            " тип публикации");
+                    }
+                }
             }
             return result;
+        }
+
+        /// <summary>
+        /// Метод для проверки наличия строк
+        /// </summary>
+        /// <param name="element">Элемент JSON</param>
+        /// <returns>true, если нет пустых строк, иначе false</returns>
+        private static bool HasEmptyStrings(JsonElement element)
+        {
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.Name == "$type") continue;
+
+                if (property.Value.ValueKind == JsonValueKind.String &&
+                    string.IsNullOrEmpty(property.Value.GetString()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Метод для валидации года
+        /// </summary>
+        /// <param name="element">Элемент JSON</param>
+        /// <returns>true, если валидно, иначе false</returns>
+        private static bool HasValidYear(JsonElement element)
+        {
+            if (!element.TryGetProperty("Year", out JsonElement yearElement))
+            {
+                return false;
+            }
+
+            if (yearElement.ValueKind != JsonValueKind.Number)
+            {
+                return false;
+            }
+
+            int year = yearElement.GetInt32();
+            return year >= PublicationBase.MinYear 
+                && year <= DateTime.Now.Year;
         }
     }
 }

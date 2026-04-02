@@ -24,6 +24,9 @@ namespace View
         public AddPublicationForm()
         {
             InitializeComponent();
+            #if !DEBUG
+            RandomPublicationButton.Visible = false;
+            #endif
             FillPublicationComboBox();
             PublicationsComboBox.SelectedIndexChanged += (s, e)
                 => UpdateParameterPanel();
@@ -35,9 +38,9 @@ namespace View
         /// </summary>
         private void FillPublicationComboBox()
         {
-            //TOOD: отступы
+            //TODO: отступы +
             PublicationsComboBox.Items.AddRange(new object[]
-            { "Книга", "Сборник", "Журнал", "Диссертация" });
+                { "Книга", "Сборник", "Журнал", "Диссертация" });
         }
 
         /// <summary>
@@ -226,7 +229,8 @@ namespace View
             publication.Publisher = PublisherTextBox.Text.Trim();
             publication.TotalPages = int.Parse(TotalPagesTextBox.Text);
         }
-        //TODO: условная компиляция
+        //TODO: условная компиляция +
+#if DEBUG
         /// <summary>
         /// Метод заполнения случайными данными базовых полей
         /// </summary>
@@ -255,6 +259,7 @@ namespace View
             TotalPagesTextBox.Text = random.Next(MinimalRandomPages,
                 MaximumRandomPages).ToString();
         }
+#endif
 
         /// <summary>
         /// Обработчик события нажатия на кнопку "Отмена"

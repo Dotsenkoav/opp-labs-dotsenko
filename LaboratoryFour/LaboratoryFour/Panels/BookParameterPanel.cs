@@ -85,7 +85,8 @@ namespace View.Panels
             }
         }
 
-        //TODO: условная компиляция
+        //TODO: условная компиляция +
+        #if DEBUG
         /// <summary>
         /// Метод для случайного заполнения полей книги
         /// </summary>
@@ -108,6 +109,7 @@ namespace View.Panels
                 AuthorsListBox.Items.Add(author);
             }
         }
+        #endif
 
         /// <summary>
         /// Метод валидации ввода автора

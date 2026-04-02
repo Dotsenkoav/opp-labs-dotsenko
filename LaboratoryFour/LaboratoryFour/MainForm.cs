@@ -115,30 +115,33 @@ namespace View
 
             if (countChooseElement == 0)
             {
-                callMessageBox("Выберите издание для удаления", "Ошибка");
+                СallMessageBox("Выберите издание для удаления", "Ошибка");
             }
-
-            if (MessageBox.Show($"Удалить " +
-                $"{countChooseElement} выбранных изданий?",
-                "Подтверждение",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) == DialogResult.Yes)
+            else
             {
-                var itemsToRemove = new List<PublicationBase>();
-
-                foreach (DataGridViewRow rowTable
-                    in PublicationsDataGridView.SelectedRows)
+                if (MessageBox.Show($"Удалить " +
+                    $"{countChooseElement} выбранных изданий?",
+                    "Подтверждение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    var itemTable = (PublicationBase)rowTable.DataBoundItem;
-                    itemsToRemove.Add(itemTable);
-                }
+                    var itemsToRemove = new List<PublicationBase>();
 
-                foreach (var itemTable in itemsToRemove)
-                {
-                    _publications.Remove(itemTable);
-                }
+                    foreach (DataGridViewRow rowTable
+                        in PublicationsDataGridView.SelectedRows)
+                    {
+                        var itemTable = (PublicationBase)rowTable
+                            .DataBoundItem;
+                        itemsToRemove.Add(itemTable);
+                    }
 
-                RefreshDataGridView();
+                    foreach (var itemTable in itemsToRemove)
+                    {
+                        _publications.Remove(itemTable);
+                    }
+
+                    RefreshDataGridView();
+                }
             }
         }
 
@@ -179,22 +182,21 @@ namespace View
                     _publications 
                         = PublicationSerializer.Load(dialog.FileName);
                     RefreshDataGridView();
-                    callMessageBox($"Загружено {_publications.Count}" +
+                    СallMessageBox($"Загружено {_publications.Count}" +
                         $" изданий", "Уведомление");
                 }
                 catch (Exception ex)
                 {
-                    callMessageBox(ex.Message, "Ошибка");
+                    СallMessageBox(ex.Message, "Ошибка");
                 }
             }
         }
 
         /// <summary>
         /// Метод обработки нажатия кнопки сохранения
-        /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Объект, вызывающий событие</param>
+        /// <param name="e">Аргументы события</param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             using var dialog = new SaveFileDialog
@@ -209,28 +211,28 @@ namespace View
                 {
                     PublicationSerializer.Save(_publications, 
                         dialog.FileName);
-                    callMessageBox("Файл успешно сохранен", "Уведомление");
+                    СallMessageBox("Файл успешно сохранен", "Уведомление");
                 }
                 catch (Exception ex)
                 {
-                    callMessageBox(ex.Message, "Ошибка");
+                    СallMessageBox(ex.Message, "Ошибка");
                 }
             }
         }
 
-        //TODO: RSDN
+        //TODO: RSDN +
         /// <summary>
         /// Метод для вызова MessageBox
         /// </summary>
         /// <param name="message">Сообщение</param>
         /// <param name="typeMessage">Тип сообщения</param>
-        private void callMessageBox(string message, string typeMessage)
+        private void СallMessageBox(string message, string typeMessage)
         {
             switch (typeMessage)
             {
                 case "Уведомление":
                 {
-                    MessageBox.Show("Уведомление.", message,
+                    MessageBox.Show(message, "Уведомление",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     break;

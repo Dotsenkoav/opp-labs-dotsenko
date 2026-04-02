@@ -59,7 +59,8 @@ namespace View.Panels
             };
         }
 
-        //TODO: условная компиляция
+        //TODO: условная компиляция +
+        #if DEBUG
         /// <summary>
         /// Метод случайного заполнения полей диссертации
         /// </summary>
@@ -81,5 +82,6 @@ namespace View.Panels
             DegreeComboBox.SelectedIndex =
                 random.Next(DegreeComboBox.Items.Count);
         }
+        #endif
     }
 }
