@@ -40,7 +40,7 @@ namespace View.Panels
         /// Метод для создания экземпяра сборника
         /// </summary>
         /// <returns>Объект класса Collection</returns>
-        public override PublicationBase CreatePublication()
+        public override IPublication CreatePublication()
         {
             return new Collection
             {

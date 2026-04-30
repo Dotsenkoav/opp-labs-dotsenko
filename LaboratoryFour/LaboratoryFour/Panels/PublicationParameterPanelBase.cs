@@ -32,7 +32,7 @@ namespace View.Panels
         /// Абстрактный метод создания издания
         /// </summary>
         /// <returns>Объект класса издания</returns>
-        public abstract PublicationBase CreatePublication();
+        public abstract IPublication CreatePublication();
 
         /// <summary>
         /// Абстрактный метод для валидации полей параметров

@@ -37,7 +37,7 @@ namespace View.Panels
         /// Метод для создания издания журнала
         /// </summary>
         /// <returns>Объект класса Journal</returns>
-        public override PublicationBase CreatePublication()
+        public override IPublication CreatePublication()
         {
             return new Journal
             {

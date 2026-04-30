@@ -76,7 +76,7 @@ namespace View
         /// <param name="sender">Объект, вызывающий событие</param>
         /// <param name="publication">Объект издания</param>
         private void OnPublicationCreated(object? sender,
-            PublicationBase publication)
+            IPublication publication)
         {
             if (publication != null)
             {
@@ -126,12 +126,12 @@ namespace View
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    var itemsToRemove = new List<PublicationBase>();
+                    var itemsToRemove = new List<IPublication>();
 
                     foreach (DataGridViewRow rowTable
                         in PublicationsDataGridView.SelectedRows)
                     {
-                        var itemTable = (PublicationBase)rowTable
+                        var itemTable = (IPublication)rowTable
                             .DataBoundItem;
                         itemsToRemove.Add(itemTable);
                     }

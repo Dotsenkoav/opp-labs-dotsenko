@@ -49,7 +49,7 @@ namespace View.Panels
         /// Метод создания публикации
         /// </summary>
         /// <returns>Объект класса Dissertation</returns>
-        public override PublicationBase CreatePublication()
+        public override IPublication CreatePublication()
         {
             return new Dissertation
             {

@@ -40,7 +40,7 @@ namespace View.Panels
         /// Метод для создания издания книги
         /// </summary>
         /// <returns>Объект класса Book</returns>
-        public override PublicationBase CreatePublication()
+        public override IPublication CreatePublication()
         {
             var book = new Book();
 

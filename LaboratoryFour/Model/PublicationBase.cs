@@ -45,11 +45,6 @@ namespace LaboratoryThirdModel
         private int _totalPages;
 
         /// <summary>
-        /// Минимальный год издания
-        /// </summary>
-        public const int MinYear = 868;
-
-        /// <summary>
         /// Свойство заглавия
         /// </summary>
         public string Title
@@ -154,10 +149,10 @@ namespace LaboratoryThirdModel
         /// Ошибка при выходе даты издания за диапазон</exception>
         protected void ValidateYear(int year)
         {
-            if (year < MinYear || year > DateTime.Now.Year)
+            if (year < IPublication.MinYear || year > DateTime.Now.Year)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(Year)}" +
-                    $" должен быть в диапазоне от {MinYear}" +
+                    $" должен быть в диапазоне от {IPublication.MinYear}" +
                     $" до {DateTime.Now.Year}");
             }
         }

@@ -7,6 +7,11 @@ namespace LaboratoryThirdModel
     public interface IPublication
     {
         /// <summary>
+        /// Минимальный год издания
+        /// </summary>
+        public const int MinYear = 868;
+
+        /// <summary>
         /// Заглавие
         /// </summary>
         string Title { get; set; }

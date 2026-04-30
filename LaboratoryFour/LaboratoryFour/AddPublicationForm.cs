@@ -11,7 +11,7 @@ namespace View
         /// <summary>
         /// Событие создания публикации для связи с MainForm
         /// </summary>
-        public event EventHandler<PublicationBase>? PublicationCreated;
+        public event EventHandler<IPublication>? PublicationCreated;
 
         /// <summary>
         /// Текущая используемая панель
@@ -193,11 +193,11 @@ namespace View
         private void ValidateYear(string yearText)
         {
             if (!int.TryParse(yearText, out int year)
-                || year < PublicationBase.MinYear
+                || year < IPublication.MinYear
                 || year > DateTime.Now.Year)
             {
                 throw new ArgumentException($"Некорректный год издания" +
-                    $" (введите от {PublicationBase.MinYear} до текущего)");
+                    $" (введите от {IPublication.MinYear} до текущего)");
             }
         }
 
@@ -221,7 +221,7 @@ namespace View
         /// Метод заполнения полей класса из формы
         /// </summary>
         /// <param name="publication">Объект для заполнения</param>
-        private void FillCommonFields(PublicationBase publication)
+        private void FillCommonFields(IPublication publication)
         {
             publication.Title = TitleTextBox.Text.Trim();
             publication.TitleInformation =
@@ -255,7 +255,7 @@ namespace View
             PublisherTextBox.Text 
                 = publishers[random.Next(publishers.Length)];
 
-            YearTextBox.Text = random.Next(PublicationBase.MinYear,
+            YearTextBox.Text = random.Next(IPublication.MinYear,
                 DateTime.Now.Year + 1).ToString();
 
             TotalPagesTextBox.Text = random.Next(MinimalRandomPages,
