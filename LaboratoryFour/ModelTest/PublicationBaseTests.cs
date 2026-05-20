@@ -283,7 +283,7 @@ namespace ModelTest
         }
 
         /// <summary>
-        /// Проверка метода AppendIfNotEmpty() корретными данными
+        /// Проверка метода AppendIfNotEmpty() корректными данными
         /// </summary>
         [Test]
         public void AppendIfNotEmptyAssertionTest()
@@ -400,9 +400,9 @@ namespace ModelTest
             /// </summary>
             /// <param name="stringBuilder">Конструкция
             /// stringBuilder</param>
-            /// <param name="prefix">Префис</param>
+            /// <param name="prefix">Префикс</param>
             /// <param name="value">Значение</param>
-            /// <param name="suffix">Суффик</param>
+            /// <param name="suffix">Суффикс</param>
             public void TestAppendIfNotEmpty(
                 System.Text.StringBuilder stringBuilder,
                 string prefix, string value, string suffix = "")
