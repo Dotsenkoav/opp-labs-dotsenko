@@ -1,5 +1,4 @@
-﻿using NUnit.Framework.Legacy;
-using LaboratoryThirdModel;
+﻿using LaboratoryThirdModel;
 
 namespace ModelTest
 {
@@ -7,7 +6,7 @@ namespace ModelTest
     /// Класс для проведения тестов класса Collection
     /// </summary>
     [TestFixture]
-    public class CollectionTests
+    public class CollectionTests : PublicationBaseChildTests<Book>
     {
         /// <summary>
         /// Проверка корректных данных для свойства EditorialBoard
@@ -22,7 +21,8 @@ namespace ModelTest
         {
             var collection = new Collection();
             collection.EditorialBoard = editorialBoard;
-            ClassicAssert.AreEqual(editorialBoard, collection.EditorialBoard);
+            Assert.That(collection.EditorialBoard,
+                Is.EqualTo(editorialBoard));
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace ModelTest
         {
             var collection = new Collection();
             collection.ResponsibleEditors = responsibleEditors;
-            ClassicAssert.AreEqual(responsibleEditors,
-                collection.ResponsibleEditors);
+            Assert.That(collection.ResponsibleEditors,
+                Is.EqualTo(responsibleEditors));
         }
 
         /// <summary>
@@ -70,7 +70,8 @@ namespace ModelTest
         /// <summary>
         /// Проверка метода GetGOSTInformation() с полными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с полными данными")]
         public void GetGOSTInformationFullDataTest()
         {
             var collection = new Collection
@@ -87,28 +88,33 @@ namespace ModelTest
 
             string result = collection.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains(
-                "Актуальные проблемы информатики"), "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains(
-                "сборник статей"), "Подзаголовок не найден");
-            ClassicAssert.IsTrue(result.Contains(
-                "Иванов И.И., Петров П.П."), "Редколлегия не найдена");
-            ClassicAssert.IsTrue(result.Contains(
-                "Сидоров С.С."), "Ответственный редактор не найден");
-            ClassicAssert.IsTrue(result.Contains(
-                "Москва"), "Место не найдено");
-            ClassicAssert.IsTrue(result.Contains(
-                "МГУ"), "Издательство не найдено");
-            ClassicAssert.IsTrue(result.Contains(
-                "2023"), "Год не найден");
-            ClassicAssert.IsTrue(result.Contains(
-                "250 с."), "Страницы не найдены");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain
+                    ("Актуальные проблемы информатики"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("сборник статей"),
+                    "Подзаголовок не найден");
+                Assert.That(result, Does.Contain("Иванов И.И., Петров П.П."),
+                    "Редколлегия не найдена");
+                Assert.That(result, Does.Contain("Сидоров С.С."),
+                    "Ответственный редактор не найден");
+                Assert.That(result, Does.Contain("Москва"),
+                    "Место не найдено");
+                Assert.That(result, Does.Contain("МГУ"),
+                    "Издательство не найдено");
+                Assert.That(result, Does.Contain("2023"),
+                    "Год не найден");
+                Assert.That(result, Does.Contain("250 с."),
+                    "Страницы не найдены");
+            });
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с минимальными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с минимальными данными")]
         public void GetGOSTInformationMinimalDataTest()
         {
             var collection = new Collection
@@ -124,14 +130,17 @@ namespace ModelTest
 
             string result = collection.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains
-                ("Минимальный сборник"), "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains
-                ("Редактор А.А."), "Редколлегия не найдена");
-            ClassicAssert.IsTrue(result.Contains
-                ("Отв. ред. Б.Б."), "Ответственный редактор не найден");
-            ClassicAssert.IsTrue(result.Contains
-                ("50 с."), "Страницы не найдены");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain("Минимальный сборник"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("Редактор А.А."),
+                    "Редколлегия не найдена");
+                Assert.That(result, Does.Contain("Отв. ред. Б.Б."),
+                    "Ответственный редактор не найден");
+                Assert.That(result, Does.Contain("50 с."),
+                    "Страницы не найдены");
+            });
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using LaboratoryThirdModel;
-using NUnit.Framework.Legacy;
 
 namespace ModelTest
 {
-    //TODO: добавить descriptions к тестовым случаям
+<<<<<<< Updated upstream
+=======
+    //TODO: добавить descriptions к тестовым случаям +
+>>>>>>> Stashed changes
     /// <summary>
     /// Класс для проведения тестов класса PublicationBase
     /// </summary>
@@ -11,191 +13,10 @@ namespace ModelTest
     public class PublicationBaseTests
     {
         /// <summary>
-        /// Проверка корректных данных для свойства Title
-        /// </summary>
-        /// <param name="title">Заголовок</param>
-        [TestCase("Программирование", 
-            TestName = "Тест установки корректного заглавия")]
-        [TestCase("C# Advanced", 
-            TestName = "Тест установки заглавия на латинице")]
-        [TestCase("Программирование на C#", 
-            TestName = "Тест установки заглавия с пробелами")]
-        public void TitleAssertionTest(string title)
-        {
-            var publication = new Book();
-            publication.Title = title;
-            ClassicAssert.AreEqual(title, publication.Title);
-        }
-
-        /// <summary>
-        /// Проверка некорректных данных для свойства Title
-        /// </summary>
-        /// <param name="invalidTitle">Некорректный заголовок</param>
-        [TestCase("", TestName = "Тест на Empty в заглавии")]
-        [TestCase("   ", TestName = "Тест на пробелы в заглавии")]
-        [TestCase(null, TestName ="Тест на null заглавия")]
-        public void TitleAssertionNegativeTest(string? invalidTitle)
-        {
-            var publication = new Book();
-            Assert.Throws<ArgumentException>(
-                () => publication.Title = invalidTitle);
-        }
-
-        /// <summary>
-        /// Проверка корректных данных для свойства TitleInformation
-        /// </summary>
-        /// <param name="titleInfo">Информация о заглавии</param>
-        [TestCase("Учебное пособие",
-            TestName = "Тест установки сведений о заглавии")]
-        [TestCase("", TestName = "Тест пустых сведений о заглавии")]
-        public void TitleInformationAssertionTest(string titleInfo)
-        {
-            var publication = new Book();
-            publication.TitleInformation = titleInfo;
-            ClassicAssert.AreEqual(titleInfo, publication.TitleInformation);
-        }
-
-        /// <summary>
-        /// Проверка корректных данных для свойства Year
-        /// </summary>
-        /// <param name="year">год издания</param>
-        [TestCase(1957, TestName = "Тест года издания 1957")]
-        [TestCase(1305, TestName = "Тест года издания 1305")]
-        [TestCase(2024, TestName = "Тест года издания 2024")]
-        public void YearAssertionTest(int year)
-        {
-            var publication = new Book();
-            publication.Year = year;
-            ClassicAssert.AreEqual(year, publication.Year);
-        }
-
-        /// <summary>
-        /// Проверка некорректных данных для свойства Year
-        /// </summary>
-        /// <param name="year">год издания</param>
-        [TestCase(0, TestName = "Тест года издания 0")]
-        [TestCase(-100, TestName = "Тест отрицательного года")]
-        [TestCase(867, TestName = "Тест года меньше минимального (868)")]
-        [TestCase(2027, TestName = "Тест года больше текущего")]
-        public void YearAssertionNegativeTest(int year)
-        {
-            var publication = new Book();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => publication.Year = year);
-        }
-
-        /// <summary>
-        /// Проверка корректных данных свойства Place
-        /// </summary>
-        /// <param name="place">Место издания</param>
-        [TestCase("Москва", TestName = "Тест установки места издания")]
-        [TestCase("Saint Petersburg",
-            TestName = "Тест места издания на латинице")]
-        [TestCase("New York", TestName = "Тест места издания с пробелами")]
-        public void PlaceAssertionTest(string place)
-        {
-            var publication = new Book();
-            publication.Place = place;
-            ClassicAssert.AreEqual(place, publication.Place);
-        }
-
-        /// <summary>
-        /// Проверка некорректных данных свойства Place
-        /// </summary>
-        /// <param name="invalidPlace">Место издания</param>
-        [TestCase("", TestName = "Тест на Empty в месте издания")]
-        [TestCase("   ", TestName = "Тест на пробелы в месте издания")]
-        [TestCase(null, TestName = "Тест на null места издания")]
-        public void PlaceAssertionNegativeTest(string? invalidPlace)
-        {
-            var publication = new Book();
-            Assert.Throws<ArgumentException>(
-                () => publication.Place = invalidPlace);
-        }
-
-        /// <summary>
-        /// Проверка корректных данных свойства Publisher
-        /// </summary>
-        /// <param name="publisher">Издательство</param>
-        [TestCase("Питер", TestName = "Тест установки издательства")]
-        [TestCase("O'Reilly", 
-            TestName = "Тест издательства со спецсимволами")]
-        [TestCase("Microsoft Press", 
-            TestName = "Тест издательства с пробелом")]
-        public void PublisherAssertionTest(string publisher)
-        {
-            var publication = new Book();
-            publication.Publisher = publisher;
-            ClassicAssert.AreEqual(publisher, publication.Publisher);
-        }
-
-        /// <summary>
-        /// Проверка некорректных данных свойства Publisher
-        /// </summary>
-        /// <param name="invalidPublisher">Издательство</param>
-        [TestCase("", TestName = "Тест на Empty в издательстве")]
-        [TestCase("   ", TestName = "Тест на пробелы в издательстве")]
-        [TestCase(null, TestName = "Тест на null издательства")]
-        public void PublisherAssertionNegativeTest(string? invalidPublisher)
-        {
-            var publication = new Book();
-            Assert.Throws<ArgumentException>(
-                () => publication.Publisher = invalidPublisher);
-        }
-
-        /// <summary>
-        /// Проверка корректных данных свойства TotalPages
-        /// </summary>
-        /// <param name="pages">Количество страниц</param>
-        [TestCase(100, TestName = "Тест количества страниц 100")]
-        [TestCase(1, TestName = "Тест минимального количества страниц")]
-        [TestCase(9999, TestName = "Тест большого количества страниц")]
-        public void TotalPagesAssertionTest(int pages)
-        {
-            var publication = new Book();
-            publication.TotalPages = pages;
-            ClassicAssert.AreEqual(pages, publication.TotalPages);
-        }
-
-        /// <summary>
-        /// Проверка некорректных данных свойства TotalPages
-        /// </summary>
-        /// <param name="pages">Количество страниц</param>
-        [TestCase(0, TestName = "Тест нулевого количества страниц")]
-        [TestCase(-100, TestName = "Тест отрицательного количества страниц")]
-        public void TotalPagesAssertionNegativeTest(int pages)
-        {
-            var publication = new Book();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => publication.TotalPages = pages);
-        }
-
-        /// <summary>
-        /// Проверка метода GetGOSTInformation()
-        /// </summary>
-        [Test]
-        public void GetGOSTInformationAssertionTest()
-        {
-            var book = new Book
-            {
-                Title = "Тестовая книга",
-                Place = "Москва",
-                Publisher = "Тест",
-                Year = 2024,
-                TotalPages = 100
-            };
-            book.AddAuthors("Тестов Т.Т.");
-
-            string gostInfo = book.GostInformation;
-            string expected = book.GetGOSTInformation();
-
-            ClassicAssert.AreEqual(expected, gostInfo);
-        }
-
-        /// <summary>
         /// Проверка метода ValidateString() корректными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода ValidateString()" +
+            " корректными данными")]
         public void ValidateStringAssertionTest()
         {
             var testPublication = new TestPublication();
@@ -268,7 +89,7 @@ namespace ModelTest
             Assert.DoesNotThrow(
                 () => testPublication.TestValidateTotalPages(pages));
         }
-
+                
         /// <summary>
         /// Проверка метода ValidateTotalPages() некорректными данными
         /// </summary>
@@ -286,7 +107,8 @@ namespace ModelTest
         /// <summary>
         /// Проверка метода AppendIfNotEmpty() корректными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода AppendIfNotEmpty()" +
+            " корректными данными")]
         public void AppendIfNotEmptyAssertionTest()
         {
             var testPublication = new TestPublication();
@@ -304,14 +126,15 @@ namespace ModelTest
                 var stringBuilder = new System.Text.StringBuilder();
                 testPublication.TestAppendIfNotEmpty(stringBuilder,
                     prefix, value, suffix);
-                ClassicAssert.AreEqual(expected, stringBuilder.ToString());
+                Assert.That(stringBuilder.ToString(), Is.EqualTo(expected));
             }
         }
 
         /// <summary>
         /// Проверка метода AppendIfNotEmpty() некорректными значениями
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода AppendIfNotEmpty()" +
+            " некорректными значениями")]
         public void AppendIfNotEmptyNegativeTest()
         {
             var testPublication = new TestPublication();
@@ -324,13 +147,14 @@ namespace ModelTest
             testPublication.TestAppendIfNotEmpty(stringBuilder,
                 "prefix ", null, " suffix");
 
-            ClassicAssert.AreEqual("start", stringBuilder.ToString());
+            Assert.That(stringBuilder.ToString(), Is.EqualTo("start"));
         }
 
         /// <summary>
         /// Проверка класса PublicationBase со всеми свойствами
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка класса PublicationBase" +
+            " со всеми свойствами")]
         public void AllPropertiesAssertionTest()
         {
             var publication = new Book();
@@ -342,14 +166,30 @@ namespace ModelTest
             publication.Publisher = "ТестИздат";
             publication.TotalPages = 500;
 
-            ClassicAssert.AreEqual(
-                "Тестовое название", publication.Title);
-            ClassicAssert.AreEqual("Тестовое подзаголовок",
-                publication.TitleInformation);
-            ClassicAssert.AreEqual(2023, publication.Year);
-            ClassicAssert.AreEqual("Санкт-Петербург", publication.Place);
-            ClassicAssert.AreEqual("ТестИздат", publication.Publisher);
-            ClassicAssert.AreEqual(500, publication.TotalPages);
+            Assert.Multiple(() =>
+            {
+                Assert.That(publication.Title,
+                    Is.EqualTo("Тестовое название"));
+                Assert.That(publication.TitleInformation,
+                    Is.EqualTo("Тестовое подзаголовок"));
+                Assert.That(publication.Year, Is.EqualTo(2023));
+                Assert.That(publication.Place,
+                    Is.EqualTo("Санкт-Петербург"));
+                Assert.That(publication.Publisher, Is.EqualTo("ТестИздат"));
+                Assert.That(publication.TotalPages, Is.EqualTo(500));
+            });
+        }
+
+        /// <summary>
+        /// Проверка свойства GostInformation
+        /// </summary>
+        [TestCase(TestName = "Проверка свойства GostInformation")]
+        public void GostInformationGetGOSTInformationResult()
+        {
+            var testPublication = new TestPublication();
+
+            Assert.That(testPublication.GostInformation,
+                Is.EqualTo(testPublication.GetGOSTInformation()));
         }
 
         /// <summary>

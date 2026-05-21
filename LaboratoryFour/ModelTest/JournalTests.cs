@@ -1,5 +1,4 @@
 ﻿using LaboratoryThirdModel;
-using NUnit.Framework.Legacy;
 
 namespace ModelTest
 {
@@ -7,7 +6,7 @@ namespace ModelTest
     /// Класс для проведения тестов класса Journal
     /// </summary>
     [TestFixture]
-    public class JournalTests
+    public class JournalTests : PublicationBaseChildTests<Book>
     {
         /// <summary>
         /// Проверка корректных данных для свойства Frequency
@@ -28,7 +27,7 @@ namespace ModelTest
         {
             var journal = new Journal();
             journal.Frequency = frequency;
-            ClassicAssert.AreEqual(frequency, journal.Frequency);
+            Assert.That(journal.Frequency, Is.EqualTo(frequency));
         }
 
         /// <summary>
@@ -42,13 +41,14 @@ namespace ModelTest
         {
             var journal = new Journal();
             journal.Frequency = frequency;
-            ClassicAssert.AreEqual(frequency, journal.Frequency);
+            Assert.That(journal.Frequency, Is.EqualTo(frequency));
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с полными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с полными данными")]
         public void GetGOSTInformationFullDataTest()
         {
             var journal = new Journal
@@ -64,26 +64,30 @@ namespace ModelTest
 
             string result = journal.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains("Наука и жизнь"),
-                "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("научно-популярный журнал"),
-                "Подзаголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("Наука"),
-                "Издательство не найдено");
-            ClassicAssert.IsTrue(result.Contains("Москва"),
-                "Место не найдено");
-            ClassicAssert.IsTrue(result.Contains("2023"),
-                "Год не найден");
-            ClassicAssert.IsTrue(result.Contains("96 с."),
-                "Страницы не найдены");
-            ClassicAssert.IsTrue(result.Contains("Ежемесячный"),
-                "Частота не найдена");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain("Наука и жизнь"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("научно-популярный журнал"),
+                    "Подзаголовок не найден");
+                Assert.That(result, Does.Contain("Наука"),
+                    "Издательство не найдено");
+                Assert.That(result, Does.Contain("Москва"),
+                    "Место не найдено");
+                Assert.That(result, Does.Contain("2023"),
+                    "Год не найден");
+                Assert.That(result, Does.Contain("96 с."),
+                    "Страницы не найдены");
+                Assert.That(result, Does.Contain("Ежемесячный"),
+                    "Частота не найдена");
+            });
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с минимальными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с минимальными данными")]
         public void GetGOSTInformationMinimalDataTest()
         {
             var journal = new Journal
@@ -97,22 +101,26 @@ namespace ModelTest
 
             string result = journal.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains("Минимальный журнал"),
-                "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("МинИздат"),
-                "Издательство не найдено");
-            ClassicAssert.IsTrue(result.Contains("Минск"),
-                "Место не найдено");
-            ClassicAssert.IsTrue(result.Contains("2025"),
-                "Год не найден");
-            ClassicAssert.IsTrue(result.Contains("30 с."),
-                "Страницы не найдены");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain("Минимальный журнал"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("МинИздат"),
+                    "Издательство не найдено");
+                Assert.That(result, Does.Contain("Минск"),
+                    "Место не найдено");
+                Assert.That(result, Does.Contain("2025"),
+                    "Год не найден");
+                Assert.That(result, Does.Contain("30 с."),
+                    "Страницы не найдены");
+            });
         }
 
         /// <summary>
         /// Проверка статического массива возможных частот
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка статического массива" +
+            " возможных частот")]
         public void PossibleFrequenciesTest()
         {
             var expectedFrequencies = new[]
@@ -127,14 +135,8 @@ namespace ModelTest
                 "С неопределенной периодичностью"
             };
 
-            ClassicAssert.AreEqual(expectedFrequencies.Length,
-                Journal.PossibleFrequencies.Length);
-
-            for (int i = 0; i < expectedFrequencies.Length; i++)
-            {
-                ClassicAssert.AreEqual(expectedFrequencies[i],
-                    Journal.PossibleFrequencies[i]);
-            }
+            Assert.That(Journal.PossibleFrequencies,
+                Is.EqualTo(expectedFrequencies));
         }
     }
 }

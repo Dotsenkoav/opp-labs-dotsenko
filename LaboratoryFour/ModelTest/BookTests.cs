@@ -1,5 +1,4 @@
 ﻿using LaboratoryThirdModel;
-using NUnit.Framework.Legacy;
 
 namespace ModelTest
 {
@@ -7,48 +6,58 @@ namespace ModelTest
     /// Класс для проведения тестов класса Book
     /// </summary>
     [TestFixture]
-    public class BookTests
+    public class BookTests : PublicationBaseChildTests<Book>
     {
         /// <summary>
-        /// Проверка метода AddAuthors() с корректными данными
+        /// Проверка метода AddAuthors() с одним автором
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation" +
+            " с одним автором")]
         public void AddAuthorsSingleAuthorAssertionTest()
         {
             var book = new Book();
             book.AddAuthors("Иванов И.И.");
 
-            ClassicAssert.AreEqual(1, book.Authors.Count);
-            ClassicAssert.AreEqual("Иванов И.И.", book.Authors[0]);
+            Assert.That(book.Authors.Count, Is.EqualTo(1));
+            Assert.That(book.Authors[0], Is.EqualTo("Иванов И.И."));
         }
 
-        [Test]
+        /// <summary>
+        /// Проверка метода AddAuthors() с двумя авторами
+        /// </summary>
+        [TestCase(TestName = "Проверка метода AddAuthors()" +
+            " с двумя авторами")]
         public void AddAuthorsTwoAuthorsAssertionTest()
         {
             var book = new Book();
             book.AddAuthors("Иванов И.И.", "Петров П.П.");
 
-            ClassicAssert.AreEqual(2, book.Authors.Count);
-            ClassicAssert.AreEqual("Иванов И.И.", book.Authors[0]);
-            ClassicAssert.AreEqual("Петров П.П.", book.Authors[1]);
+            Assert.That(book.Authors.Count, Is.EqualTo(2));
+            Assert.That(book.Authors[0], Is.EqualTo("Иванов И.И."));
+            Assert.That(book.Authors[1], Is.EqualTo("Петров П.П."));
         }
 
-        [Test]
+        /// <summary>
+        /// Проверка метода AddAuthors() с тремя авторами
+        /// </summary>
+        [TestCase(TestName = "Проверка метода AddAuthors()" +
+            " с тремя авторами")]
         public void AddAuthorsThreeAuthorsAssertionTest()
         {
             var book = new Book();
             book.AddAuthors("Иванов И.И.", "Петров П.П.", "Сидоров С.С.");
 
-            ClassicAssert.AreEqual(3, book.Authors.Count);
-            ClassicAssert.AreEqual("Иванов И.И.", book.Authors[0]);
-            ClassicAssert.AreEqual("Петров П.П.", book.Authors[1]);
-            ClassicAssert.AreEqual("Сидоров С.С.", book.Authors[2]);
+            Assert.That(book.Authors.Count, Is.EqualTo(3));
+            Assert.That(book.Authors[0], Is.EqualTo("Иванов И.И."));
+            Assert.That(book.Authors[1], Is.EqualTo("Петров П.П."));
+            Assert.That(book.Authors[2], Is.EqualTo("Сидоров С.С."));
         }
 
         /// <summary>
         /// Проверка метода AddAuthors() с некорректными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода AddAuthors()" +
+            " с некорректными данными")]
         public void AddAuthorsAssertionNegativeTest()
         {
             var book = new Book();
@@ -75,7 +84,8 @@ namespace ModelTest
         /// <summary>
         /// Проверка метода GetGOSTInformation() с одним автором
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с одним автором")]
         public void GetGOSTInformationOneAuthorAssertionTest()
         {
             var book = new Book
@@ -91,24 +101,28 @@ namespace ModelTest
 
             string result = book.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains("Программирование на C#"),
-                "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("учебное пособие"),
-                "Подзаголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("Москва"),
-                "Место не найдено");
-            ClassicAssert.IsTrue(result.Contains("Питер"),
-                "Издательство не найдено");
-            ClassicAssert.IsTrue(result.Contains("2023"),
-                "Год не найден");
-            ClassicAssert.IsTrue(result.Contains("500 с."),
-                "Страницы не найдены");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain("Программирование на C#"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("учебное пособие"),
+                    "Подзаголовок не найден");
+                Assert.That(result, Does.Contain("Москва"),
+                    "Место не найдено");
+                Assert.That(result, Does.Contain("Питер"),
+                    "Издательство не найдено");
+                Assert.That(result, Does.Contain("2023"),
+                    "Год не найден");
+                Assert.That(result, Does.Contain("500 с."),
+                    "Страницы не найдены");
+            });
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с двумя авторами
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с двумя авторами")]
         public void GetGOSTInformationTwoAuthorsAssertionTest()
         {
             var book = new Book
@@ -123,20 +137,24 @@ namespace ModelTest
 
             string result = book.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains("Программирование"),
-                "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("Санкт-Петербург"),
-                "Место не найдено");
-            ClassicAssert.IsTrue(result.Contains("БХВ"),
-                "Издательство не найдено");
-            ClassicAssert.IsTrue(result.Contains("2022"),
-                "Год не найден");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain("Программирование"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("Санкт-Петербург"),
+                    "Место не найдено");
+                Assert.That(result, Does.Contain("БХВ"),
+                    "Издательство не найдено");
+                Assert.That(result, Does.Contain("2022"),
+                    "Год не найден");
+            });
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с тремя авторами
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с тремя авторами")]
         public void GetGOSTInformationThreeAuthorsAssertionTest()
         {
             var book = new Book
@@ -152,16 +170,20 @@ namespace ModelTest
 
             string result = book.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains(
-                "Алгоритмы и структуры данных"), "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains(
-                "Москва"), "Место не найдено");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain
+                    ("Алгоритмы и структуры данных"), "Заголовок не найден");
+                Assert.That(result, Does.Contain
+                    ("Москва"), "Место не найдено");
+            });
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с четырьмя и более авторами
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с четырьмя и более авторами")]
         public void GetGOSTInformationFourAuthorsAssertionTest()
         {
             var book = new Book
@@ -177,13 +199,14 @@ namespace ModelTest
 
             string result = book.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains("[и др.]"));
+            Assert.That(result, Does.Contain("[и др.]"));
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() без авторов
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " без авторов")]
         public void GetGOSTInformationNoAuthorsAssertionTest()
         {
             var book = new Book
@@ -197,21 +220,28 @@ namespace ModelTest
 
             string result = book.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.StartsWith("Тестовая книга"));
-            ClassicAssert.IsFalse(result.Contains(" / "));
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.StartWith("Тестовая книга"));
+                Assert.That(result, Does.Not.Contain(" / "));
+            });
         }
 
         /// <summary>
         /// Проверка свойства Authors (только для чтения)
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка свойства Authors" +
+            " (только для чтения)")]
         public void AuthorsReadOnlyAssertionTest()
         {
             var book = new Book();
             book.AddAuthors("Иванов И.И.");
 
-            ClassicAssert.IsNotNull(book.Authors);
-            ClassicAssert.AreEqual(1, book.Authors.Count);
+            Assert.Multiple(() =>
+            {
+                Assert.That(book.Authors, Is.Not.Null);
+                Assert.That(book.Authors.Count, Is.EqualTo(1));
+            });
         }
     }
 }

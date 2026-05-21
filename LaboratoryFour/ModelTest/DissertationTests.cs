@@ -1,5 +1,4 @@
 ﻿using LaboratoryThirdModel;
-using NUnit.Framework.Legacy;
 
 namespace ModelTest
 {
@@ -7,7 +6,7 @@ namespace ModelTest
     /// Класс для проведения тестов класса Dissertation
     /// </summary>
     [TestFixture]
-    public class DissertationTests
+    public class DissertationTests : PublicationBaseChildTests<Book>
     {
         /// <summary>
         /// Проверка корректных данных для свойства AuthorFull
@@ -19,7 +18,7 @@ namespace ModelTest
         {
             var dissertation = new Dissertation();
             dissertation.AuthorFull = authorFull;
-            ClassicAssert.AreEqual(authorFull, dissertation.AuthorFull);
+            Assert.That(dissertation.AuthorFull, Is.EqualTo(authorFull));
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace ModelTest
         {
             var dissertation = new Dissertation();
             dissertation.Speciality = speciality;
-            ClassicAssert.AreEqual(speciality, dissertation.Speciality);
+            Assert.That(dissertation.Speciality, Is.EqualTo(speciality));
         }
 
         /// <summary>
@@ -73,7 +72,7 @@ namespace ModelTest
         {
             var dissertation = new Dissertation();
             dissertation.Degree = degree;
-            ClassicAssert.AreEqual(degree, dissertation.Degree);
+            Assert.That(dissertation.Degree, Is.EqualTo(degree));
         }
 
         /// <summary>
@@ -85,14 +84,14 @@ namespace ModelTest
         public void DegreeNegativeTest(string? invalidDegree)
         {
             var dissertation = new Dissertation();
-            Assert.Throws<ArgumentException>(
-                () => dissertation.Degree = invalidDegree);
+            Assert.Throws<ArgumentException>(() => dissertation.Degree = invalidDegree);
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с полными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с полными данными")]
         public void GetGOSTInformationFullDataTest()
         {
             var dissertation = new Dissertation
@@ -109,30 +108,34 @@ namespace ModelTest
 
             string result = dissertation.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.Contains("Иванов, И. И"),
-                "Автор в заголовке не найден"); 
-            ClassicAssert.IsTrue(result.Contains("Методы анализа данных"),
-                "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("специальность 05.13.01"),
-                "Специальность не найдена");
-            ClassicAssert.IsTrue(result.Contains("Кандидат наук"),
-                "Степень не найдена");
-            ClassicAssert.IsTrue(result.Contains("Иванов Иван Иванович"),
-                "Автор в подзаголовке не найден");
-            ClassicAssert.IsTrue(result.Contains("МГУ"),
-                "Издательство не найдено");
-            ClassicAssert.IsTrue(result.Contains("Москва"),
-                "Место не найдено");
-            ClassicAssert.IsTrue(result.Contains("2023"),
-                "Год не найден");
-            ClassicAssert.IsTrue(result.Contains("150 с."), 
-                "Страницы не найдены");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.Contain("Иванов, И. И"),
+                    "Автор в заголовке не найден");
+                Assert.That(result, Does.Contain("Методы анализа данных"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("специальность 05.13.01"),
+                    "Специальность не найдена");
+                Assert.That(result, Does.Contain("Кандидат наук"),
+                    "Степень не найдена");
+                Assert.That(result, Does.Contain("Иванов Иван Иванович"),
+                    "Автор в подзаголовке не найден");
+                Assert.That(result, Does.Contain("МГУ"),
+                    "Издательство не найдено");
+                Assert.That(result, Does.Contain("Москва"),
+                    "Место не найдено");
+                Assert.That(result, Does.Contain("2023"),
+                    "Год не найден");
+                Assert.That(result, Does.Contain("150 с."),
+                    "Страницы не найдены");
+            });
         }
 
         /// <summary>
         /// Проверка метода GetGOSTInformation() с минимальными данными
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка метода GetGOSTInformation()" +
+            " с минимальными данными")]
         public void GetGOSTInformationMinimalDataTest()
         {
             var dissertation = new Dissertation
@@ -149,32 +152,30 @@ namespace ModelTest
 
             string result = dissertation.GetGOSTInformation();
 
-            ClassicAssert.IsTrue(result.StartsWith("Петров"),
-                "Автор не в начале");
-            ClassicAssert.IsTrue(result.Contains("Простая диссертация"),
-                "Заголовок не найден");
-            ClassicAssert.IsTrue(result.Contains("Доктор наук"),
-                "Степень не найдена");
-            ClassicAssert.IsTrue(result.Contains("100 с."),
-                "Страницы не найдены");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Does.StartWith("Петров"),
+                    "Автор не в начале");
+                Assert.That(result, Does.Contain("Простая диссертация"),
+                    "Заголовок не найден");
+                Assert.That(result, Does.Contain("Доктор наук"),
+                    "Степень не найдена");
+                Assert.That(result, Does.Contain("100 с."),
+                    "Страницы не найдены");
+            });
         }
 
         /// <summary>
         /// Проверка, что возможные степени содержат ожидаемые значения
         /// </summary>
-        [Test]
+        [TestCase(TestName = "Проверка, что возможные степени содержат" +
+            " ожидаемые значения")]
         public void PossibleDegreeTest()
         {
-            var expectedDegrees = new[] { "Кандидат наук", "Доктор наук" };
-
-            ClassicAssert.AreEqual(expectedDegrees.Length,
-                Dissertation.PossibleDegree.Length);
-
-            for (int i = 0; i < expectedDegrees.Length; i++)
-            {
-                ClassicAssert.AreEqual(expectedDegrees[i],
-                    Dissertation.PossibleDegree[i]);
-            }
+            var expectedDegrees = new[] { "Кандидат наук",
+                "Доктор наук" };
+            Assert.That(Dissertation.PossibleDegree,
+                Is.EqualTo(expectedDegrees));
         }
     }
 }
