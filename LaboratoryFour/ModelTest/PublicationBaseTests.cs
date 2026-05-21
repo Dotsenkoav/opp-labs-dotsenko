@@ -2,10 +2,7 @@
 
 namespace ModelTest
 {
-<<<<<<< Updated upstream
-=======
     //TODO: добавить descriptions к тестовым случаям +
->>>>>>> Stashed changes
     /// <summary>
     /// Класс для проведения тестов класса PublicationBase
     /// </summary>
