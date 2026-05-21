@@ -38,7 +38,6 @@ namespace View
         /// </summary>
         private void FillPublicationComboBox()
         {
-            //TODO: отступы +
             PublicationsComboBox.Items.AddRange(new object[]
                 { "Книга", "Сборник", "Журнал", "Диссертация" });
         }
@@ -231,7 +230,6 @@ namespace View
             publication.Publisher = PublisherTextBox.Text.Trim();
             publication.TotalPages = int.Parse(TotalPagesTextBox.Text);
         }
-        //TODO: условная компиляция +
 #if DEBUG
         /// <summary>
         /// Метод заполнения случайными данными базовых полей
