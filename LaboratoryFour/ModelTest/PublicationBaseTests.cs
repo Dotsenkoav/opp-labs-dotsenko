@@ -2,7 +2,6 @@
 
 namespace ModelTest
 {
-    //TODO: добавить descriptions к тестовым случаям +
     /// <summary>
     /// Класс для проведения тестов класса PublicationBase
     /// </summary>
