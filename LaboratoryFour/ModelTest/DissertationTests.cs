@@ -84,7 +84,8 @@ namespace ModelTest
         public void DegreeNegativeTest(string? invalidDegree)
         {
             var dissertation = new Dissertation();
-            Assert.Throws<ArgumentException>(() => dissertation.Degree = invalidDegree);
+            Assert.Throws<ArgumentException>(
+                () => dissertation.Degree = invalidDegree);
         }
 
         /// <summary>
