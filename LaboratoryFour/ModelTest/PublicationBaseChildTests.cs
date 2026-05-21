@@ -2,6 +2,12 @@
 
 namespace ModelTest
 {
+    /// <summary>
+    /// Абстрактный класс теста дочерних классов 
+    /// PublicationBase
+    /// </summary>
+    /// <typeparam name="T">Объект дочернего класса
+    /// PublicationBase</typeparam>
     public abstract class PublicationBaseChildTests<T> 
         where T : PublicationBase, new()
     {
