@@ -11,6 +11,10 @@ namespace ModelTest
     public abstract class PublicationBaseChildTests<T> 
         where T : PublicationBase, new()
     {
+        /// <summary>
+        /// Конструктор обобщения
+        /// </summary>
+        /// <returns>Издание</returns>
         protected T CreatePublication() => new T();
 
         /// <summary>
